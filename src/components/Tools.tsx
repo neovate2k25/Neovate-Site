@@ -4,18 +4,26 @@ export default function Tools() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const tools = [
-    { name: 'React', color: '#61DAFB' },
-    { name: 'Python', color: '#3776AB' },
-    { name: 'Figma', color: '#F24E1E' },
-    { name: 'Java', color: '#007396' },
-    { name: 'Node.js', color: '#339933' },
-    { name: 'TailwindCSS', color: '#06B6D4' },
-    { name: 'TypeScript', color: '#3178C6' },
-    { name: 'Power BI', color: '#F2C811' },
-    { name: 'MongoDB', color: '#47A248' },
-    { name: 'PostgreSQL', color: '#4169E1' },
-    { name: 'Docker', color: '#2496ED' },
-    { name: 'AWS', color: '#FF9900' },
+    { name: 'React', color: '#61DAFB', image: 'https://images.pexels.com/photos/18069363/pexels-photo-18069363.jpeg?auto=compress&cs=tinysrgb&w=600' },
+    { name: 'Python', color: '#3776AB', image: 'https://images.pexels.com/photos/11035471/pexels-photo-11035471.jpeg?auto=compress&cs=tinysrgb&w=600' },
+    { name: 'Figma', color: '#F24E1E', image: 'https://images.pexels.com/photos/8349434/pexels-photo-8349434.jpeg?auto=compress&cs=tinysrgb&w=600' },
+    { name: 'Java', color: '#007396', image: 'https://images.pexels.com/photos/15582872/pexels-photo-15582872.jpeg?auto=compress&cs=tinysrgb&w=600' },
+    { name: 'Node.js', color: '#339933', image: 'https://images.pexels.com/photos/9072355/pexels-photo-9072355.jpeg?auto=compress&cs=tinysrgb&w=600' },
+    { name: 'TailwindCSS', color: '#06B6D4', image: 'https://images.pexels.com/photos/6919028/pexels-photo-6919028.jpeg?auto=compress&cs=tinysrgb&w=600' },
+    { name: 'TypeScript', color: '#3178C6', image: 'https://images.pexels.com/photos/7974/pexels-photo-7974.jpeg?auto=compress&cs=tinysrgb&w=600' },
+    { name: 'Power BI', color: '#F2C811', image: 'https://images.pexels.com/photos/374632/pexels-photo-374632.jpeg?auto=compress&cs=tinysrgb&w=600' },
+    { name: 'MongoDB', color: '#47A248', image: 'https://images.pexels.com/photos/5632399/pexels-photo-5632399.jpeg?auto=compress&cs=tinysrgb&w=600' },
+    { name: 'PostgreSQL', color: '#4169E1', image: 'https://images.pexels.com/photos/8058054/pexels-photo-8058054.jpeg?auto=compress&cs=tinysrgb&w=600' },
+    { name: 'Docker', color: '#2496ED', image: 'https://images.pexels.com/photos/4164871/pexels-photo-4164871.jpeg?auto=compress&cs=tinysrgb&w=600' },
+    { name: 'AWS', color: '#FF9900', image: 'https://images.pexels.com/photos/5632399/pexels-photo-5632399.jpeg?auto=compress&cs=tinysrgb&w=600' },
+    { name: 'Vue.js', color: '#4FC08D', image: 'https://images.pexels.com/photos/7681447/pexels-photo-7681447.jpeg?auto=compress&cs=tinysrgb&w=600' },
+    { name: 'GraphQL', color: '#E10098', image: 'https://images.pexels.com/photos/11035471/pexels-photo-11035471.jpeg?auto=compress&cs=tinysrgb&w=600' },
+    { name: 'Next.js', color: '#000000', image: 'https://images.pexels.com/photos/18069363/pexels-photo-18069363.jpeg?auto=compress&cs=tinysrgb&w=600' },
+    { name: 'Kubernetes', color: '#326CE5', image: 'https://images.pexels.com/photos/4164871/pexels-photo-4164871.jpeg?auto=compress&cs=tinysrgb&w=600' },
+    { name: 'Firebase', color: '#FFCA28', image: 'https://images.pexels.com/photos/5632399/pexels-photo-5632399.jpeg?auto=compress&cs=tinysrgb&w=600' },
+    { name: 'Redux', color: '#764ABC', image: 'https://images.pexels.com/photos/7681447/pexels-photo-7681447.jpeg?auto=compress&cs=tinysrgb&w=600' },
+    { name: 'Express.js', color: '#90C53F', image: 'https://images.pexels.com/photos/7974/pexels-photo-7974.jpeg?auto=compress&cs=tinysrgb&w=600' },
+    { name: 'Svelte', color: '#FF3E00', image: 'https://images.pexels.com/photos/9072355/pexels-photo-9072355.jpeg?auto=compress&cs=tinysrgb&w=600' },
   ];
 
   useEffect(() => {
@@ -66,42 +74,48 @@ export default function Tools() {
           </p>
         </div>
 
-        <div className="relative max-w-6xl mx-auto">
-          <div className="overflow-hidden py-12">
-            <div className="flex items-center justify-center flex-wrap gap-8">
-              {tools.map((tool, index) => (
-                <div
-                  key={index}
-                  className={`relative transition-all duration-700 ${
-                    activeIndex === index ? 'scale-125 z-10' : 'scale-100'
-                  }`}
-                  style={{
-                    opacity: activeIndex === index ? 1 : 0.5,
-                  }}
-                >
-                  <div
-                    className="w-32 h-32 rounded-2xl flex items-center justify-center font-bold text-lg transition-all duration-500 border-2"
-                    style={{
-                      backgroundColor: activeIndex === index ? `${tool.color}20` : 'rgba(31, 41, 55, 0.5)',
-                      borderColor: activeIndex === index ? tool.color : 'rgba(75, 85, 99, 0.5)',
-                      boxShadow: activeIndex === index ? `0 0 40px ${tool.color}60` : 'none',
-                      color: activeIndex === index ? tool.color : '#9CA3AF',
-                    }}
-                  >
-                    {tool.name}
+        <div className="relative max-w-7xl mx-auto">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6 mb-16">
+            {tools.map((tool, index) => (
+              <div
+                key={index}
+                onClick={() => setActiveIndex(index)}
+                className={`relative group cursor-pointer transition-all duration-500 ${
+                  activeIndex === index ? 'scale-110 z-20' : 'hover:scale-105'
+                }`}
+              >
+                <div className="relative aspect-square rounded-2xl overflow-hidden border-2 transition-all duration-500" style={{
+                  borderColor: activeIndex === index ? tool.color : 'rgba(75, 85, 99, 0.5)',
+                  boxShadow: activeIndex === index ? `0 0 30px ${tool.color}80` : 'none',
+                }}>
+                  <img
+                    src={tool.image}
+                    alt={tool.name}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-4">
+                    <span className="font-bold text-white text-sm md:text-base">{tool.name}</span>
                   </div>
-                  {activeIndex === index && (
-                    <div
-                      className="absolute inset-0 rounded-2xl animate-ping"
-                      style={{
-                        border: `2px solid ${tool.color}`,
-                        opacity: 0.3,
-                      }}
-                    />
-                  )}
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <div className="w-8 h-8 rounded-full border-2" style={{ borderColor: tool.color }}></div>
+                  </div>
                 </div>
-              ))}
-            </div>
+                {activeIndex === index && (
+                  <div
+                    className="absolute inset-0 rounded-2xl animate-ping pointer-events-none"
+                    style={{
+                      border: `2px solid ${tool.color}`,
+                      opacity: 0.3,
+                    }}
+                  />
+                )}
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center py-8">
+            <h3 className="text-2xl font-bold text-white mb-2">{tools[activeIndex].name}</h3>
+            <p className="text-gray-400">Currently showcasing</p>
           </div>
         </div>
 

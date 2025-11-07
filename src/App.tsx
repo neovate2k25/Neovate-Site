@@ -11,6 +11,7 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import CustomCursor from './components/CustomCursor';
 import EasterEgg from './components/EasterEgg';
+import ScrollButton from './components/ScrollButton';
 import { useEffect } from 'react';
 
 function App() {
@@ -48,6 +49,7 @@ function App() {
       <Contact />
       <Footer />
       <EasterEgg />
+      <ScrollButton />
     </div>
   );
 }
