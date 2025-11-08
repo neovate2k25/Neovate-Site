@@ -45,22 +45,23 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
-        <h1 className="text-6xl md:text-8xl font-bold mb-6 tracking-tight">
-          <span className="inline-block animate-fade-in-up text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.3)]">
-            Innovating
-          </span>
-          <br />
-          <span className="inline-block animate-fade-in-up animation-delay-200 text-yellow-400 drop-shadow-[0_0_30px_rgba(250,204,21,0.8)]">
-            the New
-          </span>
-        </h1>
+      <div className="relative z-10 px-6 max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
+        <div className="flex-1 text-center lg:text-left">
+          <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight">
+            <span className="inline-block animate-fade-in-up text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.3)]">
+              Innovating
+            </span>
+            <br />
+            <span className="inline-block animate-fade-in-up animation-delay-200 text-yellow-400 drop-shadow-[0_0_30px_rgba(250,204,21,0.8)]">
+              the New
+            </span>
+          </h1>
 
-        <p className="text-xl md:text-2xl text-gray-300 mb-12 animate-fade-in-up animation-delay-400 max-w-3xl mx-auto">
-          Student-led innovation meets professional excellence. We transform ideas into digital reality.
-        </p>
+          <p className="text-xl md:text-2xl text-gray-300 mb-12 animate-fade-in-up animation-delay-400">
+            Student-led innovation meets professional excellence. We transform ideas into digital reality.
+          </p>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in-up animation-delay-600">
+          <div className="flex flex-col sm:flex-row gap-4 justify-start lg:justify-start items-start sm:items-center animate-fade-in-up animation-delay-600">
           <button
             onClick={() => scrollToSection('contact')}
             className="px-8 py-4 bg-yellow-400 text-black font-bold rounded-full hover:bg-yellow-300 transition-all duration-300 shadow-[0_0_30px_rgba(250,204,21,0.6)] hover:shadow-[0_0_40px_rgba(250,204,21,0.9)] hover:scale-105 flex items-center gap-2"
@@ -82,6 +83,21 @@ export default function Hero() {
             <Briefcase size={20} />
             Start Your Project
           </button>
+          </div>
+        </div>
+
+        <div className="flex-1 flex items-center justify-center animate-fade-in-up animation-delay-600 w-full lg:w-auto">
+          <div className="relative w-full max-w-md lg:max-w-sm">
+            <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 to-blue-400/20 rounded-3xl blur-2xl"></div>
+            <div className="relative backdrop-blur-xl bg-white/10 border border-white/20 rounded-3xl p-6 md:p-8 shadow-2xl">
+              <img
+                src="https://images.pexels.com/photos/3182812/pexels-photo-3182812.jpeg?auto=compress&cs=tinysrgb&w=600"
+                alt="Innovation"
+                className="w-full h-auto rounded-2xl object-cover shadow-lg animate-float"
+              />
+              <div className="absolute inset-0 rounded-3xl ring-1 ring-white/30"></div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -115,6 +131,13 @@ export default function Hero() {
         .animation-delay-600 {
           animation-delay: 0.6s;
           opacity: 0;
+        }
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-20px); }
+        }
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
         }
       `}</style>
     </section>

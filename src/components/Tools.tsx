@@ -1,64 +1,71 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export default function Tools() {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
 
-  const tools = [
-    { name: 'React', color: '#61DAFB', image: 'https://images.pexels.com/photos/18069363/pexels-photo-18069363.jpeg?auto=compress&cs=tinysrgb&w=600' },
-    { name: 'Python', color: '#3776AB', image: 'https://images.pexels.com/photos/11035471/pexels-photo-11035471.jpeg?auto=compress&cs=tinysrgb&w=600' },
-    { name: 'Figma', color: '#F24E1E', image: 'https://images.pexels.com/photos/8349434/pexels-photo-8349434.jpeg?auto=compress&cs=tinysrgb&w=600' },
-    { name: 'Java', color: '#007396', image: 'https://images.pexels.com/photos/15582872/pexels-photo-15582872.jpeg?auto=compress&cs=tinysrgb&w=600' },
-    { name: 'Node.js', color: '#339933', image: 'https://images.pexels.com/photos/9072355/pexels-photo-9072355.jpeg?auto=compress&cs=tinysrgb&w=600' },
-    { name: 'TailwindCSS', color: '#06B6D4', image: 'https://images.pexels.com/photos/6919028/pexels-photo-6919028.jpeg?auto=compress&cs=tinysrgb&w=600' },
-    { name: 'TypeScript', color: '#3178C6', image: 'https://images.pexels.com/photos/7974/pexels-photo-7974.jpeg?auto=compress&cs=tinysrgb&w=600' },
-    { name: 'Power BI', color: '#F2C811', image: 'https://images.pexels.com/photos/374632/pexels-photo-374632.jpeg?auto=compress&cs=tinysrgb&w=600' },
-    { name: 'MongoDB', color: '#47A248', image: 'https://images.pexels.com/photos/5632399/pexels-photo-5632399.jpeg?auto=compress&cs=tinysrgb&w=600' },
-    { name: 'PostgreSQL', color: '#4169E1', image: 'https://images.pexels.com/photos/8058054/pexels-photo-8058054.jpeg?auto=compress&cs=tinysrgb&w=600' },
-    { name: 'Docker', color: '#2496ED', image: 'https://images.pexels.com/photos/4164871/pexels-photo-4164871.jpeg?auto=compress&cs=tinysrgb&w=600' },
-    { name: 'AWS', color: '#FF9900', image: 'https://images.pexels.com/photos/5632399/pexels-photo-5632399.jpeg?auto=compress&cs=tinysrgb&w=600' },
-    { name: 'Vue.js', color: '#4FC08D', image: 'https://images.pexels.com/photos/7681447/pexels-photo-7681447.jpeg?auto=compress&cs=tinysrgb&w=600' },
-    { name: 'GraphQL', color: '#E10098', image: 'https://images.pexels.com/photos/11035471/pexels-photo-11035471.jpeg?auto=compress&cs=tinysrgb&w=600' },
-    { name: 'Next.js', color: '#000000', image: 'https://images.pexels.com/photos/18069363/pexels-photo-18069363.jpeg?auto=compress&cs=tinysrgb&w=600' },
-    { name: 'Kubernetes', color: '#326CE5', image: 'https://images.pexels.com/photos/4164871/pexels-photo-4164871.jpeg?auto=compress&cs=tinysrgb&w=600' },
-    { name: 'Firebase', color: '#FFCA28', image: 'https://images.pexels.com/photos/5632399/pexels-photo-5632399.jpeg?auto=compress&cs=tinysrgb&w=600' },
-    { name: 'Redux', color: '#764ABC', image: 'https://images.pexels.com/photos/7681447/pexels-photo-7681447.jpeg?auto=compress&cs=tinysrgb&w=600' },
-    { name: 'Express.js', color: '#90C53F', image: 'https://images.pexels.com/photos/7974/pexels-photo-7974.jpeg?auto=compress&cs=tinysrgb&w=600' },
-    { name: 'Svelte', color: '#FF3E00', image: 'https://images.pexels.com/photos/9072355/pexels-photo-9072355.jpeg?auto=compress&cs=tinysrgb&w=600' },
-  ];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % tools.length);
-    }, 2000);
-    return () => clearInterval(interval);
-  }, [tools.length]);
+  const toolsByCategory = {
+    'Marketing & Analytics': [
+      { name: 'Meta Ads', icon: '📱' },
+      { name: 'Google Ads', icon: '📊' },
+      { name: 'Google Analytics', icon: '📈' },
+      { name: 'Tag Manager', icon: '🏷️' },
+      { name: 'Hootsuite', icon: '🔗' },
+      { name: 'Buffer', icon: '📅' },
+      { name: 'Semrush', icon: '🎯' },
+    ],
+    'Frontend & Backend': [
+      { name: 'React', icon: '⚛️' },
+      { name: 'Vite', icon: '⚡' },
+      { name: 'Node.js', icon: '🟢' },
+      { name: 'Express', icon: '🛠️' },
+    ],
+    'Databases': [
+      { name: 'MongoDB', icon: '🍃' },
+      { name: 'PostgreSQL', icon: '🐘' },
+    ],
+    'Cloud & Deployment': [
+      { name: 'AWS', icon: '☁️' },
+      { name: 'Vercel', icon: '▲' },
+      { name: 'Netlify', icon: '🌐' },
+    ],
+    'Video & Design': [
+      { name: 'Premiere Pro', icon: '🎬' },
+      { name: 'After Effects', icon: '✨' },
+      { name: 'DaVinci Resolve', icon: '🎞️' },
+      { name: 'Photoshop', icon: '🖼️' },
+      { name: 'Illustrator', icon: '🎨' },
+      { name: 'Figma', icon: '🎭' },
+      { name: 'Canva', icon: '📐' },
+    ],
+    'Mobile Development': [
+      { name: 'Android Studio', icon: '📱' },
+      { name: 'Xcode', icon: '🍎' },
+      { name: 'Flutter', icon: '🦋' },
+      { name: 'React Native', icon: '⚛️' },
+      { name: 'Expo', icon: '📦' },
+    ],
+    'DevOps & Tools': [
+      { name: 'Jira', icon: '📋' },
+      { name: 'GitHub Actions', icon: '🚀' },
+      { name: 'Cursor', icon: '✏️' },
+      { name: 'WhatsApp', icon: '💬' },
+    ],
+  };
 
   return (
     <section id="tools" className="relative py-20 bg-black overflow-hidden">
       <div className="absolute inset-0">
-        {[...Array(50)].map((_, i) => (
+        {[...Array(30)].map((_, i) => (
           <div
             key={i}
-            className="absolute w-px bg-gradient-to-b from-transparent via-yellow-400/20 to-transparent"
+            className="absolute w-px bg-gradient-to-b from-transparent via-yellow-400/10 to-transparent"
             style={{
               left: `${Math.random() * 100}%`,
-              height: `${Math.random() * 100}px`,
+              height: `${50 + Math.random() * 150}px`,
               top: `${Math.random() * 100}%`,
-              animation: `flow-up ${5 + Math.random() * 5}s linear infinite`,
+              animation: `flow-up ${8 + Math.random() * 4}s linear infinite`,
               animationDelay: `${Math.random() * 3}s`,
-            }}
-          />
-        ))}
-        {[...Array(50)].map((_, i) => (
-          <div
-            key={`h-${i}`}
-            className="absolute h-px bg-gradient-to-r from-transparent via-yellow-400/20 to-transparent"
-            style={{
-              top: `${Math.random() * 100}%`,
-              width: `${Math.random() * 100}px`,
-              left: `${Math.random() * 100}%`,
-              animation: `flow-right ${5 + Math.random() * 5}s linear infinite`,
-              animationDelay: `${Math.random() * 3}s`,
+              opacity: 0.3,
             }}
           />
         ))}
@@ -67,59 +74,51 @@ export default function Tools() {
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-5xl md:text-6xl font-bold mb-4">
-            Our <span className="text-yellow-400">Tech Stack</span>
+            Tools We <span className="text-yellow-400">Use</span>
           </h2>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Powered by cutting-edge technologies and industry-leading tools
+          <p className="text-xl text-gray-400">
+            Only logos shown. A quick glance at our daily toolkit.
           </p>
         </div>
 
-        <div className="relative max-w-6xl mx-auto">
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-7 gap-2 md:gap-3 mb-12">
-            {tools.map((tool, index) => (
-              <div
-                key={index}
-                onClick={() => setActiveIndex(index)}
-                className={`relative group cursor-pointer transition-all duration-300 ${
-                  activeIndex === index ? 'scale-125 z-20' : 'hover:scale-110'
-                }`}
-              >
-                <div className="relative aspect-square rounded-lg md:rounded-xl overflow-hidden border transition-all duration-300" style={{
-                  borderColor: activeIndex === index ? tool.color : 'rgba(75, 85, 99, 0.3)',
-                  borderWidth: activeIndex === index ? '2px' : '1px',
-                  boxShadow: activeIndex === index ? `0 0 20px ${tool.color}80` : 'none',
-                }}>
-                  <img
-                    src={tool.image}
-                    alt={tool.name}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-2">
-                    <span className="font-semibold text-white text-xs line-clamp-1">{tool.name}</span>
-                  </div>
-                </div>
-                {activeIndex === index && (
+        <div className="space-y-12 max-w-6xl mx-auto">
+          {Object.entries(toolsByCategory).map(([category, tools]) => (
+            <div
+              key={category}
+              onMouseEnter={() => setHoveredCategory(category)}
+              onMouseLeave={() => setHoveredCategory(null)}
+              className="group"
+            >
+              <h3 className="text-lg md:text-xl font-semibold text-yellow-400 mb-6 ml-2 transition-all duration-300">
+                {category}
+              </h3>
+              <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 gap-3 md:gap-4">
+                {tools.map((tool, index) => (
                   <div
-                    className="absolute inset-0 rounded-lg md:rounded-xl animate-ping pointer-events-none"
-                    style={{
-                      border: `2px solid ${tool.color}`,
-                      opacity: 0.2,
-                    }}
-                  />
-                )}
+                    key={index}
+                    className={`group/item transition-all duration-300 ${
+                      hoveredCategory === category ? 'opacity-100' : 'opacity-75 hover:opacity-100'
+                    }`}
+                  >
+                    <div className="relative aspect-square rounded-xl bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 hover:border-yellow-400/50 flex items-center justify-center overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(250,204,21,0.3)] hover:scale-110 cursor-pointer group/tool">
+                      <span className="text-4xl md:text-5xl drop-shadow-lg transition-transform duration-300 group-hover/tool:scale-125">
+                        {tool.icon}
+                      </span>
+                      <div className="absolute inset-0 rounded-xl ring-1 ring-yellow-400/0 group-hover/tool:ring-yellow-400/50 transition-all duration-300"></div>
+                    </div>
+                    <p className="text-center text-sm mt-3 text-gray-400 group-hover/item:text-white transition-colors duration-300 font-medium">
+                      {tool.name}
+                    </p>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-
-          <div className="text-center py-6">
-            <h3 className="text-xl md:text-2xl font-bold text-white">{tools[activeIndex].name}</h3>
-          </div>
+            </div>
+          ))}
         </div>
 
-        <div className="text-center mt-12">
-          <p className="text-gray-400 text-lg">
-            Continuously evolving with the latest technologies to deliver{' '}
-            <span className="text-yellow-400 font-semibold">exceptional results</span>
+        <div className="mt-16 text-center">
+          <p className="text-gray-500 text-sm">
+            Continuously expanding our toolkit to deliver cutting-edge solutions
           </p>
         </div>
       </div>
@@ -127,13 +126,8 @@ export default function Tools() {
       <style>{`
         @keyframes flow-up {
           0% { transform: translateY(100px); opacity: 0; }
-          50% { opacity: 1; }
+          50% { opacity: 0.3; }
           100% { transform: translateY(-100px); opacity: 0; }
-        }
-        @keyframes flow-right {
-          0% { transform: translateX(-100px); opacity: 0; }
-          50% { opacity: 1; }
-          100% { transform: translateX(100px); opacity: 0; }
         }
       `}</style>
     </section>
