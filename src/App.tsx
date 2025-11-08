@@ -4,7 +4,7 @@ import About from './components/About';
 import Services from './components/Services';
 import StartHub from './components/StartHub';
 import Tools from './components/Tools';
-import WhyNeovate from './components/WhyNeovate';
+// import WhyNeovate from './components/WhyNeovate';
 import IdeasLab from './components/IdeasLab';
 import Videos from './components/Videos';
 import Contact from './components/Contact';
@@ -44,7 +44,7 @@ function App() {
       <Tools />
       <StartHub />
       <IdeasLab />
-      {/* <WhyNeovate /> */}
+      {/* <WhyNeovate /> now we did not have any costumer if we had a customer we put this point  */}
       <Videos />
       <Contact />
       <Footer />
