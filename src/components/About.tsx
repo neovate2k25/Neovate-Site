@@ -66,8 +66,8 @@ export default function About() {
               transform: `translateZ(${scrollY * 30}px) scale(${0.8 + scrollY * 0.2})`,
             }}
           >
-            <span className="text-yellow-400 drop-shadow-[0_0_20px_rgba(250,204,21,0.8)]">Neo</span>
-            <span className="text-white">vate</span>
+            <span className="text-white">Neo</span>
+            <span className="text-yellow-400 drop-shadow-[0_0_20px_rgba(250,204,21,0.8)]">vate</span>
           </h2>
 
           <div
