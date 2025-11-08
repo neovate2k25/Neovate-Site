@@ -41,10 +41,10 @@ function App() {
       <Hero />
       <About />
       <Services />
-      <StartHub />
       <Tools />
-      <WhyNeovate />
+      <StartHub />
       <IdeasLab />
+      {/* <WhyNeovate /> */}
       <Videos />
       <Contact />
       <Footer />
