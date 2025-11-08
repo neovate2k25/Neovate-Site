@@ -74,38 +74,36 @@ export default function Tools() {
           </p>
         </div>
 
-        <div className="relative max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6 mb-16">
+        <div className="relative max-w-6xl mx-auto">
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-7 gap-2 md:gap-3 mb-12">
             {tools.map((tool, index) => (
               <div
                 key={index}
                 onClick={() => setActiveIndex(index)}
-                className={`relative group cursor-pointer transition-all duration-500 ${
-                  activeIndex === index ? 'scale-110 z-20' : 'hover:scale-105'
+                className={`relative group cursor-pointer transition-all duration-300 ${
+                  activeIndex === index ? 'scale-125 z-20' : 'hover:scale-110'
                 }`}
               >
-                <div className="relative aspect-square rounded-2xl overflow-hidden border-2 transition-all duration-500" style={{
-                  borderColor: activeIndex === index ? tool.color : 'rgba(75, 85, 99, 0.5)',
-                  boxShadow: activeIndex === index ? `0 0 30px ${tool.color}80` : 'none',
+                <div className="relative aspect-square rounded-lg md:rounded-xl overflow-hidden border transition-all duration-300" style={{
+                  borderColor: activeIndex === index ? tool.color : 'rgba(75, 85, 99, 0.3)',
+                  borderWidth: activeIndex === index ? '2px' : '1px',
+                  boxShadow: activeIndex === index ? `0 0 20px ${tool.color}80` : 'none',
                 }}>
                   <img
                     src={tool.image}
                     alt={tool.name}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-4">
-                    <span className="font-bold text-white text-sm md:text-base">{tool.name}</span>
-                  </div>
-                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <div className="w-8 h-8 rounded-full border-2" style={{ borderColor: tool.color }}></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-2">
+                    <span className="font-semibold text-white text-xs line-clamp-1">{tool.name}</span>
                   </div>
                 </div>
                 {activeIndex === index && (
                   <div
-                    className="absolute inset-0 rounded-2xl animate-ping pointer-events-none"
+                    className="absolute inset-0 rounded-lg md:rounded-xl animate-ping pointer-events-none"
                     style={{
                       border: `2px solid ${tool.color}`,
-                      opacity: 0.3,
+                      opacity: 0.2,
                     }}
                   />
                 )}
@@ -113,9 +111,8 @@ export default function Tools() {
             ))}
           </div>
 
-          <div className="text-center py-8">
-            <h3 className="text-2xl font-bold text-white mb-2">{tools[activeIndex].name}</h3>
-            <p className="text-gray-400">Currently showcasing</p>
+          <div className="text-center py-6">
+            <h3 className="text-xl md:text-2xl font-bold text-white">{tools[activeIndex].name}</h3>
           </div>
         </div>
 
