@@ -154,9 +154,10 @@ export default function About() {
             <FaLightbulb className="text-yellow-400 text-2xl animate-pulse" />
             <div className="w-12 h-px bg-gradient-to-l from-transparent to-yellow-400"></div>
           </div>
-          <p className="text-yellow-400 font-bold text-2xl md:text-3xl max-w-2xl mx-auto">
-            "Innovation starts with us — Neovate."
-          </p>
+          <p className="text-yellow-400 font-bold text-5xl md:text-4xl max-w-2xl mx-auto">
+  " Innovate. Elevate. Neovate. "
+</p>
+
         </div>
       </div>
 
