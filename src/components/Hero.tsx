@@ -1,4 +1,3 @@
-import React from 'react';
 import { Rocket, Eye, Briefcase, Megaphone, Code, Smartphone, Palette, Users, Camera, BarChart3, Brain, Video } from 'lucide-react';
 
 export default function Hero() {
