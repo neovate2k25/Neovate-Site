@@ -11,6 +11,11 @@ export default function StartHub() {
       description: 'Connect with talented freelancers and collaborate on projects',
     },
     {
+      icon: Rocket,
+      title: 'Launch Support',
+      description: 'End-to-end support to bring your startup idea to life',
+    },
+    {
       icon: Lightbulb,
       title: 'Mentorship',
       description: 'Get guidance from experienced professionals in the industry',
@@ -20,11 +25,7 @@ export default function StartHub() {
       title: 'Resources Hub',
       description: 'Access tools, templates, and learning materials for growth',
     },
-    {
-      icon: Rocket,
-      title: 'Launch Support',
-      description: 'End-to-end support to bring your startup idea to life',
-    },
+    
   ];
 
   return (
@@ -38,9 +39,10 @@ export default function StartHub() {
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-5xl md:text-6xl font-bold mb-4">
-            Start<span className="text-yellow-400">Hub</span>
-          </h2>
+          <h2 className="text-5xl md:text-7xl font-bold mb-6">
+            <span className="text-white">Startup</span>
+            <span className="text-yellow-400 drop-shadow-[0_0_20px_rgba(250,204,21,0.8)]">Hub</span>
+          </h2> 
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
             A thriving ecosystem for freelancers, entrepreneurs, and innovators to connect, learn, and build together
           </p>
@@ -68,7 +70,7 @@ export default function StartHub() {
           </h3>
           <p className="text-gray-300 mb-8 text-lg">
             Whether you're a freelancer looking for opportunities or an entrepreneur with a vision,
-            StartHub is your launchpad to success.
+            Startup Hub is your launchpad to success.
           </p>
           <button
             onMouseEnter={() => setIsHovered(true)}
