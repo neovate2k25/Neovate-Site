@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Code, Cpu, Database, Smartphone, Zap } from 'lucide-react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
+import { Code, Cpu, Database, Smartphone, Zap, CheckCircle } from 'lucide-react';
 
 // Define the type for tech stack items
 interface TechStack {
@@ -8,6 +8,7 @@ interface TechStack {
   category: string;
 }
 
+// Tech stack data remains the same
 const techStacks: TechStack[] = [
   // Frontend Web
   { name: 'HTML', category: 'frontend', svg: (<svg width="100%" height="100%" viewBox="0 0 128 128"><path fill="#E44D26" d="M19.5 114.5L8.1 0h111.8l-11.4 114.5L63.9 128"/><path fill="#F16529" d="M64 117.2l36.8-10.2 9.8-109.7H64"/><path fill="#EBEBEB" d="M64 66.7H45.6l-1.2-13.7H64V39.7H32.7l.3 3.7 3.1 34.7H64zM64 98.2h-.1l-15.4-4.2-.9-10.2H36.2l1.7 19.2 26 7.2h.1z"/><path fill="#FFF" d="M63.9 66.7v13.3h15.7l-1.5 16.6-14.2 4.2v13.2l26-7.2 1.7-19.2H63.9zM63.9 39.7v13.3h28.1l.3-3.7.7-7.9.2-1.7z"/></svg>) },
@@ -48,44 +49,24 @@ const techStacks: TechStack[] = [
   { name: 'AWS', category: 'tools', svg: (<svg width="40" height="40" viewBox="0 0 128 128"><rect width="128" height="128" rx="16" fill="#232F3E"/><text x="50%" y="50%" textAnchor="middle" dy=".3em" fontSize="24" fill="#fff" fontFamily="Arial, Helvetica, sans-serif">AWS</text></svg>) },
 ];
 
-// Helper to split array into n nearly equal parts
-function splitArray(array: TechStack[], n: number): TechStack[][] {
-  const result: TechStack[][] = Array.from({ length: n }, () => []);
-  array.forEach((item, i) => {
-    result[i % n].push(item);
-  });
-  return result;
-}
+const categories = [
+  { key: 'frontend', icon: Code, name: 'Frontend', color: 'from-blue-400 to-cyan-400' },
+  { key: 'backend', icon: Cpu, name: 'Backend', color: 'from-green-400 to-emerald-400' },
+  { key: 'database', icon: Database, name: 'Database', color: 'from-purple-400 to-pink-400' },
+  { key: 'mobile', icon: Smartphone, name: 'Mobile', color: 'from-orange-400 to-red-400' },
+  { key: 'tools', icon: Zap, name: 'Tools', color: 'from-yellow-400 to-amber-400' },
+];
 
-const rows = splitArray(techStacks, 3);
-
-function getRowAnimation(row: number, isMobile: boolean): React.CSSProperties {
-  const duration = isMobile ? '20s' : '30s';
-  return {
-    animation: row % 2 === 0 
-      ? `marqueeX ${duration} linear infinite` 
-      : `marqueeXReverse ${duration} linear infinite`,
-  };
-}
-
-function TechStacks() {
-  const [isMobile, setIsMobile] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
+function TechStacksGrid() {
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [inView, setInView] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const checkIsMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
     const handleScroll = () => {
       if (sectionRef.current) {
         const rect = sectionRef.current.getBoundingClientRect();
-        const scrollProgress = Math.max(0, Math.min(1, (window.innerHeight - rect.top) / window.innerHeight));
-        setScrollY(scrollProgress);
-        
-        // Check if section is in view
+        // Check if the section is 20% visible from the bottom of the viewport
         if (rect.top < window.innerHeight * 0.8) {
           setInView(true);
         }
@@ -93,200 +74,168 @@ function TechStacks() {
     };
 
     window.addEventListener('scroll', handleScroll);
-    window.addEventListener('resize', checkIsMobile);
-    
-    // Initial checks
-    checkIsMobile();
-    handleScroll();
-    
+    handleScroll(); // Initial check
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', checkIsMobile);
     };
   }, []);
 
-  const categories = [
-    { icon: Code, name: 'Frontend', color: 'from-blue-400 to-cyan-400' },
-    { icon: Cpu, name: 'Backend', color: 'from-green-400 to-emerald-400' },
-    { icon: Database, name: 'Database', color: 'from-purple-400 to-pink-400' },
-    { icon: Smartphone, name: 'Mobile', color: 'from-orange-400 to-red-400' },
-    { icon: Zap, name: 'Tools', color: 'from-yellow-400 to-amber-400' },
-  ];
+  // Filter stacks based on the active category
+  const filteredStacks = useMemo(() => {
+    if (!activeCategory) {
+      // If no category is selected, return all items in a default order
+      return techStacks;
+    }
+    return techStacks.filter(stack => stack.category === activeCategory);
+  }, [activeCategory]);
+  
+  // Custom stagger delay calculation based on index for the grid animation
+  const getStaggerDelay = (index: number) => {
+    if (!inView) return '0ms';
+    // Small initial delay, then stagger by 50ms per item
+    return `${300 + index * 50}ms`;
+  };
+
+  // Generate random animation delay for each card
+  const getFloatDelay = (index: number) => {
+    return `${(index % 10) * 0.2}s`;
+  };
 
   return (
     <section
       id="tech-stacks"
       ref={sectionRef}
-      className="relative min-h-screen flex items-center justify-center py-20 overflow-hidden"
+      className="relative min-h-screen flex flex-col items-center justify-center py-20 overflow-hidden bg-black text-white"
     >
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900 to-black opacity-50"></div>
+      <style>{`
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-15px);
+          }
+        }
+
+        .float-animation {
+          animation: float 3s ease-in-out infinite;
+        }
+      `}</style>
+
+      <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900 to-black opacity-80"></div>
+      
+      {/* Background Grid/Lines */}
+      <div className="absolute inset-0 z-0 opacity-10">
+        {[...Array(10)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-full h-[1px] bg-yellow-400"
+            style={{ top: `${i * 10}%` }}
+          />
+        ))}
+        {[...Array(10)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute h-full w-[1px] bg-yellow-400"
+            style={{ left: `${i * 10}%` }}
+          />
+        ))}
+      </div>
 
       <div className="relative z-10 container mx-auto px-6 max-w-7xl">
         {/* Header */}
-        <div
-          className="text-center transition-all duration-1000 mb-16"
-          style={{
-            opacity: scrollY,
-            transform: `translateY(${(1 - scrollY) * 50}px)`,
-          }}
-        >
-          <h2
-            className="text-5xl md:text-7xl font-bold mb-6"
-            style={{
-              transform: `translateZ(${scrollY * 30}px) scale(${0.8 + scrollY * 0.2})`,
-            }}
-          >
-            <span className="text-white">Tech</span>
-            <span className="text-yellow-400 drop-shadow-[0_0_20px_rgba(250,204,21,0.8)]">Stack</span>
+        <div className="text-center mb-12">
+          <h2 className="text-4xl md:text-6xl font-extrabold mb-4">
+            <span className="text-white">Our Core</span>
+            <span className="text-yellow-400 drop-shadow-[0_0_20px_rgba(250,204,21,0.8)]"> Technologies</span>
           </h2>
-
-          <div
-            className="space-y-6 text-lg md:text-xl text-gray-300 leading-relaxed mb-8"
-            style={{
-              transform: `translateZ(${scrollY * 20}px)`,
-            }}
-          >
-            <p className="max-w-3xl mx-auto">
-              We master a comprehensive suite of modern technologies to deliver 
-              <span className="text-yellow-400 font-semibold"> cutting-edge solutions</span>. 
-              From frontend to backend, mobile to cloud — our expertise spans the entire development spectrum.
-            </p>
-          </div>
+          <p className="max-w-3xl mx-auto text-base md:text-lg text-gray-300 leading-relaxed">
+            Explore the specialized toolsets we master across different domains to build your next project. Click a category to see the stacks!
+          </p>
         </div>
 
-        {/* Category Icons */}
-        <div className="flex justify-center flex-wrap gap-6 mb-12">
-          {categories.map((category, index) => (
-            <div
-              key={category.name}
-              className={`flex flex-col items-center transition-all duration-500 transform ${
-                inView 
-                  ? 'translate-y-0 opacity-100 scale-100' 
-                  : 'translate-y-10 opacity-0 scale-95'
-              }`}
-              style={{ transitionDelay: `${index * 100}ms` }}
+        {/* Category Selector */}
+        <div className="flex justify-center flex-wrap gap-3 md:gap-6 mb-10">
+          {categories.map((category, index) => {
+            const isActive = activeCategory === category.key;
+            return (
+              <button
+                key={category.key}
+                onClick={() => setActiveCategory(prev => (prev === category.key ? null : category.key))}
+                className={`
+                  flex items-center space-x-2 p-2.5 md:p-3 rounded-full font-semibold text-sm md:text-base
+                  transition-all duration-300 transform shadow-lg
+                  ${isActive
+                    ? `bg-gradient-to-r ${category.color} text-black scale-105 shadow-yellow-500/50`
+                    : 'bg-gray-800 text-gray-300 hover:bg-gray-700 hover:scale-[1.02] border border-gray-700'
+                  }
+                  ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}
+                `}
+                style={{ transitionDelay: `${index * 100}ms` }}
+              >
+                <category.icon size={18} className={isActive ? 'text-black' : 'text-yellow-400'} />
+                <span>{category.name}</span>
+                {isActive && <CheckCircle size={14} className="text-black ml-1" />}
+              </button>
+            );
+          })}
+          {/* Reset button */}
+          {activeCategory && (
+            <button
+              onClick={() => setActiveCategory(null)}
+              className="flex items-center space-x-2 p-2.5 md:p-3 rounded-full font-semibold text-sm md:text-base bg-red-600 text-white hover:bg-red-700 transition-all duration-300"
             >
-              <div className={`w-16 h-16 bg-gradient-to-br ${category.color} rounded-2xl flex items-center justify-center mb-3 transform transition-all duration-300 hover:scale-110 hover:rotate-12 group`}>
-                <category.icon size={28} className="text-black group-hover:scale-110 transition-transform duration-300" />
+              Reset Filter
+            </button>
+          )}
+        </div>
+
+        {/* Animated Tech Stack Grid */}
+        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-3 md:gap-4 justify-center">
+          {filteredStacks.map((stack, index) => (
+            <div
+              key={`${stack.name}-${index}`}
+              className={`
+                flex flex-col items-center justify-center p-3 md:p-4 rounded-xl border-2
+                bg-gray-800/70 backdrop-blur-sm
+                transition-all duration-700 ease-out transform
+                hover:scale-110 hover:shadow-2xl hover:bg-gray-700/80 hover:z-10
+                float-animation
+                ${inView ? 'opacity-100 scale-100' : 'opacity-0 scale-70'}
+              `}
+              style={{
+                borderColor: activeCategory === stack.category ? 'var(--stack-color-border)' : 'rgba(250, 204, 21, 0.2)',
+                '--stack-color-border': categories.find(c => c.key === stack.category)?.color.replace('from-', '').split(' ')[0] || 'rgba(250, 204, 21, 0.2)',
+                transitionDelay: getStaggerDelay(index),
+                animationDelay: getFloatDelay(index),
+                minHeight: '90px',
+              } as React.CSSProperties}
+            >
+              <div className="mb-1.5 md:mb-2 w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
+                {stack.svg}
               </div>
-              <span className="text-gray-300 font-semibold text-sm">{category.name}</span>
-            </div>
-          ))}
-        </div>
-
-        {/* Animated Tech Stack Rows */}
-        <div
-          className={`relative w-full h-[300px] md:h-[360px] flex flex-col justify-center space-y-6 md:space-y-8 transition-all duration-1000 ${
-            inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}
-        >
-          {rows.map((rowStacks, row) => (
-            <div
-              key={row}
-              className="flex items-center gap-4 md:gap-8 whitespace-nowrap will-change-transform"
-              style={getRowAnimation(row, isMobile)}
-            >
-              {rowStacks.map((stack, i) => (
-                <div
-                  key={`${stack.name}-${row}-${i}`}
-                  className="flex flex-col items-center justify-center bg-gradient-to-br from-gray-900 to-black border-2 border-yellow-400/20 rounded-2xl p-4 md:p-6 shadow-lg hover:scale-105 transition-all duration-300 group hover:border-yellow-400/50"
-                  style={{
-                    boxShadow: '0 0 20px rgba(250, 204, 21, 0.1)',
-                  }}
-                >
-                  <div className="mb-2 md:mb-3 w-10 h-10 md:w-12 md:h-12 group-hover:scale-110 transition-transform duration-300">
-                    {stack.svg}
-                  </div>
-                  <span className="text-white text-sm md:text-lg font-semibold drop-shadow-md">
-                    {stack.name}
-                  </span>
-                </div>
-              ))}
-              {/* Duplicate for seamless looping */}
-              {rowStacks.map((stack, i) => (
-                <div
-                  key={`${stack.name}-dup-${row}-${i}`}
-                  className="flex flex-col items-center justify-center bg-gradient-to-br from-gray-900 to-black border-2 border-yellow-400/20 rounded-2xl p-4 md:p-6 shadow-lg hover:scale-105 transition-all duration-300 group hover:border-yellow-400/50"
-                  aria-hidden="true"
-                  style={{
-                    boxShadow: '0 0 20px rgba(250, 204, 21, 0.1)',
-                  }}
-                >
-                  <div className="mb-2 md:mb-3 w-10 h-10 md:w-12 md:h-12 group-hover:scale-110 transition-transform duration-300">
-                    {stack.svg}
-                  </div>
-                  <span className="text-white text-sm md:text-lg font-semibold drop-shadow-md">
-                    {stack.name}
-                  </span>
-                </div>
-              ))}
+              <span className="text-white text-xs md:text-sm font-semibold text-center mt-1">
+                {stack.name}
+              </span>
             </div>
           ))}
         </div>
 
         {/* Bottom Quote */}
-        <div
-          className={`text-center mt-16 transition-all duration-1000 delay-500 ${
-            inView 
-              ? 'translate-y-0 opacity-100' 
-              : 'translate-y-10 opacity-0'
-          }`}
-        >
+        <div className="text-center mt-16">
           <div className="flex items-center justify-center gap-4 mb-4">
             <div className="w-12 h-px bg-gradient-to-r from-transparent to-yellow-400"></div>
-            <Zap size={24} className="text-yellow-400 animate-pulse" />
+            <Zap size={20} className="text-yellow-400" />
             <div className="w-12 h-px bg-gradient-to-l from-transparent to-yellow-400"></div>
           </div>
-          <p className="text-yellow-400 font-bold text-xl md:text-2xl max-w-2xl mx-auto">
-            " Powering Innovation with Modern Technology "
+          <p className="text-yellow-400 font-bold text-lg md:text-xl max-w-2xl mx-auto">
+            "Adaptability is the cornerstone of our development philosophy."
           </p>
         </div>
       </div>
-
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 bg-yellow-400 rounded-full animate-pulse"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${2 + Math.random() * 2}s`,
-              opacity: 0.3 + Math.random() * 0.4,
-            }}
-          />
-        ))}
-        
-        {/* Floating particles */}
-        <div className="absolute top-1/4 left-1/4 w-4 h-4 bg-yellow-400/20 rounded-full animate-float">
-          <div className="absolute inset-0 bg-yellow-400/40 rounded-full animate-ping"></div>
-        </div>
-        <div className="absolute top-2/3 right-1/3 w-3 h-3 bg-yellow-400/30 rounded-full animate-float" style={{animationDelay: '1s'}}>
-          <div className="absolute inset-0 bg-yellow-400/50 rounded-full animate-ping" style={{animationDelay: '1s'}}></div>
-        </div>
-      </div>
-
-      <style>{`
-        @keyframes marqueeX {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-100%); }
-        }
-        @keyframes marqueeXReverse {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(0); }
-        }
-        @keyframes float {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          50% { transform: translateY(-20px) rotate(180deg); }
-        }
-        .animate-float {
-          animation: float 6s ease-in-out infinite;
-        }
-      `}</style>
     </section>
   );
 }
 
-export default TechStacks;
+export default TechStacksGrid;
