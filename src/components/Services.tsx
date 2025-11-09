@@ -11,8 +11,10 @@ import {
   BarChart3,
 } from 'lucide-react';
 
+
 export default function Services() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
 
   const services = [
     { name: 'Web Development', icon: Code, description: 'Custom websites, front-end & back-end.' },
@@ -25,6 +27,7 @@ export default function Services() {
     { name: 'Branding', icon: Palette, description: 'Logos, identity and visual systems.' },
     { name: 'Multimedia Support', icon: Video, description: 'Animations, motion design and assets.' },
   ];
+
 
   // Map each index to a simple animation variant name
   const animMap = [
@@ -39,22 +42,25 @@ export default function Services() {
     'slide', // multimedia
   ];
 
+
   return (
     <section id="services" className="relative py-12 sm:py-16 lg:py-20 bg-black">
       <div className="container mx-auto px-4 sm:px-6">
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 leading-tight">
-            Our <span className="text-yellow-400">Services</span>
+            Our <span className="text-yellow-400 drop-shadow-[0_0_30px_rgba(250,204,21,0.8)]">Services</span>
           </h2>
           <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto">
             Focused service categories — tap a card to see a micro-animation.
           </p>
         </div>
 
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-7xl mx-auto">
           {services.map((svc, i) => {
             const Icon = svc.icon as any;
             const anim = animMap[i] || 'float';
+
 
             return (
               <div
@@ -73,8 +79,10 @@ export default function Services() {
                   <Icon className={`w-6 h-6 sm:w-8 sm:h-8 lg:w-8 lg:h-8 ${hoveredIndex === i ? 'text-yellow-400 drop-shadow-[0_0_12px_rgba(250,204,21,0.8)]' : 'text-yellow-400/90'}`} />
                 </div>
 
+
                 <h3 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-3 text-white text-center sm:text-left">{svc.name}</h3>
                 <p className="text-sm sm:text-base text-gray-400 mb-0 sm:mb-4 text-center sm:text-left">{svc.description}</p>
+
 
                 
               </div>
@@ -83,32 +91,44 @@ export default function Services() {
         </div>
       </div>
 
+
       <style>{`
         /* Icon wrappers */
         .icon-wrap{ background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); }
         .icon-wrap svg{ transition: transform .45s cubic-bezier(.2,.9,.2,1), filter .35s; }
 
+
         /* Variants */
         .float svg{ transform-origin: center; }
         .float.active svg{ animation: float 3s ease-in-out infinite; }
 
+
         .pop.active svg{ animation: pop 700ms cubic-bezier(.2,.9,.2,1); }
+
 
         .swirl.active{ animation: swirl 2.2s linear infinite; }
 
+
         .wave.active svg{ animation: wave 1.6s ease-in-out infinite; transform-origin: center bottom; }
+
 
         .pulse.active svg{ animation: pulse 1.4s ease-in-out infinite; }
 
+
         .orbit.active{ animation: orbit 3s linear infinite; }
+
 
         .film.active svg{ animation: film 1.8s steps(4) infinite; }
 
+
         .slide.active{ animation: slide 1.6s ease-in-out infinite; }
+
 
         .rise.active svg{ animation: rise 2s ease-in-out infinite; }
 
+
         .spark.active svg{ animation: spark 900ms ease-in-out infinite; }
+
 
         /* Keyframes */
         @keyframes float { 0%,100%{transform: translateY(0)}50%{transform: translateY(-8px)} }
@@ -121,6 +141,7 @@ export default function Services() {
         @keyframes slide { 0%{transform: translateX(-6px)}50%{transform: translateX(6px)}100%{transform: translateX(-6px)} }
         @keyframes rise { 0%{transform: translateY(6px) scale(.98)}50%{transform: translateY(-6px) scale(1.02)}100%{transform: translateY(6px) scale(.98)} }
         @keyframes spark { 0%{transform: scale(1)}50%{transform: scale(1.06)}100%{transform: scale(1)} }
+
 
         /* Responsive tweaks */
         @media (max-width: 640px){
