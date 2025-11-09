@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { FaBullseye, FaLightbulb} from 'react-icons/fa6';
-import { IoRocketSharp } from 'react-icons/io5';
+import { Target, Lightbulb, Rocket } from 'lucide-react';
 
 export default function About() {
   const [scrollY, setScrollY] = useState(0);
@@ -101,7 +100,7 @@ export default function About() {
           >
             <div className="text-center mb-6">
               <div className="w-20 h-20 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center mx-auto mb-4 transform transition-all duration-500 hover:scale-110 hover:rotate-12 group">
-                <FaBullseye className="text-3xl text-black group-hover:scale-110 transition-transform duration-300" />
+                <Target size={32} className="text-black group-hover:scale-110 transition-transform duration-300" />
               </div>
               <h3 className="text-2xl font-bold text-yellow-400 mb-2">Mission</h3>
               <div className="w-20 h-1 bg-gradient-to-r from-yellow-400 to-yellow-200 mx-auto rounded-full"></div>
@@ -129,7 +128,7 @@ export default function About() {
           >
             <div className="text-center mb-6">
               <div className="w-20 h-20 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center mx-auto mb-4 transform transition-all duration-500 hover:scale-110 hover:-rotate-12 group">
-                <IoRocketSharp className="text-3xl text-black group-hover:scale-110 transition-transform duration-300" />
+                <Rocket size={32} className="text-black group-hover:scale-110 transition-transform duration-300" />
               </div>
               <h3 className="text-2xl font-bold text-yellow-400 mb-2">Vision</h3>
               <div className="w-20 h-1 bg-gradient-to-r from-yellow-400 to-yellow-200 mx-auto rounded-full"></div>
@@ -151,7 +150,7 @@ export default function About() {
         >
           <div className="flex items-center justify-center gap-4 mb-4">
             <div className="w-12 h-px bg-gradient-to-r from-transparent to-yellow-400"></div>
-            <FaLightbulb className="text-yellow-400 text-2xl animate-pulse" />
+            <Lightbulb size={24} className="text-yellow-400 animate-pulse" />
             <div className="w-12 h-px bg-gradient-to-l from-transparent to-yellow-400"></div>
           </div>
           <p className="text-yellow-400 font-bold text-5xl md:text-4xl max-w-2xl mx-auto">
