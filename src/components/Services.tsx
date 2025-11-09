@@ -1,136 +1,82 @@
 import { useState } from 'react';
-import { Code, Brain, TrendingUp, Palette, Film, Smartphone, Zap, Users, Layers, Settings, Cpu } from 'lucide-react';
+import {
+  Code,
+  Brain,
+  Megaphone,
+  Palette,
+  Smartphone,
+  Users,
+  Camera,
+  Video,
+  BarChart3,
+} from 'lucide-react';
 
 export default function Services() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   const services = [
-    {
-      icon: Code,
-      title: 'Web & App Development',
-      description: 'Custom websites and mobile applications built with modern frameworks and best practices.',
-      features: ['React & Next.js', 'Mobile Apps', 'E-commerce', 'Progressive Web Apps'],
-    },
-    {
-      icon: Brain,
-      title: 'AI Integration',
-      description: 'Intelligent solutions powered by machine learning and artificial intelligence.',
-      features: ['ChatGPT Integration', 'ML Models', 'Automation', 'Data Analytics'],
-    },
-    {
-      icon: TrendingUp,
-      title: 'Digital Marketing',
-      description: 'Strategic campaigns that drive engagement, growth, and measurable results.',
-      features: ['SEO Optimization', 'Social Media', 'Content Strategy', 'Analytics'],
-    },
-    {
-      icon: Palette,
-      title: 'Branding & Design',
-      description: 'Distinctive brand identities that resonate with your target audience.',
-      features: ['Logo Design', 'Brand Strategy', 'UI/UX Design', 'Style Guides'],
-    },
-    {
-      icon: Film,
-      title: 'Photo/Video Editing',
-      description: 'Professional editing services that bring your visual content to life.',
-      features: ['Video Production', 'Photo Editing', 'Motion Graphics', 'Color Grading'],
-    },
-    {
-      icon: Smartphone,
-      title: 'Mobile-First Design',
-      description: 'Responsive designs optimized for mobile devices and all screen sizes.',
-      features: ['iOS Development', 'Android Development', 'Cross-Platform', 'Performance Optimization'],
-    },
-    {
-      icon: Zap,
-      title: 'Cloud & DevOps',
-      description: 'Scalable infrastructure and deployment solutions for modern applications.',
-      features: ['AWS & Azure', 'CI/CD Pipelines', 'Docker & Kubernetes', 'Cloud Migration'],
-    },
-    {
-      icon: Users,
-      title: 'Consultation & Strategy',
-      description: 'Expert guidance to align technology with your business goals and vision.',
-      features: ['Tech Planning', 'Architecture Design', 'Growth Strategy', 'Feasibility Analysis'],
-    },
-    {
-      icon: Layers,
-      title: 'System Integration',
-      description: 'Seamless integration of multiple systems and platforms for unified workflows.',
-      features: ['API Integration', 'Database Management', 'Legacy System Modernization', 'Data Migration'],
-    },
-    {
-      icon: Settings,
-      title: 'Maintenance & Support',
-      description: 'Ongoing support and maintenance to keep your systems running smoothly.',
-      features: ['24/7 Monitoring', 'Bug Fixes', 'Updates & Patches', 'Performance Tuning'],
-    },
-    {
-      icon: Cpu,
-      title: 'Cybersecurity',
-      description: 'Comprehensive security solutions to protect your digital assets and data.',
-      features: ['Security Audits', 'Data Encryption', 'Vulnerability Testing', 'Compliance'],
-    },
+    { name: 'Web Development', icon: Code, description: 'Custom websites, front-end & back-end.' },
+    { name: 'App Development', icon: Smartphone, description: 'Native and cross-platform mobile apps.' },
+    { name: 'AI Integration', icon: Brain, description: 'Chatbots, ML pipelines and automation.' },
+    { name: 'Digital Marketing', icon: Megaphone, description: 'Campaigns that convert and grow audiences.' },
+    { name: 'Google & Meta Ads', icon: BarChart3, description: 'Ad strategy, setup and optimisation.' },
+    { name: 'Photo/Video Editing', icon: Camera, description: 'Color grading, cuts, motion graphics.' },
+    { name: 'Social Media Handling', icon: Users, description: 'Content calendars and community growth.' },
+    { name: 'Branding', icon: Palette, description: 'Logos, identity and visual systems.' },
+    { name: 'Multimedia Support', icon: Video, description: 'Animations, motion design and assets.' },
+  ];
+
+  // Map each index to a simple animation variant name
+  const animMap = [
+    'float', // web
+    'pop', // app
+    'pulse', // ai
+    'wave', // marketing
+    'spark', // ads
+    'film', // photo/video
+    'orbit', // social
+    'swirl', // branding
+    'slide', // multimedia
   ];
 
   return (
-    <section id="services" className="relative py-20 bg-black">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-5xl md:text-6xl font-bold mb-4">
+    <section id="services" className="relative py-12 sm:py-16 lg:py-20 bg-black">
+      <div className="container mx-auto px-4 sm:px-6">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 leading-tight">
             Our <span className="text-yellow-400">Services</span>
           </h2>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Comprehensive solutions tailored to transform your digital presence
+          <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto">
+            Focused service categories — tap a card to see a micro-animation.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-          {services.map((service, index) => {
-            const Icon = service.icon;
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-7xl mx-auto">
+          {services.map((svc, i) => {
+            const Icon = svc.icon as any;
+            const anim = animMap[i] || 'float';
+
             return (
               <div
-                key={index}
-                onMouseEnter={() => setHoveredIndex(index)}
+                key={svc.name}
+                onMouseEnter={() => setHoveredIndex(i)}
                 onMouseLeave={() => setHoveredIndex(null)}
-                className={`relative p-8 rounded-2xl border transition-all duration-500 cursor-pointer ${
-                  hoveredIndex === index
-                    ? 'bg-gradient-to-br from-yellow-400/20 to-transparent border-yellow-400 shadow-[0_0_40px_rgba(250,204,21,0.3)] scale-105 z-10'
-                    : hoveredIndex !== null
-                    ? 'bg-gray-900/50 border-gray-800 blur-sm scale-95'
-                    : 'bg-gray-900/50 border-gray-800 hover:border-gray-700'
-                }`}
+                className={`relative p-4 sm:p-6 lg:p-8 rounded-2xl border transition-all duration-500 cursor-pointer transform-gpu
+                  ${hoveredIndex === i ? 'bg-gradient-to-br from-yellow-400/20 to-transparent border-yellow-400 shadow-[0_0_40px_rgba(250,204,21,0.25)] scale-105 z-10' : 'bg-gray-900/50 border-gray-800 hover:border-gray-700'}
+                `}
                 style={{
-                  transform: hoveredIndex === index ? 'translateY(-10px) scale(1.05)' : undefined,
+                  transform: hoveredIndex === i ? 'translateY(-8px) scale(1.03)' : undefined,
                 }}
               >
-                <div className={`transition-all duration-500 ${hoveredIndex === index ? 'animate-bounce-slow' : ''}`}>
-                  <Icon
-                    className={`w-12 h-12 mb-6 transition-all duration-300 ${
-                      hoveredIndex === index ? 'text-yellow-400 drop-shadow-[0_0_15px_rgba(250,204,21,0.8)]' : 'text-yellow-400'
-                    }`}
-                  />
+                {/* Animated icon container */}
+                <div className={`icon-wrap mb-4 sm:mb-6 w-12 h-12 sm:w-14 sm:h-14 lg:w-14 lg:h-14 rounded-lg flex items-center justify-center ${anim} ${hoveredIndex === i ? 'active' : ''}`}>
+                  <Icon className={`w-6 h-6 sm:w-8 sm:h-8 lg:w-8 lg:h-8 ${hoveredIndex === i ? 'text-yellow-400 drop-shadow-[0_0_12px_rgba(250,204,21,0.8)]' : 'text-yellow-400/90'}`} />
                 </div>
 
-                <h3 className="text-2xl font-bold mb-4 text-white">{service.title}</h3>
-                <p className="text-gray-400 mb-6">{service.description}</p>
+                <h3 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-3 text-white text-center sm:text-left">{svc.name}</h3>
+                <p className="text-sm sm:text-base text-gray-400 mb-0 sm:mb-4 text-center sm:text-left">{svc.description}</p>
 
-                <ul className="space-y-2">
-                  {service.features.map((feature, i) => (
-                    <li
-                      key={i}
-                      className={`flex items-center text-sm transition-all duration-300 ${
-                        hoveredIndex === index ? 'text-white' : 'text-gray-500'
-                      }`}
-                      style={{
-                        transitionDelay: hoveredIndex === index ? `${i * 100}ms` : '0ms',
-                      }}
-                    >
-                      <span className="w-1.5 h-1.5 bg-yellow-400 rounded-full mr-3"></span>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
+                
               </div>
             );
           })}
@@ -138,12 +84,51 @@ export default function Services() {
       </div>
 
       <style>{`
-        @keyframes bounce-slow {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-5px); }
+        /* Icon wrappers */
+        .icon-wrap{ background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); }
+        .icon-wrap svg{ transition: transform .45s cubic-bezier(.2,.9,.2,1), filter .35s; }
+
+        /* Variants */
+        .float svg{ transform-origin: center; }
+        .float.active svg{ animation: float 3s ease-in-out infinite; }
+
+        .pop.active svg{ animation: pop 700ms cubic-bezier(.2,.9,.2,1); }
+
+        .swirl.active{ animation: swirl 2.2s linear infinite; }
+
+        .wave.active svg{ animation: wave 1.6s ease-in-out infinite; transform-origin: center bottom; }
+
+        .pulse.active svg{ animation: pulse 1.4s ease-in-out infinite; }
+
+        .orbit.active{ animation: orbit 3s linear infinite; }
+
+        .film.active svg{ animation: film 1.8s steps(4) infinite; }
+
+        .slide.active{ animation: slide 1.6s ease-in-out infinite; }
+
+        .rise.active svg{ animation: rise 2s ease-in-out infinite; }
+
+        .spark.active svg{ animation: spark 900ms ease-in-out infinite; }
+
+        /* Keyframes */
+        @keyframes float { 0%,100%{transform: translateY(0)}50%{transform: translateY(-8px)} }
+        @keyframes pop { 0%{transform: scale(0.85)}60%{transform: scale(1.08)}100%{transform: scale(1)} }
+        @keyframes swirl { 0%{transform: rotate(0deg)}100%{transform: rotate(360deg)} }
+        @keyframes wave { 0%{transform: rotate(-6deg)}50%{transform: rotate(6deg)}100%{transform: rotate(-6deg)} }
+        @keyframes pulse { 0%{filter: drop-shadow(0 0 0 rgba(250,204,21,0.0))}50%{filter: drop-shadow(0 0 18px rgba(250,204,21,0.25))}100%{filter: drop-shadow(0 0 0 rgba(250,204,21,0.0))} }
+        @keyframes orbit { 0%{transform: translateX(0)}25%{transform: translateX(6px) translateY(-4px)}50%{transform: translateX(0) translateY(-8px)}75%{transform: translateX(-6px) translateY(-4px)}100%{transform: translateX(0)} }
+        @keyframes film { 0%{opacity:1}50%{opacity:.6}100%{opacity:1} }
+        @keyframes slide { 0%{transform: translateX(-6px)}50%{transform: translateX(6px)}100%{transform: translateX(-6px)} }
+        @keyframes rise { 0%{transform: translateY(6px) scale(.98)}50%{transform: translateY(-6px) scale(1.02)}100%{transform: translateY(6px) scale(.98)} }
+        @keyframes spark { 0%{transform: scale(1)}50%{transform: scale(1.06)}100%{transform: scale(1)} }
+
+        /* Responsive tweaks */
+        @media (max-width: 640px){
+          .icon-wrap{ width:48px !important; height:48px !important; }
+          .grid{ gap: 1rem; }
         }
-        .animate-bounce-slow {
-          animation: bounce-slow 2s ease-in-out infinite;
+        @media (min-width: 641px) and (max-width: 1024px){
+          .icon-wrap{ width: 56px; height: 56px; }
         }
       `}</style>
     </section>
