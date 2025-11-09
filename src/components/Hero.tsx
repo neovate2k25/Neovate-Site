@@ -1,6 +1,20 @@
 import { useState, useEffect, useRef } from 'react';
 import { Rocket, Eye, Briefcase, Megaphone, Code, Smartphone, Palette, Users, Camera, BarChart3, Brain, Video } from 'lucide-react';
 
+// Moved outside: Stabilizes reference, prevents useEffect re-runs on every render
+const services = [
+  { name: 'Web Development', icon: Code, color: 'from-blue-500 to-cyan-500' },
+  { name: 'Branding', icon: Palette, color: 'from-red-500 to-orange-500' },
+  { name: 'Digital Marketing', icon: Megaphone, color: 'from-purple-500 to-pink-500' },
+  { name: 'Social Media Handling', icon: Users, color: 'from-indigo-500 to-blue-500' },
+  { name: 'App Development', icon: Smartphone, color: 'from-green-500 to-emerald-500' },
+  { name: 'Multimedia Support', icon: Video, color: 'from-yellow-500 to-orange-500' },
+  { name: 'Training & Internships', icon: Users, color: 'from-gray-500 to-blue-500' },
+  { name: 'Google & Meta Ads', icon: BarChart3, color: 'from-teal-500 to-green-500' },
+  { name: 'AI Integration', icon: Brain, color: 'from-purple-500 to-indigo-500' },
+  { name: 'Photo/Video Editing', icon: Camera, color: 'from-pink-500 to-rose-500' },
+];
+
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerSize, setContainerSize] = useState(520); // Default to lg size
@@ -10,19 +24,6 @@ export default function Hero() {
     const element = document.getElementById(id);
     if (element) element.scrollIntoView({ behavior: 'smooth' });
   };
-
-  const services = [
-    { name: 'Web Development', icon: Code, color: 'from-blue-500 to-cyan-500' },
-    { name: 'Branding', icon: Palette, color: 'from-red-500 to-orange-500' },
-    { name: 'Digital Marketing', icon: Megaphone, color: 'from-purple-500 to-pink-500' },
-    { name: 'Social Media Handling', icon: Users, color: 'from-indigo-500 to-blue-500' },
-    { name: 'App Development', icon: Smartphone, color: 'from-green-500 to-emerald-500' },
-    { name: 'Multimedia Support', icon: Video, color: 'from-yellow-500 to-orange-500' },
-    { name: 'Training & Internships', icon: Users, color: 'from-gray-500 to-blue-500' },
-    { name: 'Google & Meta Ads', icon: BarChart3, color: 'from-teal-500 to-green-500' },
-    { name: 'AI Integration', icon: Brain, color: 'from-purple-500 to-indigo-500' },
-    { name: 'Photo/Video Editing', icon: Camera, color: 'from-pink-500 to-rose-500' },
-  ];
 
   // Update container size and recalculate positions on resize
   useEffect(() => {
@@ -72,7 +73,7 @@ export default function Hero() {
     updateSize(); // Initial call
     window.addEventListener('resize', updateSize);
     return () => window.removeEventListener('resize', updateSize);
-  }, []);
+  }, []); // Empty deps: runs once on mount/unmount
 
   // Calculate line positions for SVG (same logic, but update viewBox dynamically)
   const [svgViewBox, setSvgViewBox] = useState('0 0 520 520');
@@ -116,7 +117,7 @@ export default function Hero() {
     });
 
     setLines(newLines);
-  }, [containerSize, services]);
+  }, [containerSize, services]); // services is now stable
 
   return (
     <section
