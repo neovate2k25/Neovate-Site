@@ -35,14 +35,14 @@ export default function Navigation() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${
+        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ease-in-out ${
           isScrolled
             ? 'bg-black/95 backdrop-blur-xl shadow-2xl shadow-yellow-400/25 border-b border-yellow-400/15'
             : 'bg-transparent'
         }`}
       >
-        <div className="container mx-auto px-4 sm:px-6 py-3 sm:py-4 max-w-7xl">
-          <div className="flex items-center justify-between">
+        <div className="container mx-auto px-4 sm:px-6 py-3 sm:py-4 max-w-7xl relative">
+          <div className="flex items-center justify-between relative z-40">
             {/* Logo with enhanced hover animation */}
             <button
               onClick={() => scrollToSection('home')}
@@ -97,16 +97,16 @@ export default function Navigation() {
               {/* Mobile Menu Button - Enhanced with rotation */}
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="text-yellow-400 hover:text-yellow-300 transition-all duration-400 p-2 rounded-xl hover:bg-yellow-400/15 transform hover:rotate-12"
+                className="lg:hidden text-yellow-400 hover:text-yellow-300 transition-all duration-400 p-2 rounded-xl hover:bg-yellow-400/15 transform hover:rotate-12 z-50"
               >
-                {isMobileMenuOpen ? <X size={28} className="sm:w-8 sm:h-8" /> : <Menu size={28} className="sm:w-8 sm:h-8" />}
+                {isMobileMenuOpen ? <X size={28} className="w-7 h-7 sm:w-8 sm:h-8" /> : <Menu size={28} className="w-7 h-7 sm:w-8 sm:h-8" />}
               </button>
             </div>
           </div>
 
           {/* Mobile Navigation - Enhanced with slide-in and bottom gaps */}
           {isMobileMenuOpen && (
-            <div className="lg:hidden mt-4 pb-6 space-y-2 border-t border-yellow-400/30 pt-4 bg-black/95 backdrop-blur-2xl rounded-b-2xl shadow-2xl shadow-yellow-400/20 mx-2 sm:mx-4 relative">
+            <div className="lg:hidden mt-4 pb-6 space-y-2 border-t border-yellow-400/30 pt-4 bg-black/98 backdrop-blur-2xl rounded-b-2xl shadow-2xl shadow-yellow-400/20 relative z-50 animate-in slide-in-from-top duration-300">
               <div className="space-y-1">
                 {navLinks.map((link, index) => (
                   <button

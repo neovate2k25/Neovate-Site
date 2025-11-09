@@ -1,59 +1,96 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 export default function Tools() {
-  const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
+  const [toolPositions, setToolPositions] = useState<{ [key: string]: { x: number; y: number } }>({});
+  const dragRef = useRef<{ id: string; startX: number; startY: number; currentX: number; currentY: number } | null>(null);
 
   const toolsByCategory = {
     'Marketing & Analytics': [
-      { name: 'Meta Ads', icon: '📱' },
-      { name: 'Google Ads', icon: '📊' },
-      { name: 'Google Analytics', icon: '📈' },
-      { name: 'Tag Manager', icon: '🏷️' },
-      { name: 'Hootsuite', icon: '🔗' },
-      { name: 'Buffer', icon: '📅' },
-      { name: 'Semrush', icon: '🎯' },
+      { id: 'meta-ads', name: 'Meta Ads', icon: '📱' },
+      { id: 'google-ads', name: 'Google Ads', icon: '📊' },
+      { id: 'google-analytics', name: 'Google Analytics', icon: '📈' },
+      { id: 'tag-manager', name: 'Tag Manager', icon: '🏷️' },
+      { id: 'hootsuite', name: 'Hootsuite', icon: '🔗' },
+      { id: 'buffer', name: 'Buffer', icon: '📅' },
+      { id: 'semrush', name: 'Semrush', icon: '🎯' },
     ],
     'Frontend & Backend': [
-      { name: 'React', icon: '⚛️' },
-      { name: 'Vite', icon: '⚡' },
-      { name: 'Node.js', icon: '🟢' },
-      { name: 'Express', icon: '🛠️' },
+      { id: 'react', name: 'React', icon: '⚛️' },
+      { id: 'vite', name: 'Vite', icon: '⚡' },
+      { id: 'nodejs', name: 'Node.js', icon: '🟢' },
+      { id: 'express', name: 'Express', icon: '🛠️' },
     ],
     'Databases': [
-      { name: 'MongoDB', icon: '🍃' },
-      { name: 'PostgreSQL', icon: '🐘' },
+      { id: 'mongodb', name: 'MongoDB', icon: '🍃' },
+      { id: 'postgresql', name: 'PostgreSQL', icon: '🐘' },
     ],
     'Cloud & Deployment': [
-      { name: 'AWS', icon: '☁️' },
-      { name: 'Vercel', icon: '▲' },
-      { name: 'Netlify', icon: '🌐' },
+      { id: 'aws', name: 'AWS', icon: '☁️' },
+      { id: 'vercel', name: 'Vercel', icon: '▲' },
+      { id: 'netlify', name: 'Netlify', icon: '🌐' },
     ],
     'Video & Design': [
-      { name: 'Premiere Pro', icon: '🎬' },
-      { name: 'After Effects', icon: '✨' },
-      { name: 'DaVinci Resolve', icon: '🎞️' },
-      { name: 'Photoshop', icon: '🖼️' },
-      { name: 'Illustrator', icon: '🎨' },
-      { name: 'Figma', icon: '🎭' },
-      { name: 'Canva', icon: '📐' },
+      { id: 'premiere', name: 'Premiere Pro', icon: '🎬' },
+      { id: 'after-effects', name: 'After Effects', icon: '✨' },
+      { id: 'davinci', name: 'DaVinci Resolve', icon: '🎞️' },
+      { id: 'photoshop', name: 'Photoshop', icon: '🖼️' },
+      { id: 'illustrator', name: 'Illustrator', icon: '🎨' },
+      { id: 'figma', name: 'Figma', icon: '🎭' },
+      { id: 'canva', name: 'Canva', icon: '📐' },
     ],
     'Mobile Development': [
-      { name: 'Android Studio', icon: '📱' },
-      { name: 'Xcode', icon: '🍎' },
-      { name: 'Flutter', icon: '🦋' },
-      { name: 'React Native', icon: '⚛️' },
-      { name: 'Expo', icon: '📦' },
+      { id: 'android', name: 'Android Studio', icon: '📱' },
+      { id: 'xcode', name: 'Xcode', icon: '🍎' },
+      { id: 'flutter', name: 'Flutter', icon: '🦋' },
+      { id: 'react-native', name: 'React Native', icon: '⚛️' },
+      { id: 'expo', name: 'Expo', icon: '📦' },
     ],
     'DevOps & Tools': [
-      { name: 'Jira', icon: '📋' },
-      { name: 'GitHub Actions', icon: '🚀' },
-      { name: 'Cursor', icon: '✏️' },
-      { name: 'WhatsApp', icon: '💬' },
+      { id: 'jira', name: 'Jira', icon: '📋' },
+      { id: 'github-actions', name: 'GitHub Actions', icon: '🚀' },
+      { id: 'cursor', name: 'Cursor', icon: '✏️' },
+      { id: 'whatsapp', name: 'WhatsApp', icon: '💬' },
     ],
   };
 
+  const handleMouseDown = (e: React.MouseEvent, toolId: string) => {
+    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+    dragRef.current = {
+      id: toolId,
+      startX: e.clientX - rect.left,
+      startY: e.clientY - rect.top,
+      currentX: toolPositions[toolId]?.x || 0,
+      currentY: toolPositions[toolId]?.y || 0,
+    };
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!dragRef.current) return;
+
+    const deltaX = e.clientX - (dragRef.current.startX + window.scrollX);
+    const deltaY = e.clientY - (dragRef.current.startY + window.scrollY);
+
+    setToolPositions(prev => ({
+      ...prev,
+      [dragRef.current!.id]: {
+        x: dragRef.current.currentX + deltaX,
+        y: dragRef.current.currentY + deltaY,
+      },
+    }));
+  };
+
+  const handleMouseUp = () => {
+    dragRef.current = null;
+  };
+
   return (
-    <section id="tools" className="relative py-20 bg-black overflow-hidden">
+    <section
+      id="tools"
+      className="relative py-20 bg-black overflow-hidden"
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseUp}
+    >
       <div className="absolute inset-0">
         {[...Array(30)].map((_, i) => (
           <div
@@ -77,38 +114,48 @@ export default function Tools() {
             Tools We <span className="text-yellow-400">Use</span>
           </h2>
           <p className="text-xl text-gray-400">
-            Only logos shown. A quick glance at our daily toolkit.
+            Only logos shown. A quick glance at our daily toolkit. Drag to move around!
           </p>
         </div>
 
-        <div className="space-y-12 max-w-6xl mx-auto">
-          {Object.entries(toolsByCategory).map(([category, tools]) => (
-            <div
-              key={category}
-              onMouseEnter={() => setHoveredCategory(category)}
-              onMouseLeave={() => setHoveredCategory(null)}
-              className="group"
-            >
-              <h3 className="text-lg md:text-xl font-semibold text-yellow-400 mb-6 ml-2 transition-all duration-300">
+        <div className="max-w-7xl mx-auto space-y-12">
+          {Object.entries(toolsByCategory).map(([category, tools], rowIndex) => (
+            <div key={category} className="relative">
+              <h3 className="text-lg md:text-xl font-semibold text-yellow-400 mb-6 ml-2">
                 {category}
               </h3>
-              <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 gap-3 md:gap-4">
-                {tools.map((tool, index) => (
+              <div
+                className="flex flex-wrap gap-4 md:gap-6 justify-center items-start md:items-center transition-all duration-500"
+                style={{
+                  justifyContent:
+                    rowIndex % 3 === 0 ? 'flex-start' : rowIndex % 3 === 1 ? 'flex-end' : 'center',
+                }}
+              >
+                {tools.map((tool) => (
                   <div
-                    key={index}
-                    className={`group/item transition-all duration-300 ${
-                      hoveredCategory === category ? 'opacity-100' : 'opacity-75 hover:opacity-100'
-                    }`}
+                    key={tool.id}
+                    className="relative"
+                    style={{
+                      transform: `translate(${toolPositions[tool.id]?.x || 0}px, ${
+                        toolPositions[tool.id]?.y || 0
+                      }px)`,
+                      transition: dragRef.current?.id === tool.id ? 'none' : 'transform 0.3s ease-out',
+                    }}
                   >
-                    <div className="relative aspect-square rounded-xl bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 hover:border-yellow-400/50 flex items-center justify-center overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(250,204,21,0.3)] hover:scale-110 cursor-pointer group/tool">
-                      <span className="text-4xl md:text-5xl drop-shadow-lg transition-transform duration-300 group-hover/tool:scale-125">
-                        {tool.icon}
-                      </span>
-                      <div className="absolute inset-0 rounded-xl ring-1 ring-yellow-400/0 group-hover/tool:ring-yellow-400/50 transition-all duration-300"></div>
+                    <div
+                      onMouseDown={(e) => handleMouseDown(e, tool.id)}
+                      className="group cursor-grab active:cursor-grabbing select-none transition-all duration-300"
+                    >
+                      <div className="relative aspect-square w-20 sm:w-24 md:w-28 rounded-xl bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 hover:border-yellow-400/50 flex items-center justify-center overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(250,204,21,0.3)] hover:scale-110 group-active:scale-95">
+                        <span className="text-5xl md:text-6xl drop-shadow-lg transition-transform duration-300 group-hover:scale-125">
+                          {tool.icon}
+                        </span>
+                        <div className="absolute inset-0 rounded-xl ring-1 ring-yellow-400/0 group-hover:ring-yellow-400/50 transition-all duration-300"></div>
+                      </div>
+                      <p className="text-center text-xs sm:text-sm mt-3 text-gray-400 group-hover:text-white transition-colors duration-300 font-medium max-w-28">
+                        {tool.name}
+                      </p>
                     </div>
-                    <p className="text-center text-sm mt-3 text-gray-400 group-hover/item:text-white transition-colors duration-300 font-medium">
-                      {tool.name}
-                    </p>
                   </div>
                 ))}
               </div>
@@ -118,7 +165,7 @@ export default function Tools() {
 
         <div className="mt-16 text-center">
           <p className="text-gray-500 text-sm">
-            Continuously expanding our toolkit to deliver cutting-edge solutions
+            Tip: Drag tools around to customize your view! Continuously expanding our toolkit to deliver cutting-edge solutions
           </p>
         </div>
       </div>

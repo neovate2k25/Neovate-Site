@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Code, Brain, TrendingUp, Palette, Film } from 'lucide-react';
+import { Code, Brain, TrendingUp, Palette, Film, Smartphone, Zap, Users, Layers, Settings, Cpu } from 'lucide-react';
 
 export default function Services() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -34,6 +34,42 @@ export default function Services() {
       title: 'Photo/Video Editing',
       description: 'Professional editing services that bring your visual content to life.',
       features: ['Video Production', 'Photo Editing', 'Motion Graphics', 'Color Grading'],
+    },
+    {
+      icon: Smartphone,
+      title: 'Mobile-First Design',
+      description: 'Responsive designs optimized for mobile devices and all screen sizes.',
+      features: ['iOS Development', 'Android Development', 'Cross-Platform', 'Performance Optimization'],
+    },
+    {
+      icon: Zap,
+      title: 'Cloud & DevOps',
+      description: 'Scalable infrastructure and deployment solutions for modern applications.',
+      features: ['AWS & Azure', 'CI/CD Pipelines', 'Docker & Kubernetes', 'Cloud Migration'],
+    },
+    {
+      icon: Users,
+      title: 'Consultation & Strategy',
+      description: 'Expert guidance to align technology with your business goals and vision.',
+      features: ['Tech Planning', 'Architecture Design', 'Growth Strategy', 'Feasibility Analysis'],
+    },
+    {
+      icon: Layers,
+      title: 'System Integration',
+      description: 'Seamless integration of multiple systems and platforms for unified workflows.',
+      features: ['API Integration', 'Database Management', 'Legacy System Modernization', 'Data Migration'],
+    },
+    {
+      icon: Settings,
+      title: 'Maintenance & Support',
+      description: 'Ongoing support and maintenance to keep your systems running smoothly.',
+      features: ['24/7 Monitoring', 'Bug Fixes', 'Updates & Patches', 'Performance Tuning'],
+    },
+    {
+      icon: Cpu,
+      title: 'Cybersecurity',
+      description: 'Comprehensive security solutions to protect your digital assets and data.',
+      features: ['Security Audits', 'Data Encryption', 'Vulnerability Testing', 'Compliance'],
     },
   ];
 
