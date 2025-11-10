@@ -3,6 +3,8 @@ import { Send, Lightbulb } from 'lucide-react';
 
 export default function IdeasLab() {
   const [formData, setFormData] = useState({ name: '', email: '', idea: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
   const communityIdeas = [
     { idea: 'AI-powered study assistant for students', author: 'Alex K.' },
@@ -12,10 +14,44 @@ export default function IdeasLab() {
     { idea: 'AR app for furniture visualization in homes', author: 'Chris P.' },
   ];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Idea submitted:', formData);
-    setFormData({ name: '', email: '', idea: '' });
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+      const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+      const response = await fetch(`${supabaseUrl}/functions/v1/send-email`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${anonKey}`,
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          idea: formData.idea,
+          subject: 'New Ideas Lab Submission',
+          type: 'ideas',
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSubmitStatus({ type: 'success', message: 'Your idea has been submitted! Thank you for contributing.' });
+        setFormData({ name: '', email: '', idea: '' });
+      } else {
+        setSubmitStatus({ type: 'error', message: 'Failed to submit idea. Please try again.' });
+      }
+    } catch (error) {
+      setSubmitStatus({ type: 'error', message: 'An error occurred. Please try again later.' });
+      console.error('Error:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -77,12 +113,26 @@ export default function IdeasLab() {
                   required
                 />
               </div>
+              {submitStatus && (
+                <div className={`p-4 rounded-lg text-center font-semibold ${
+                  submitStatus.type === 'success'
+                    ? 'bg-green-500/20 text-green-400 border border-green-500/50'
+                    : 'bg-red-500/20 text-red-400 border border-red-500/50'
+                }`}>
+                  {submitStatus.message}
+                </div>
+              )}
               <button
                 type="submit"
-                className="w-full px-6 py-4 bg-yellow-400 text-black font-bold rounded-full hover:bg-yellow-300 transition-all duration-300 shadow-[0_0_30px_rgba(250,204,21,0.6)] hover:shadow-[0_0_40px_rgba(250,204,21,0.9)] hover:scale-105 flex items-center justify-center gap-2"
+                disabled={isSubmitting}
+                className={`w-full px-6 py-4 bg-yellow-400 text-black font-bold rounded-full transition-all duration-300 shadow-[0_0_30px_rgba(250,204,21,0.6)] flex items-center justify-center gap-2 ${
+                  isSubmitting
+                    ? 'opacity-50 cursor-not-allowed'
+                    : 'hover:bg-yellow-300 hover:shadow-[0_0_40px_rgba(250,204,21,0.9)] hover:scale-105'
+                }`}
               >
                 <Send size={20} />
-                Submit Your Idea
+                {isSubmitting ? 'Submitting...' : 'Submit Your Idea'}
               </button>
             </form>
           </div>

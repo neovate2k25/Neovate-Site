@@ -1,8 +1,51 @@
-import { Users, Lightbulb, Rocket, BookOpen } from 'lucide-react';
+import { Users, Lightbulb, Rocket, BookOpen, Send } from 'lucide-react';
 import { useState } from 'react';
 
 export default function StartHub() {
   const [isHovered, setIsHovered] = useState(false);
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+      const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+      const response = await fetch(`${supabaseUrl}/functions/v1/send-email`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${anonKey}`,
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          subject: 'New Startup Hub Application',
+          type: 'startup',
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSubmitStatus({ type: 'success', message: 'Application submitted successfully! We\'ll review it soon.' });
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        setSubmitStatus({ type: 'error', message: 'Failed to submit application. Please try again.' });
+      }
+    } catch (error) {
+      setSubmitStatus({ type: 'error', message: 'An error occurred. Please try again later.' });
+      console.error('Error:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const features = [
     {
@@ -25,7 +68,6 @@ export default function StartHub() {
       title: 'Resources Hub',
       description: 'Access tools, templates, and learning materials for growth',
     },
-    
   ];
 
   return (
@@ -64,36 +106,82 @@ export default function StartHub() {
           })}
         </div>
 
-        <div className="max-w-4xl mx-auto bg-gradient-to-r from-yellow-400/10 to-yellow-400/5 border border-yellow-400/30 rounded-2xl p-12 text-center">
-          <h3 className="text-3xl md:text-4xl font-bold mb-6 text-white">
+        <div className="max-w-4xl mx-auto bg-gradient-to-r from-yellow-400/10 to-yellow-400/5 border border-yellow-400/30 rounded-2xl p-8 md:p-12">
+          <h3 className="text-3xl md:text-4xl font-bold mb-6 text-white text-center">
             Ready to Join the <span className="text-yellow-400">Revolution?</span>
           </h3>
-          <p className="text-gray-300 mb-8 text-lg">
+          <p className="text-gray-300 mb-8 text-lg text-center">
             Whether you're a freelancer looking for opportunities or an entrepreneur with a vision,
             Startup Hub is your launchpad to success.
           </p>
-          <button
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-            className="relative px-10 py-4 bg-yellow-400 text-black font-bold rounded-full hover:bg-yellow-300 transition-all duration-500 shadow-[0_0_30px_rgba(250,204,21,0.6)] overflow-hidden group"
-            style={{
-              transform: isHovered ? 'scale(1.1)' : 'scale(1)',
-            }}
-          >
-            <span className="relative z-10 flex items-center gap-2">
-              <Rocket size={20} />
-              Apply Now
-            </span>
-            <div
-              className={`absolute inset-0 bg-white transition-all duration-500 ${
-                isHovered ? 'scale-100' : 'scale-0'
+
+          <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <input
+                type="text"
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                className="px-4 py-3 bg-black/40 border border-yellow-400/30 rounded-lg text-white focus:border-yellow-400 focus:outline-none transition-all duration-300"
+                placeholder="Your name"
+                required
+              />
+              <input
+                type="email"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                className="px-4 py-3 bg-black/40 border border-yellow-400/30 rounded-lg text-white focus:border-yellow-400 focus:outline-none transition-all duration-300"
+                placeholder="your@email.com"
+                required
+              />
+            </div>
+            <textarea
+              value={formData.message}
+              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+              rows={4}
+              className="w-full px-4 py-3 bg-black/40 border border-yellow-400/30 rounded-lg text-white focus:border-yellow-400 focus:outline-none transition-all duration-300 resize-none"
+              placeholder="Tell us about your experience and goals..."
+              required
+            />
+
+            {submitStatus && (
+              <div className={`p-4 rounded-lg text-center font-semibold ${
+                submitStatus.type === 'success'
+                  ? 'bg-green-500/20 text-green-400 border border-green-500/50'
+                  : 'bg-red-500/20 text-red-400 border border-red-500/50'
+              }`}>
+                {submitStatus.message}
+              </div>
+            )}
+
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+              className={`w-full relative px-10 py-4 bg-yellow-400 text-black font-bold rounded-full transition-all duration-500 shadow-[0_0_30px_rgba(250,204,21,0.6)] overflow-hidden group flex items-center justify-center gap-2 ${
+                isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
               }`}
               style={{
-                transformOrigin: 'center',
-                borderRadius: '9999px',
+                transform: isHovered && !isSubmitting ? 'scale(1.05)' : 'scale(1)',
               }}
-            ></div>
-          </button>
+            >
+              <span className="relative z-10 flex items-center gap-2">
+                <Rocket size={20} />
+                {isSubmitting ? 'Applying...' : 'Apply Now'}
+              </span>
+              {!isSubmitting && (
+                <div
+                  className={`absolute inset-0 bg-white transition-all duration-500 ${
+                    isHovered ? 'scale-100' : 'scale-0'
+                  }`}
+                  style={{
+                    transformOrigin: 'center',
+                    borderRadius: '9999px',
+                  }}
+                ></div>
+              )}
+            </button>
+          </form>
         </div>
       </div>
 

@@ -4,11 +4,47 @@ import { Mail, Phone, MapPin, Send, Instagram, Linkedin, Twitter, Github } from 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [focusedField, setFocusedField] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Contact form submitted:', formData);
-    setFormData({ name: '', email: '', message: '' });
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+      const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+      const response = await fetch(`${supabaseUrl}/functions/v1/send-email`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${anonKey}`,
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          subject: 'New Contact Form Message',
+          type: 'contact',
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSubmitStatus({ type: 'success', message: 'Message sent successfully! We\'ll get back to you soon.' });
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        setSubmitStatus({ type: 'error', message: 'Failed to send message. Please try again.' });
+      }
+    } catch (error) {
+      setSubmitStatus({ type: 'error', message: 'An error occurred. Please try again later.' });
+      console.error('Error:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const socialLinks = [
@@ -100,12 +136,26 @@ export default function Contact() {
                   required
                 />
               </div>
+              {submitStatus && (
+                <div className={`p-4 rounded-lg text-center font-semibold ${
+                  submitStatus.type === 'success'
+                    ? 'bg-green-500/20 text-green-400 border border-green-500/50'
+                    : 'bg-red-500/20 text-red-400 border border-red-500/50'
+                }`}>
+                  {submitStatus.message}
+                </div>
+              )}
               <button
                 type="submit"
-                className="w-full px-6 py-4 bg-yellow-400 text-black font-bold rounded-full hover:bg-yellow-300 transition-all duration-300 shadow-[0_0_30px_rgba(250,204,21,0.6)] hover:shadow-[0_0_40px_rgba(250,204,21,0.9)] hover:scale-105 flex items-center justify-center gap-2"
+                disabled={isSubmitting}
+                className={`w-full px-6 py-4 bg-yellow-400 text-black font-bold rounded-full transition-all duration-300 shadow-[0_0_30px_rgba(250,204,21,0.6)] flex items-center justify-center gap-2 ${
+                  isSubmitting
+                    ? 'opacity-50 cursor-not-allowed'
+                    : 'hover:bg-yellow-300 hover:shadow-[0_0_40px_rgba(250,204,21,0.9)] hover:scale-105'
+                }`}
               >
                 <Send size={20} />
-                Send Message
+                {isSubmitting ? 'Sending...' : 'Send Message'}
               </button>
             </form>
           </div>

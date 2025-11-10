@@ -38,7 +38,7 @@ export default function Navigation() {
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ease-in-out ${
           isScrolled
             ? 'bg-black/95 backdrop-blur-xl shadow-2xl shadow-yellow-400/25 border-b border-yellow-400/15'
-            : 'bg-transparent'
+            : 'bg-black/40 lg:bg-transparent backdrop-blur-sm lg:backdrop-blur-none'
         }`}
       >
         <div className="container mx-auto px-4 sm:px-6 py-3 sm:py-4 max-w-7xl relative">
