@@ -17,7 +17,7 @@ export default function Footer() {
     { name: 'Services', id: 'services' },
     { name: 'Startup Hub', id: 'starthub' },
     { name: 'Ideas Lab', id: 'ideas-lab' },
-    { name: 'Videos', id: 'videos' },
+    { name: 'Video Hub', id: 'videos' },
   ];
 
   const socialLinks = [

@@ -1,33 +1,122 @@
 import { Play, ExternalLink } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
+interface YouTubeVideo {
+  title: string;
+  thumbnail: string;
+  videoId: string;
+  publishedAt: string;
+}
 
 export default function Videos() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [videos, setVideos] = useState<YouTubeVideo[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const videos = [
-    {
-      title: 'Building the Future with AI',
-      thumbnail: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=800',
-      videoId: 'dQw4w9WgXcQ',
-    },
-    {
-      title: 'Web Development Masterclass',
-      thumbnail: 'https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=800',
-      videoId: 'dQw4w9WgXcQ',
-    },
-    {
-      title: 'Startup Success Stories',
-      thumbnail: 'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=800',
-      videoId: 'dQw4w9WgXcQ',
-    },
-  ];
+  const API_KEY = 'AIzaSyCSq7ORP3G9_-vAr80zqiABOV-r0XKIAgI';
+  const CHANNEL_ID = 'UCY4XLjHe5QqTHp2RYnuTuKw';
+
+  useEffect(() => {
+    const fetchYouTubeVideos = async () => {
+      try {
+        setLoading(true);
+        // First, get the uploads playlist ID from the channel
+        const channelResponse = await fetch(
+          `https://www.googleapis.com/youtube/v3/channels?part=contentDetails&id=${CHANNEL_ID}&key=${API_KEY}`
+        );
+        
+        const channelData = await channelResponse.json();
+        
+        if (!channelData.items || channelData.items.length === 0) {
+          throw new Error('Channel not found');
+        }
+
+        const uploadsPlaylistId = channelData.items[0].contentDetails.relatedPlaylists.uploads;
+
+        // Then, get the videos from the uploads playlist
+        const videosResponse = await fetch(
+          `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsPlaylistId}&maxResults=6&key=${API_KEY}`
+        );
+
+        const videosData = await videosResponse.json();
+
+        if (!videosData.items) {
+          throw new Error('No videos found');
+        }
+
+        const formattedVideos: YouTubeVideo[] = videosData.items.map((item: any) => ({
+          title: item.snippet.title,
+          thumbnail: item.snippet.thumbnails.high?.url || item.snippet.thumbnails.medium?.url || item.snippet.thumbnails.default?.url,
+          videoId: item.snippet.resourceId.videoId,
+          publishedAt: item.snippet.publishedAt
+        }));
+
+        // Sort by published date (newest first)
+        formattedVideos.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
+        
+        setVideos(formattedVideos);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Failed to fetch videos');
+        console.error('Error fetching YouTube videos:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchYouTubeVideos();
+  }, []);
+
+  if (loading) {
+    return (
+      <section id="videos" className="relative py-20 bg-gradient-to-b from-black via-gray-900 to-black">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+             <h2 className="text-5xl md:text-7xl font-bold mb-6">
+            <span className="text-white">Video</span>
+            <span className="text-yellow-400 drop-shadow-[0_0_20px_rgba(250,204,21,0.8)]">Hub</span>
+          </h2>
+            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+              Loading videos...
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {[...Array(3)].map((_, index) => (
+              <div key={index} className="aspect-video rounded-2xl bg-gray-800 animate-pulse"></div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section id="videos" className="relative py-20 bg-gradient-to-b from-black via-gray-900 to-black">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl md:text-6xl font-bold mb-4">
+              YouTube <span className="text-yellow-400">Highlights</span>
+            </h2>
+            <p className="text-xl text-red-400 max-w-2xl mx-auto">
+              Error: {error}
+            </p>
+            <p className="text-lg text-gray-400 mt-4">
+              Please check your API key and channel ID
+            </p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="videos" className="relative py-20 bg-gradient-to-b from-black via-gray-900 to-black">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-5xl md:text-6xl font-bold mb-4">
-            YouTube <span className="text-yellow-400">Highlights</span>
+          <h2 className="text-5xl md:text-7xl font-bold mb-6">
+            <span className="text-white">Video</span>
+            <span className="text-yellow-400 drop-shadow-[0_0_20px_rgba(250,204,21,0.8)]">Hub</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
             Explore our latest videos, tutorials, and behind-the-scenes content
@@ -37,7 +126,7 @@ export default function Videos() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto mb-12">
           {videos.map((video, index) => (
             <a
-              key={index}
+              key={video.videoId}
               href={`https://www.youtube.com/watch?v=${video.videoId}`}
               target="_blank"
               rel="noopener noreferrer"
@@ -77,7 +166,7 @@ export default function Videos() {
 
         <div className="text-center">
           <a
-            href="https://www.youtube.com/@neovate"
+            href={`https://www.youtube.com/channel/${CHANNEL_ID}`}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold rounded-full hover:from-yellow-300 hover:to-yellow-400 transition-all duration-300 shadow-[0_0_30px_rgba(250,204,21,0.6)] hover:shadow-[0_0_40px_rgba(250,204,21,0.9)] hover:scale-105"
