@@ -1,4 +1,4 @@
-import { Users, Lightbulb, Rocket, BookOpen, Send } from 'lucide-react';
+import { Users, Lightbulb, Rocket, BookOpen } from 'lucide-react';
 import { useState } from 'react';
 
 export default function StartHub() {
