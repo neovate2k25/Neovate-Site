@@ -83,8 +83,9 @@ export default function Contact() {
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-5xl md:text-6xl font-bold mb-4">
-            Get in <span className="text-yellow-400">Touch</span>
+          <h2 className="text-5xl md:text-7xl font-bold mb-6">
+            <span className="text-white">Get in</span>
+            <span className="text-yellow-400 drop-shadow-[0_0_20px_rgba(250,204,21,0.8)]">Touch</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
             Ready to start your project? Let's create something amazing together
@@ -186,7 +187,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <p className="text-gray-400 text-sm mb-1">Email</p>
-                  <p className="text-white font-semibold">sanjayn.23aim@kongu.edu</p>
+                  <p className="text-white font-semibold">teamneovate@gmail.com</p>
                 </div>
               </div>
               <div className="flex items-start gap-4 group">
@@ -195,7 +196,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <p className="text-gray-400 text-sm mb-1">Phone</p>
-                  <p className="text-white font-semibold">+91 98765 43210</p>
+                  <p className="text-white font-semibold">+91 9043697817 , +91 9655191168</p>
                 </div>
               </div>
               <div className="flex items-start gap-4 group">
@@ -204,7 +205,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <p className="text-gray-400 text-sm mb-1">Location</p>
-                  <p className="text-white font-semibold">Kongu Engineering College, Erode</p>
+                  <p className="text-white font-semibold">Remote (Chennai) </p>
                 </div>
               </div>
             </div>
@@ -229,19 +230,6 @@ export default function Contact() {
                   );
                 })}
               </div>
-            </div>
-
-            {/* Map */}
-            <div className="bg-gray-900/50 border border-gray-800 rounded-2xl overflow-hidden">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3894.206739007289!2d77.60232907490833!3d11.274853188924597!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba96f8aeb5a2bdb%3A0x8ee5a2c7e788969!2sKongu%20Engineering%20College!5e0!3m2!1sen!2sin!4v1684561234567!5m2!1sen!2sin"
-                width="100%"
-                height="250"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                title="Neovate Location"
-              />
             </div>
           </div>
         </div>
