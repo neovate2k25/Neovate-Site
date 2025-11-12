@@ -16,7 +16,7 @@ export default function Footer() {
     { name: 'About', id: 'about' },
     { name: 'Services', id: 'services' },
     { name: 'Startup Hub', id: 'starthub' },
-    { name: 'Ideas Lab', id: 'ideas-lab' },
+    // { name: 'Ideas Lab', id: 'ideas-lab' },
     { name: 'Video Hub', id: 'videos' },
   ];
 

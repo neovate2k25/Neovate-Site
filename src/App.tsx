@@ -43,7 +43,7 @@ function App() {
       <Services />
       <Tools />
       <StartHub />
-      <IdeasLab />
+      {/* <IdeasLab /> */}
       {/* <WhyNeovate /> now we did not have any costumer if we had a customer we put this point  */}
       <Videos />
       <Contact />
