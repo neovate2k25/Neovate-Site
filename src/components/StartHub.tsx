@@ -1,5 +1,6 @@
 import { Users, Lightbulb, Rocket, BookOpen, Sparkles, Send } from 'lucide-react';
 import { useState } from 'react';
+import emailjs from '@emailjs/browser';
 
 export default function StartHub() {
   const [isHovered, setIsHovered] = useState(false);
@@ -14,43 +15,51 @@ export default function StartHub() {
     setSubmitStatus(null);
 
     try {
-      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-      const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-
       const isJoin = formType === 'join';
-      const body = {
-        name: formData.name,
-        email: formData.email,
-        ...(isJoin ? { message: formData.content } : { idea: formData.content }),
-        subject: isJoin ? 'New Startup Hub Application' : 'New Ideas Lab Submission',
-        type: isJoin ? 'startup' : 'ideas',
-      };
+      const message = isJoin ? 'Application Type: Startup Hub Join\n\nMessage: ' + formData.content : 'Submission Type: Ideas Lab\n\nIdea: ' + formData.content;
+      const subject = isJoin ? 'New Startup Hub Application' : 'New Ideas Lab Submission';
+      const type = isJoin ? 'startup' : 'ideas';
 
-      const response = await fetch(`${supabaseUrl}/functions/v1/send-email`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${anonKey}`,
+      // Send message to admin
+      await emailjs.send(
+        'service_oea27kp',      // your service ID
+        'template_z1ug5uq',     // template for admin
+        {
+          name: formData.name,
+          email: formData.email,
+          message: message,
+          subject: subject,
+          type: type,
+          from_email: 'teamneovate@gmail.com' // updated sender email
         },
-        body: JSON.stringify(body),
+        'jbjZxkG--7ob-fr1J'     // your public key
+      );
+
+      // Send confirmation mail to the user
+      await emailjs.send(
+        'service_oea27kp',      // same service ID
+        'template_3lvrb64',     // template for user confirmation
+        {
+          name: formData.name,
+          email: formData.email,
+          message: message,
+          subject: `Confirmation: ${subject}`,
+          type: type,
+          from_email: 'teamneovate@gmail.com' // updated sender email
+        },
+        'jbjZxkG--7ob-fr1J'
+      );
+
+      setSubmitStatus({ 
+        type: 'success' as const, 
+        message: isJoin 
+          ? 'Application submitted successfully! We\'ll review it soon. Confirmation email sent.' 
+          : 'Your idea has been submitted! Thank you for contributing. Confirmation email sent.' 
       });
-
-      const data = await response.json();
-
-      if (data.success) {
-        setSubmitStatus({ 
-          type: 'success' as const, 
-          message: isJoin 
-            ? 'Application submitted successfully! We\'ll review it soon.' 
-            : 'Your idea has been submitted! Thank you for contributing.' 
-        });
-        setFormData({ name: '', email: '', content: '' });
-      } else {
-        setSubmitStatus({ type: 'error', message: 'Failed to submit. Please try again.' });
-      }
+      setFormData({ name: '', email: '', content: '' });
     } catch (error) {
-      setSubmitStatus({ type: 'error', message: 'An error occurred. Please try again later.' });
-      console.error('Error:', error);
+      console.error('EmailJS Error:', error);
+      setSubmitStatus({ type: 'error', message: 'Failed to submit. Please try again later.' });
     } finally {
       setIsSubmitting(false);
     }
@@ -189,7 +198,7 @@ export default function StartHub() {
               required
             />
 
-            {submitStatus && (
+            {/* {submitStatus && (
               <div className={`p-4 rounded-lg text-center font-semibold ${
                 submitStatus.type === 'success'
                   ? 'bg-green-500/20 text-green-400 border border-green-500/50'
@@ -197,7 +206,7 @@ export default function StartHub() {
               }`}>
                 {submitStatus.message}
               </div>
-            )}
+            )} */}
 
             <button
               type="submit"
