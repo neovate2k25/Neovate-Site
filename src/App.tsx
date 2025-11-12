@@ -5,7 +5,7 @@ import Services from './components/Services';
 import StartHub from './components/StartHub';
 import Tools from './components/Tools';
 // import WhyNeovate from './components/WhyNeovate';
-import IdeasLab from './components/IdeasLab';
+// import IdeasLab from './components/IdeasLab';
 import Videos from './components/Videos';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
