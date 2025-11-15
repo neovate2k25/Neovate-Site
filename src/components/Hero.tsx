@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Rocket, Eye, Briefcase, Megaphone, Code, Smartphone, Palette, Users, Camera, BarChart3, Brain, Video } from 'lucide-react';
-
+import neovateLogo from '../assets/Neovate-st.png';
 // Moved outside: Stabilizes reference, prevents useEffect re-runs on every render
 const services = [
   { name: 'Web Development', icon: Code, color: 'from-blue-500 to-cyan-500' },
@@ -212,8 +212,11 @@ export default function Hero() {
 
                 <div className="relative w-full h-full bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center shadow-2xl border-2 border-yellow-300/50 transform transition-transform duration-500 group-hover:scale-105">
                   <div className="w-44 h-44 sm:w-48 sm:h-48 bg-white/95 rounded-2xl flex items-center justify-center shadow-inner max-w-full max-h-full">
-                    <img src="/src/assets/Neovate-st.png" alt="Neovate logo" className="w-40 h-40 sm:w-44 sm:h-44 object-cover rounded-lg animate-float max-w-full max-h-full" />
-                  </div>
+<img 
+            src={neovateLogo} // Use the imported image
+            alt="Neovate logo" 
+            className="w-40 h-40 sm:w-44 sm:h-44 object-cover rounded-lg animate-float max-w-full max-h-full" 
+          />               </div>
                 </div>
               </div>
             </div>
