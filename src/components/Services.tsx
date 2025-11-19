@@ -9,6 +9,12 @@ import {
   Camera,
   Video,
   BarChart3,
+  Globe,
+  Wrench,
+  Search,
+  GraduationCap,
+  // Settings,
+  Database,
 } from 'lucide-react';
 
 
@@ -26,20 +32,35 @@ export default function Services() {
     { name: 'Social Media Handling', icon: Users, description: 'Content calendars and community growth.' },
     { name: 'Branding', icon: Palette, description: 'Logos, identity and visual systems.' },
     { name: 'Multimedia Support', icon: Video, description: 'Animations, motion design and assets.' },
+
+    // ========== NEW SERVICES ADDED ==========
+    { name: 'CRM Setup', icon: Database, description: 'Custom CRM configuration & automation (Zoho, HubSpot, etc.).' },
+    { name: 'Hosting & Domain', icon: Globe, description: 'Domain registration, hosting setup & management.' },
+    { name: 'College Projects', icon: GraduationCap, description: 'Full Stack, AI, IoT, ML – end-to-end project delivery.' },
+    { name: 'School & Mini Projects', icon: GraduationCap, description: 'Quick, affordable academic & hobby projects.' },
+    { name: 'UI/UX Design', icon: Palette, description: 'User-centered designs, wireframes & prototypes.' },
+    { name: 'Website Maintenance', icon: Wrench, description: 'Updates, backups, security & performance optimization.' },
+    { name: 'SEO Optimization', icon: Search, description: 'On-page, technical SEO & ranking improvements.' },
   ];
 
-
-  // Map each index to a simple animation variant name
+  // Extended animation map for the new cards
   const animMap = [
-    'float', // web
-    'pop', // app
-    'pulse', // ai
-    'wave', // marketing
-    'spark', // ads
-    'film', // photo/video
-    'orbit', // social
-    'swirl', // branding
-    'slide', // multimedia
+    'float',   // Web Development
+    'pop',     // App Development
+    'pulse',   // AI Integration
+    'wave',    // Digital Marketing
+    'spark',   // Google & Meta Ads
+    'film',    // Photo/Video Editing
+    'orbit',   // Social Media Handling
+    'swirl',   // Branding
+    'slide',   // Multimedia Support
+    'rise',    // CRM Setup
+    'float',   // Hosting & Domain
+    'pop',     // College Projects
+    'pulse',   // School & Mini Projects
+    'swirl',   // UI/UX Design
+    'wave',    // Website Maintenance
+    'spark',   // SEO Optimization
   ];
 
 
