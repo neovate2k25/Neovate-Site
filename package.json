@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
+    "@mlc-ai/web-llm": "^0.2.79",
     "@supabase/supabase-js": "^2.57.4",
     "emailjs-com": "^3.2.0",
     "firebase": "^12.5.0",

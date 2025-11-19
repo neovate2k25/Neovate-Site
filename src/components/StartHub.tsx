@@ -1,4 +1,4 @@
-import { Users, Lightbulb, Rocket, BookOpen, Sparkles, Send } from 'lucide-react';
+import { Users, Lightbulb, Rocket, BookOpen, Sparkles, Send, Palette, Globe, Megaphone } from 'lucide-react';
 import { useState } from 'react';
 import emailjs from '@emailjs/browser';
 
@@ -16,45 +16,47 @@ export default function StartHub() {
 
     try {
       const isJoin = formType === 'join';
-      const message = isJoin ? 'Application Type: Startup Hub Join\n\nMessage: ' + formData.content : 'Submission Type: Ideas Lab\n\nIdea: ' + formData.content;
+      const message = isJoin 
+        ? 'Application Type: Startup Hub Join\n\nMessage: ' + formData.content 
+        : 'Submission Type: Ideas Lab\n\nIdea: ' + formData.content;
       const subject = isJoin ? 'New Startup Hub Application' : 'New Ideas Lab Submission';
       const type = isJoin ? 'startup' : 'ideas';
 
-      // Send message to admin
+      // Send to admin
       await emailjs.send(
-        'service_oea27kp',      // your service ID
-        'template_z1ug5uq',     // template for admin
+        'service_oea27kp',
+        'template_z1ug5uq',
         {
           name: formData.name,
           email: formData.email,
           message: message,
           subject: subject,
           type: type,
-          from_email: 'teamneovate@gmail.com' // updated sender email
+          from_email: 'teamneovate@gmail.com'
         },
-        'jbjZxkG--7ob-fr1J'     // your public key
+        'jbjZxkG--7ob-fr1J'
       );
 
-      // Send confirmation mail to the user
+      // Confirmation to user
       await emailjs.send(
-        'service_oea27kp',      // same service ID
-        'template_3lvrb64',     // template for user confirmation
+        'service_oea27kp',
+        'template_3lvrb64',
         {
           name: formData.name,
           email: formData.email,
           message: message,
           subject: `Confirmation: ${subject}`,
           type: type,
-          from_email: 'teamneovate@gmail.com' // updated sender email
+          from_email: 'teamneovate@gmail.com'
         },
         'jbjZxkG--7ob-fr1J'
       );
 
-      setSubmitStatus({ 
-        type: 'success' as const, 
-        message: isJoin 
-          ? 'Application submitted successfully! We\'ll review it soon. Confirmation email sent.' 
-          : 'Your idea has been submitted! Thank you for contributing. Confirmation email sent.' 
+      setSubmitStatus({
+        type: 'success',
+        message: isJoin
+          ? 'Application submitted successfully! We\'ll review it soon. Confirmation email sent.'
+          : 'Your idea has been submitted! Thank you for contributing. Confirmation email sent.'
       });
       setFormData({ name: '', email: '', content: '' });
     } catch (error) {
@@ -66,40 +68,43 @@ export default function StartHub() {
   };
 
   const features = [
+    { icon: Users, title: 'Freelancer Network', description: 'Connect with talented freelancers and collaborate on projects' },
+    { icon: Sparkles, title: 'Ideas Lab', description: 'Share your startup ideas and get valuable feedback from the community' },
+    { icon: Rocket, title: 'Launch Support', description: 'End-to-end support to bring your startup idea to life' },
+    { icon: Lightbulb, title: 'Mentorship', description: 'Get guidance from experienced professionals in the industry' },
+    { icon: BookOpen, title: 'Resources Hub', description: 'Access tools, templates, and learning materials for growth' },
+  ];
+
+  const plans = [
     {
-      icon: Users,
-      title: 'Freelancer Network',
-      description: 'Connect with talented freelancers and collaborate on projects',
+      name: 'STARTUP DESIGNER',
+      icon: Palette,
+      price: 'Visual Identity Package',
+      includes: ['Logo Creation', 'Brochure Designs', 'Visiting Card Designs'],
+      popular: false,
     },
     {
-      icon: Sparkles,
-      title: 'Ideas Lab',
-      description: 'Share your startup ideas and get valuable feedback from the community',
+      name: 'STARTUP BASIC PLAN',
+      icon: Globe,
+      price: 'Digital Presence Package',
+      includes: ['Website Development', 'Domain Purchase', 'Server', 'Social Media Page Creation'],
+      popular: true,
     },
     {
-      icon: Rocket,
-      title: 'Launch Support',
-      description: 'End-to-end support to bring your startup idea to life',
+      name: 'STARTUP PROMOTION',
+      icon: Megaphone,
+      price: 'Growth Package',
+      includes: ['Social Media Management', 'Lead Generation', 'Brand Awareness'],
+      popular: false,
     },
-    {
-      icon: Lightbulb,
-      title: 'Mentorship',
-      description: 'Get guidance from experienced professionals in the industry',
-    },
-    {
-      icon: BookOpen,
-      title: 'Resources Hub',
-      description: 'Access tools, templates, and learning materials for growth',
-    },
-    
   ];
 
   const isJoin = formType === 'join';
   const Icon = isJoin ? Rocket : Send;
   const buttonText = isJoin ? 'Apply Now' : 'Submit Your Idea';
   const submittingText = isJoin ? 'Applying...' : 'Submitting...';
-  const contentPlaceholder = isJoin 
-    ? 'Tell us about your experience and goals...' 
+  const contentPlaceholder = isJoin
+    ? 'Tell us about your experience and goals...'
     : 'Describe your startup idea...';
 
   return (
@@ -112,17 +117,19 @@ export default function StartHub() {
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
+        {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-5xl md:text-7xl font-bold mb-6">
             <span className="text-white">Startup</span>
             <span className="text-yellow-400 drop-shadow-[0_0_20px_rgba(250,204,21,0.8)]">Hub</span>
-          </h2> 
+          </h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
             A thriving ecosystem for freelancers, entrepreneurs, and innovators to connect, learn, and build together
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-16">
+        {/* Features Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-20">
           {features.map((feature, index) => {
             const IconComponent = feature.icon;
             return (
@@ -138,6 +145,48 @@ export default function StartHub() {
           })}
         </div>
 
+        {/* NEW: Startup Plans / Pricing Section */}
+        <div className="mb-20">
+          
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {plans.map((plan) => {
+              const PlanIcon = plan.icon;
+              return (
+                <div
+                  key={plan.name}
+                  className={`relative rounded-2xl p-8 border transition-all duration-300 ${
+                    plan.popular
+                      ? 'bg-yellow-400/10 border-yellow-400 shadow-[0_0_40px_rgba(250,204,21,0.3)] scale-105'
+                      : 'bg-gray-900/50 border-gray-800 hover:border-yellow-400/50'
+                  }`}
+                >
+                  {plan.popular && (
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-yellow-400 text-black px-6 py-1 rounded-full text-sm font-bold">
+                      MOST POPULAR
+                    </div>
+                  )}
+                  <div className="text-center mb-6">
+                    <PlanIcon className="w-14 h-14 text-yellow-400 mx-auto mb-4" />
+                    <h3 className="text-2xl font-bold text-white">{plan.name}</h3>
+                    <p className="text-yellow-400 text-lg mt-2">{plan.price}</p>
+                  </div>
+                  <ul className="space-y-4 mb-8">
+                    {plan.includes.map((item) => (
+                      <li key={item} className="flex items-center text-gray-300">
+                        <span className="w-2 h-2 bg-yellow-400 rounded-full mr-3"></span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                  
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Form Section */}
         <div className="max-w-4xl mx-auto bg-gradient-to-r from-yellow-400/10 to-yellow-400/5 border border-yellow-400/30 rounded-2xl p-8 md:p-12">
           <h3 className="text-3xl md:text-4xl font-bold mb-6 text-white text-center">
             Ready to Join the <span className="text-yellow-400">Revolution</span> or Share an Idea?
@@ -189,6 +238,7 @@ export default function StartHub() {
                 required
               />
             </div>
+
             <textarea
               value={formData.content}
               onChange={(e) => setFormData({ ...formData, content: e.target.value })}
@@ -197,16 +247,6 @@ export default function StartHub() {
               placeholder={contentPlaceholder}
               required
             />
-
-            {/* {submitStatus && (
-              <div className={`p-4 rounded-lg text-center font-semibold ${
-                submitStatus.type === 'success'
-                  ? 'bg-green-500/20 text-green-400 border border-green-500/50'
-                  : 'bg-red-500/20 text-red-400 border border-red-500/50'
-              }`}>
-                {submitStatus.message}
-              </div>
-            )} */}
 
             <button
               type="submit"
@@ -240,6 +280,7 @@ export default function StartHub() {
         </div>
       </div>
 
+      {/* Floating particles */}
       {[...Array(15)].map((_, i) => (
         <div
           key={i}
