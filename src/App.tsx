@@ -43,20 +43,51 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-white overflow-x-hidden">
-      <Navigation />
-      {isDesktop && <CustomCursor />}
-      <Hero />
-      <About />
-      <Services />
-      <Tools />
-      <StartHub />
-      <Videos />
-      <Contact />
-      <Footer />
-      <EasterEgg />
-      <ScrollButton />
-    </div>
+    <>
+      <style>{`
+        /* Custom scrollbar for WebKit browsers (Chrome, Safari, Edge) */
+        ::-webkit-scrollbar {
+          width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+          background: #000000;
+        }
+
+        ::-webkit-scrollbar-thumb {
+          background: #FBBF24; /* Yellow-400 (gold yellow) */
+          border-radius: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+          background: #F59E0B; /* Yellow-500 for hover effect */
+        }
+
+        ::-webkit-scrollbar-thumb:active {
+          background: #D97706; /* Yellow-600 for active */
+        }
+
+        /* Custom scrollbar for Firefox */
+        html {
+          scrollbar-width: thin;
+          scrollbar-color: #FBBF24 #000000;
+        }
+      `}</style>
+      <div className="min-h-screen bg-black text-white overflow-x-hidden">
+        <Navigation />
+        {isDesktop && <CustomCursor />}
+        <Hero />
+        <About />
+        <Services />
+        <Tools />
+        <StartHub />
+        <Videos />
+        <Contact />
+        <Footer />
+        <EasterEgg />
+        <ScrollButton />
+      </div>
+    </>
   );
 }
 
