@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
-import { Code, Cpu, Database, Smartphone, Zap, CheckCircle } from 'lucide-react';
+import { Code, Cpu, Database, Smartphone, Zap, Brain, CheckCircle, GitBranch } from 'lucide-react';
 
 // Define the type for tech stack items
 interface TechStack {
@@ -8,7 +8,7 @@ interface TechStack {
   category: string;
 }
 
-// Tech stack data remains the same
+// Tech stack data
 const techStacks: TechStack[] = [
   // Frontend Web
   { name: 'HTML', category: 'frontend', svg: (<svg width="100%" height="100%" viewBox="0 0 128 128"><path fill="#E44D26" d="M19.5 114.5L8.1 0h111.8l-11.4 114.5L63.9 128"/><path fill="#F16529" d="M64 117.2l36.8-10.2 9.8-109.7H64"/><path fill="#EBEBEB" d="M64 66.7H45.6l-1.2-13.7H64V39.7H32.7l.3 3.7 3.1 34.7H64zM64 98.2h-.1l-15.4-4.2-.9-10.2H36.2l1.7 19.2 26 7.2h.1z"/><path fill="#FFF" d="M63.9 66.7v13.3h15.7l-1.5 16.6-14.2 4.2v13.2l26-7.2 1.7-19.2H63.9zM63.9 39.7v13.3h28.1l.3-3.7.7-7.9.2-1.7z"/></svg>) },
@@ -41,12 +41,20 @@ const techStacks: TechStack[] = [
   { name: 'Swift', category: 'mobile', svg: (<svg width="40" height="40" viewBox="0 0 128 128"><rect width="128" height="128" rx="16" fill="#FA7343"/><text x="50%" y="50%" textAnchor="middle" dy=".3em" fontSize="24" fill="#fff" fontFamily="Arial, Helvetica, sans-serif">Swift</text></svg>) },
   { name: 'Expo Go', category: 'mobile', svg: (<svg width="40" height="40" viewBox="0 0 128 128"><polygon fill="#1B1F23" points="64,20 100,108 28,108"/><text x="50%" y="80%" textAnchor="middle" fontSize="18" fill="#fff" fontFamily="Arial, Helvetica, sans-serif">Expo</text></svg>) },
 
-  // Other Tools
+  // AI/ML/Data
+  { name: 'TensorFlow', category: 'ai-ml', svg: (<svg width="40" height="40" viewBox="0 0 128 128"><rect width="128" height="128" rx="16" fill="#FF6F00"/><text x="50%" y="50%" textAnchor="middle" dy=".3em" fontSize="28" fill="#fff" fontFamily="Arial, Helvetica, sans-serif">TF</text></svg>) },
+  { name: 'PyTorch', category: 'ai-ml', svg: (<svg width="40" height="40" viewBox="0 0 128 128"><rect width="128" height="128" rx="16" fill="#EE4C2C"/><text x="50%" y="50%" textAnchor="middle" dy=".3em" fontSize="28" fill="#fff" fontFamily="Arial, Helvetica, sans-serif">PT</text></svg>) },
+  { name: 'Scikit-learn', category: 'ai-ml', svg: (<svg width="40" height="40" viewBox="0 0 128 128"><rect width="128" height="128" rx="16" fill="#F7931E"/><text x="50%" y="50%" textAnchor="middle" dy=".3em" fontSize="20" fill="#fff" fontFamily="Arial, Helvetica, sans-serif">SK</text></svg>) },
+  { name: 'OpenCV', category: 'ai-ml', svg: (<svg width="40" height="40" viewBox="0 0 128 128"><rect width="128" height="128" rx="16" fill="#E4113A"/><text x="50%" y="50%" textAnchor="middle" dy=".3em" fontSize="28" fill="#fff" fontFamily="Arial, Helvetica, sans-serif">CV</text></svg>) },
+  { name: 'Hugging Face', category: 'ai-ml', svg: (<svg width="40" height="40" viewBox="0 0 128 128"><rect width="128" height="128" rx="16" fill="#FF7A00"/><text x="50%" y="50%" textAnchor="middle" dy=".3em" fontSize="20" fill="#fff" fontFamily="Arial, Helvetica, sans-serif">HF</text></svg>) },
+  { name: 'YOLO', category: 'ai-ml', svg: (<svg width="40" height="40" viewBox="0 0 128 128"><rect width="128" height="128" rx="16" fill="#FF0000"/><text x="50%" y="50%" textAnchor="middle" dy=".3em" fontSize="28" fill="#fff" fontFamily="Arial, Helvetica, sans-serif">YOLO</text></svg>) },
+
+  // Common Developer Tools
+  { name: 'Git', category: 'tools', svg: (<svg width="40" height="40" viewBox="0 0 128 128"><rect width="128" height="128" rx="16" fill="#F05032"/><text x="50%" y="50%" textAnchor="middle" dy=".3em" fontSize="32" fill="#fff" fontFamily="Arial, Helvetica, sans-serif">G</text></svg>) },
   { name: 'GitHub', category: 'tools', svg: (<svg width="40" height="40" viewBox="0 0 128 128"><circle cx="64" cy="64" r="56" fill="#181717"/><path fill="#fff" d="M64 24c-22.1 0-40 17.9-40 40 0 17.7 11.5 32.7 27.5 38.1 2 .4 2.7-.9 2.7-2v-7c-11.2 2.4-13.5-5.4-13.5-5.4-1.8-4.5-4.5-5.7-4.5-5.7-3.7-2.5.3-2.5.3-2.5 4.1.3 6.3 4.2 6.3 4.2 3.6 6.2 9.4 4.4 11.7 3.4.4-2.6 1.4-4.4 2.5-5.4-9-1-18.5-4.5-18.5-20.1 0-4.4 1.6-8 4.2-10.8-.4-1-1.8-5 .4-10.4 0 0 3.4-1.1 11.2 4.1 3.2-.9 6.6-1.4 10-1.4s6.8.5 10 1.4c7.8-5.2 11.2-4.1 11.2-4.1 2.2 5.4.8 9.4.4 10.4 2.6 2.8 4.2 6.4 4.2 10.8 0 15.7-9.5 19.1-18.5 20.1 1.4 1.2 2.7 3.6 2.7 7.3v10.8c0 1.1.7 2.4 2.7 2C92.5 96.7 104 81.7 104 64c0-22.1-17.9-40-40-40z"/></svg>) },
+  { name: 'Postman', category: 'tools', svg: (<svg width="40" height="40" viewBox="0 0 128 128"><circle cx="64" cy="64" r="64" fill="#FF6C37"/><text x="50%" y="50%" textAnchor="middle" dy=".3em" fontSize="40" fill="#fff" fontFamily="Arial, Helvetica, sans-serif">P</text></svg>) },
+  { name: 'VS Code', category: 'tools', svg: (<svg width="40" height="40" viewBox="0 0 128 128"><rect width="128" height="128" rx="16" fill="#007ACC"/><text x="50%" y="50%" textAnchor="middle" dy=".3em" fontSize="28" fill="#fff" fontFamily="Arial, Helvetica, sans-serif">VS</text></svg>) },
   { name: 'Figma', category: 'tools', svg: (<svg width="40" height="40" viewBox="0 0 128 128"><circle cx="64" cy="64" r="56" fill="#fff"/><circle cx="64" cy="40" r="16" fill="#F24E1E"/><circle cx="64" cy="64" r="16" fill="#A259FF"/><circle cx="64" cy="88" r="16" fill="#1ABCFE"/><circle cx="88" cy="64" r="16" fill="#0ACF83"/><circle cx="40" cy="64" r="16" fill="#FF7262"/></svg>) },
-  { name: 'Docker', category: 'tools', svg: (<svg width="40" height="40" viewBox="0 0 128 128"><rect width="128" height="128" rx="16" fill="#2496ED"/><text x="50%" y="50%" textAnchor="middle" dy=".3em" fontSize="24" fill="#fff" fontFamily="Arial, Helvetica, sans-serif">Docker</text></svg>) },
-  { name: 'GraphQL', category: 'tools', svg: (<svg width="40" height="40" viewBox="0 0 128 128"><circle cx="64" cy="64" r="56" fill="#E10098"/><text x="50%" y="50%" textAnchor="middle" dy=".3em" fontSize="20" fill="#fff" fontFamily="Arial, Helvetica, sans-serif">GraphQL</text></svg>) },
-  { name: 'AWS', category: 'tools', svg: (<svg width="40" height="40" viewBox="0 0 128 128"><rect width="128" height="128" rx="16" fill="#232F3E"/><text x="50%" y="50%" textAnchor="middle" dy=".3em" fontSize="24" fill="#fff" fontFamily="Arial, Helvetica, sans-serif">AWS</text></svg>) },
 ];
 
 const categories = [
@@ -54,7 +62,8 @@ const categories = [
   { key: 'backend', icon: Cpu, name: 'Backend', color: 'from-green-400 to-emerald-400' },
   { key: 'database', icon: Database, name: 'Database', color: 'from-purple-400 to-pink-400' },
   { key: 'mobile', icon: Smartphone, name: 'Mobile', color: 'from-orange-400 to-red-400' },
-  { key: 'tools', icon: Zap, name: 'Tools', color: 'from-yellow-400 to-amber-400' },
+  { key: 'ai-ml', icon: Brain, name: 'AI/ML/Data', color: 'from-indigo-400 to-purple-400' },
+  { key: 'tools', icon: GitBranch, name: 'Tools', color: 'from-yellow-400 to-amber-400' },
 ];
 
 function TechStacksGrid() {
