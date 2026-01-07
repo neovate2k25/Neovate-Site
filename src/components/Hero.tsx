@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { Rocket, Eye, Briefcase, Megaphone, Code, Smartphone, Palette, Users, Camera, BarChart3, Brain, Video } from 'lucide-react';
 import neovateLogo from '../assets/Neovate-st.png';
-// Moved outside: Stabilizes reference, prevents useEffect re-runs on every render
+
+// Stable reference outside component
 const services = [
   { name: 'Web Development', icon: Code, color: 'from-blue-500 to-cyan-500' },
   { name: 'Branding', icon: Palette, color: 'from-red-500 to-orange-500' },
@@ -17,7 +18,7 @@ const services = [
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [containerSize, setContainerSize] = useState(520); // Default to lg size
+  const [containerSize, setContainerSize] = useState(520);
   const [positions, setPositions] = useState<{ [key: string]: { left: string; top: string } }>({});
 
   const scrollToSection = (id: string) => {
@@ -25,15 +26,14 @@ export default function Hero() {
     if (element) element.scrollIntoView({ behavior: 'smooth' });
   };
 
-  // Update container size and recalculate positions on resize
+  // Update size and positions on resize
   useEffect(() => {
     const updateSize = () => {
       if (containerRef.current) {
         const rect = containerRef.current.getBoundingClientRect();
-        const size = Math.min(rect.width, rect.height); // Use square size for consistency
+        const size = Math.min(rect.width, rect.height);
         setContainerSize(size);
 
-        // Recalculate positions based on current size
         const center = size / 2;
         const itemsPerLayer = 5;
         const newPositions: { [key: string]: { left: string; top: string } } = {};
@@ -46,13 +46,11 @@ export default function Hero() {
           const angleDeg = layerIndex * segment + stagger;
           const angle = (angleDeg * Math.PI) / 180;
 
-          // Scale radii proportionally to container size (base on lg:520)
           const baseRadius1 = 150;
           const baseRadius2 = 240;
           const scale = size / 520;
           const radius = layer === 1 ? baseRadius1 * scale : baseRadius2 * scale;
 
-          // Ensure minimum radius to avoid collapse on very small screens
           const minRadius1 = 80;
           const minRadius2 = 140;
           const adjustedRadius = Math.max(layer === 1 ? minRadius1 : minRadius2, radius);
@@ -70,12 +68,12 @@ export default function Hero() {
       }
     };
 
-    updateSize(); // Initial call
+    updateSize();
     window.addEventListener('resize', updateSize);
     return () => window.removeEventListener('resize', updateSize);
-  }, []); // Empty deps: runs once on mount/unmount
+  }, []);
 
-  // Calculate line positions for SVG (same logic, but update viewBox dynamically)
+  // Dynamic SVG lines
   const [svgViewBox, setSvgViewBox] = useState('0 0 520 520');
   const [lines, setLines] = useState<React.ReactNode[]>([]);
 
@@ -117,15 +115,15 @@ export default function Hero() {
     });
 
     setLines(newLines);
-  }, [containerSize, services]); // services is now stable
+  }, [containerSize]);
 
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden py-12 bg-gradient-to-b from-black/80 via-black/70 to-transparent"
+      className="relative min-h-screen flex flex-col justify-start overflow-hidden bg-gradient-to-b from-black/80 via-black/70 to-transparent"
       aria-label="Hero: Neovate — innovation and services"
     >
-      {/* background diagonal lines */}
+      {/* Background diagonal animated lines */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0">
           {[...Array(18)].map((_, i) => (
@@ -160,8 +158,8 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="relative z-10 px-6 max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-16">
-        {/* LEFT: Text */}
+      <div className="relative z-10 px-6 max-w-7xl mx-auto w-full pt-20 lg:pt-24 pb-12 flex flex-col lg:flex-row items-start justify-between gap-10 lg:gap-16">
+        {/* LEFT: Text Content */}
         <div className="w-full lg:w-1/2 text-center lg:text-left">
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-4">
             <span className="block text-white drop-shadow-md animate-fade-in-up">Innovation starts</span>
@@ -172,7 +170,7 @@ export default function Hero() {
             Transform your ideas into reality with Neovate — a student-led startup crafting intelligent solutions in web development, app creation, and AI-driven automation.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center sm:items-center mt-2">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center mt-2">
             <button
               onClick={() => scrollToSection('contact')}
               className="px-6 sm:px-8 py-3 bg-yellow-400 text-black font-bold rounded-full hover:bg-yellow-300 transition-all duration-300 shadow-lg hover:scale-105 flex items-center gap-2"
@@ -202,26 +200,27 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* RIGHT: Visual hub */}
+        {/* RIGHT: Visual Service Hub */}
         <div className="w-full lg:w-1/2 flex items-center justify-center">
           <div ref={containerRef} className="relative w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] lg:w-[520px] lg:h-[520px]">
-            {/* Center main circle */}
+            {/* Center Logo Circle */}
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
               <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 max-w-full max-h-full">
                 <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/40 to-yellow-600/30 rounded-full blur-2xl animate-pulse" />
 
                 <div className="relative w-full h-full bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center shadow-2xl border-2 border-yellow-300/50 transform transition-transform duration-500 group-hover:scale-105">
-                  <div className="w-44 h-44 sm:w-48 sm:h-48 bg-white/95 rounded-2xl flex items-center justify-center shadow-inner max-w-full max-h-full">
-<img 
-            src={neovateLogo} // Use the imported image
-            alt="Neovate logo" 
-            className="w-40 h-40 sm:w-44 sm:h-44 object-cover rounded-lg animate-float max-w-full max-h-full" 
-          />               </div>
+                  <div className="w-44 h-44 sm:w-48 sm:h-48 bg-white/95 rounded-2xl flex items-center justify-center shadow-inner">
+                    <img
+                      src={neovateLogo}
+                      alt="Neovate logo"
+                      className="w-40 h-40 sm:w-44 sm:h-44 object-cover rounded-lg animate-float"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Surrounding service circles (dynamic positions) */}
+            {/* Service Circles */}
             {services.map((service) => {
               const pos = positions[service.name];
               if (!pos) return null;
@@ -234,22 +233,22 @@ export default function Hero() {
                   className="absolute -translate-x-1/2 -translate-y-1/2"
                   style={{ left: pos.left, top: pos.top }}
                 >
-                  <div className="relative flex items-center justify-center" title={service.name} tabIndex={0} role="button" aria-pressed="false">
-                    {/* soft glow */}
-                    <div className={`absolute inset-0 rounded-full blur-xl opacity-60 transition-all duration-300 bg-gradient-to-r ${service.color}`} />
+                  <div className="relative flex items-center justify-center" title={service.name} tabIndex={0} role="button">
+                    <div className={`absolute inset-0 rounded-full blur-xl opacity-60 bg-gradient-to-r ${service.color}`} />
 
-                    {/* circle — responsive size */}
-                    <div className={`relative w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-gradient-to-br ${service.color} rounded-full flex flex-col items-center justify-center p-2 shadow-md border border-white/20 transform transition-all duration-400 hover:scale-110 focus:scale-110 max-w-full max-h-full`}>
+                    <div className={`relative w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-gradient-to-br ${service.color} rounded-full flex flex-col items-center justify-center p-2 shadow-md border border-white/20 transform transition-all duration-400 hover:scale-110 focus:scale-110`}>
                       <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-white flex-shrink-0" />
-                      <span className="text-[10px] sm:text-xs font-semibold text-white text-center leading-tight mt-1 max-w-[64px] truncate">{service.name}</span>
+                      <span className="text-[10px] sm:text-xs font-semibold text-white text-center leading-tight mt-1 truncate max-w-[64px]">
+                        {service.name}
+                      </span>
                     </div>
                   </div>
                 </div>
               );
             })}
 
-            {/* Connecting lines — dynamic SVG */}
-            <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox={svgViewBox} preserveAspectRatio="xMidYMid meet" aria-hidden>
+            {/* Connecting Lines */}
+            <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox={svgViewBox} preserveAspectRatio="xMidYMid meet" aria-hidden="true">
               <defs>
                 <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
                   <stop offset="0%" stopColor="#fbbf24" stopOpacity="0.35" />
@@ -262,16 +261,33 @@ export default function Hero() {
         </div>
       </div>
 
-      <button onClick={() => scrollToSection('about')} className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce" aria-label="Scroll to About" />
+      {/* Scroll Down Indicator */}
+      <button
+        onClick={() => scrollToSection('about')}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce text-white/70 hover:text-yellow-400 transition-colors"
+        aria-label="Scroll to About section"
+      >
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        </svg>
+      </button>
 
-      <style>{`
-        @keyframes slide-diagonal { 0% { transform: translateX(-50%) rotate(-6deg); } 100% { transform: translateX(50%) rotate(-6deg); } }
-        @keyframes fade-in-up { 0% { opacity: 0; transform: translateY(28px); } 100% { opacity: 1; transform: translateY(0); } }
-        @keyframes float { 0%,100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-8px) rotate(1.5deg); } }
+      <style jsx>{`
+        @keyframes slide-diagonal {
+          0% { transform: translateX(-50%) rotate(-6deg); }
+          100% { transform: translateX(50%) rotate(-6deg); }
+        }
+        @keyframes fade-in-up {
+          0% { opacity: 0; transform: translateY(28px); }
+          100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes float {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-8px) rotate(1.5deg); }
+        }
         .animate-fade-in-up { animation: fade-in-up 0.9s ease-out forwards; opacity: 0; }
         .animation-delay-200 { animation-delay: 0.2s; }
         .animation-delay-400 { animation-delay: 0.4s; }
-        .animation-delay-600 { animation-delay: 0.6s; }
         .animate-float { animation: float 6s ease-in-out infinite; }
       `}</style>
     </section>
