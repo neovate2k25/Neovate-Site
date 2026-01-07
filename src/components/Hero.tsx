@@ -161,15 +161,14 @@ export default function Hero() {
       <div className="relative z-10 px-6 max-w-7xl mx-auto w-full pt-20 lg:pt-24 pb-12 flex flex-col lg:flex-row items-start justify-between gap-10 lg:gap-16">
         {/* LEFT: Text Content */}
         <div className="w-full lg:w-1/2 text-center lg:text-left">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-4">
-            <span className="block text-white drop-shadow-md animate-fade-in-up">Innovation starts</span>
-            <span className="block text-yellow-400 drop-shadow-[0_0_30px_rgba(250,204,21,0.85)] animate-fade-in-up animation-delay-200">with us.</span>
-          </h1>
-          
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-8">
+  <span className="block text-white drop-shadow-md animate-fade-in-up">Innovation starts</span>
+  <span className="block text-yellow-400 drop-shadow-[0_0_30px_rgba(250,204,21,0.85)] animate-fade-in-up animation-delay-200">with us.</span>
+</h1>
 
-          <p className="text-lg md:text-xl text-gray-300 mb-6 animate-fade-in-up animation-delay-400 leading-relaxed">
-            Transform your ideas into reality with Neovate — a student-led startup crafting intelligent solutions in web development, app creation, and AI-driven automation.
-          </p>
+<p className="text-lg md:text-xl text-gray-300 mb-6 animate-fade-in-up animation-delay-400 leading-relaxed">
+  Transform your ideas into reality with Neovate — a student-led startup crafting intelligent solutions in web development, app creation, and AI-driven automation.
+</p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center mt-2">
             <button
