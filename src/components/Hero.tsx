@@ -165,6 +165,7 @@ export default function Hero() {
             <span className="block text-white drop-shadow-md animate-fade-in-up">Innovation starts</span>
             <span className="block text-yellow-400 drop-shadow-[0_0_30px_rgba(250,204,21,0.85)] animate-fade-in-up animation-delay-200">with us.</span>
           </h1>
+          
 
           <p className="text-lg md:text-xl text-gray-300 mb-6 animate-fade-in-up animation-delay-400 leading-relaxed">
             Transform your ideas into reality with Neovate — a student-led startup crafting intelligent solutions in web development, app creation, and AI-driven automation.
@@ -262,15 +263,7 @@ export default function Hero() {
       </div>
 
       {/* Scroll Down Indicator */}
-      <button
-        onClick={() => scrollToSection('about')}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce text-white/70 hover:text-yellow-400 transition-colors"
-        aria-label="Scroll to About section"
-      >
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-        </svg>
-      </button>
+      
 
       <style jsx>{`
         @keyframes slide-diagonal {
