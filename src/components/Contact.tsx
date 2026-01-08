@@ -129,7 +129,7 @@ export default function Contact() {
         <div className="text-center mb-16">
           <h2 className="text-5xl md:text-7xl font-bold mb-6">
             <span className="text-white">Get in</span>
-            <span className="text-yellow-400 drop-shadow-[0_0_20px_rgba(250,204,21,0.8)]">Touch</span>
+            <span className="text-yellow-400">Touch</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
             Ready to start your project? Let's create something amazing together
@@ -150,7 +150,7 @@ export default function Contact() {
                   onBlur={() => setFocusedField(null)}
                   className={`w-full px-4 py-3 bg-gray-900/50 border rounded-lg text-white focus:outline-none transition-all duration-300 ${
                     focusedField === 'name'
-                      ? 'border-yellow-400 shadow-[0_0_20px_rgba(250,204,21,0.3)]'
+                      ? 'border-yellow-400'
                       : 'border-gray-700'
                   }`}
                   placeholder="Your name"
@@ -168,7 +168,7 @@ export default function Contact() {
                   onBlur={() => setFocusedField(null)}
                   className={`w-full px-4 py-3 bg-gray-900/50 border rounded-lg text-white focus:outline-none transition-all duration-300 ${
                     focusedField === 'email'
-                      ? 'border-yellow-400 shadow-[0_0_20px_rgba(250,204,21,0.3)]'
+                      ? 'border-yellow-400'
                       : 'border-gray-700'
                   }`}
                   placeholder="your@email.com"
@@ -186,7 +186,7 @@ export default function Contact() {
                   rows={6}
                   className={`w-full px-4 py-3 bg-gray-900/50 border rounded-lg text-white focus:outline-none transition-all duration-300 resize-none ${
                     focusedField === 'message'
-                      ? 'border-yellow-400 shadow-[0_0_20px_rgba(250,204,21,0.3)]'
+                      ? 'border-yellow-400'
                       : 'border-gray-700'
                   }`}
                   placeholder="Tell us about your project..."
@@ -209,10 +209,10 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`w-full px-6 py-4 bg-yellow-400 text-black font-bold rounded-full transition-all duration-300 shadow-[0_0_30px_rgba(250,204,21,0.6)] flex items-center justify-center gap-2 ${
+                className={`w-full px-6 py-4 bg-yellow-400 text-black font-bold rounded-full transition-all duration-300 flex items-center justify-center gap-2 ${
                   isSubmitting
                     ? 'opacity-50 cursor-not-allowed'
-                    : 'hover:bg-yellow-300 hover:shadow-[0_0_40px_rgba(250,204,21,0.9)] hover:scale-105'
+                    : 'hover:bg-yellow-300 hover:scale-105'
                 }`}
               >
                 <Send size={20} />
