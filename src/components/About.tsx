@@ -24,7 +24,7 @@ export default function About() {
     <section
       id="about"
       ref={sectionRef}
-      className="relative min-h-screen flex items-center justify-center py-20 overflow-hidden bg-black"
+      className="relative min-h-screen flex items-center justify-center pt-0 pb-20 overflow-hidden bg-black"
     >
       <style>{`
         @keyframes fadeInUp {
@@ -63,7 +63,7 @@ export default function About() {
         <div className={`text-center mb-16 ${isVisible ? 'animate-fadeInUp' : 'opacity-0'}`}>
           <h2 className="text-5xl md:text-7xl font-bold mb-6">
             <span className="text-white">Neo</span>
-            <span className="text-yellow-400 drop-shadow-[0_0_20px_rgba(250,204,21,0.8)]">vate</span>
+            <span className="text-yellow-400">vate</span>
           </h2>
 
           <div className="space-y-6 text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
@@ -82,7 +82,6 @@ export default function About() {
             }`}
             style={{
               animationDelay: '0.2s',
-              boxShadow: '0 0 40px rgba(250, 204, 21, 0.2)',
             }}
           >
             <div className="text-center mb-6">
@@ -104,7 +103,6 @@ export default function About() {
             }`}
             style={{
               animationDelay: '0.4s',
-              boxShadow: '0 0 40px rgba(250, 204, 21, 0.2)',
             }}
           >
             <div className="text-center mb-6">
