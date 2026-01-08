@@ -121,7 +121,7 @@ export default function StartHub() {
         <div className="text-center mb-16">
           <h2 className="text-5xl md:text-7xl font-bold mb-6">
             <span className="text-white">Startup</span>
-            <span className="text-yellow-400 drop-shadow-[0_0_20px_rgba(250,204,21,0.8)]">Hub</span>
+            <span className="text-yellow-400">Hub</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
             A thriving ecosystem for freelancers, entrepreneurs, and innovators to connect, learn, and build together
@@ -135,7 +135,7 @@ export default function StartHub() {
             return (
               <div
                 key={index}
-                className="p-6 rounded-xl bg-gray-900/50 border border-gray-800 hover:border-yellow-400/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(250,204,21,0.2)] hover:scale-105"
+                className="p-6 rounded-xl bg-gray-900/50 border border-gray-800 hover:border-yellow-400/50 transition-all duration-300 hover:scale-105"
               >
                 <IconComponent className="w-10 h-10 text-yellow-400 mb-4" />
                 <h3 className="text-xl font-bold mb-2 text-white">{feature.title}</h3>
@@ -157,7 +157,7 @@ export default function StartHub() {
                   key={plan.name}
                   className={`relative rounded-2xl p-8 border transition-all duration-300 ${
                     plan.popular
-                      ? 'bg-yellow-400/10 border-yellow-400 shadow-[0_0_40px_rgba(250,204,21,0.3)] scale-105'
+                      ? 'bg-yellow-400/10 border-yellow-400 scale-105'
                       : 'bg-gray-900/50 border-gray-800 hover:border-yellow-400/50'
                   }`}
                 >
@@ -201,7 +201,7 @@ export default function StartHub() {
               onClick={() => setFormType('join')}
               className={`px-6 py-2 rounded-full font-semibold transition-all duration-300 ${
                 isJoin
-                  ? 'bg-yellow-400 text-black shadow-[0_0_20px_rgba(250,204,21,0.4)]'
+                  ? 'bg-yellow-400 text-black'
                   : 'bg-gray-700/50 text-gray-300 hover:bg-gray-600'
               }`}
             >
@@ -211,7 +211,7 @@ export default function StartHub() {
               onClick={() => setFormType('idea')}
               className={`px-6 py-2 rounded-full font-semibold ml-4 transition-all duration-300 ${
                 !isJoin
-                  ? 'bg-yellow-400 text-black shadow-[0_0_20px_rgba(250,204,21,0.4)]'
+                  ? 'bg-yellow-400 text-black'
                   : 'bg-gray-700/50 text-gray-300 hover:bg-gray-600'
               }`}
             >
@@ -253,7 +253,7 @@ export default function StartHub() {
               disabled={isSubmitting}
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
-              className={`w-full relative px-10 py-4 bg-yellow-400 text-black font-bold rounded-full transition-all duration-500 shadow-[0_0_30px_rgba(250,204,21,0.6)] overflow-hidden group flex items-center justify-center gap-2 ${
+              className={`w-full relative px-10 py-4 bg-yellow-400 text-black font-bold rounded-full transition-all duration-500 overflow-hidden group flex items-center justify-center gap-2 ${
                 isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
               }`}
               style={{
