@@ -74,7 +74,7 @@ export default function Videos() {
           <div className="text-center mb-16">
              <h2 className="text-5xl md:text-7xl font-bold mb-6">
             <span className="text-white">Video</span>
-            <span className="text-yellow-400 drop-shadow-[0_0_20px_rgba(250,204,21,0.8)]">Hub</span>
+            <span className="text-yellow-400">Hub</span>
           </h2>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
               Loading videos...
@@ -116,7 +116,7 @@ export default function Videos() {
         <div className="text-center mb-16">
           <h2 className="text-5xl md:text-7xl font-bold mb-6">
             <span className="text-white">Video</span>
-            <span className="text-yellow-400 drop-shadow-[0_0_20px_rgba(250,204,21,0.8)]">Hub</span>
+            <span className="text-yellow-400">Hub</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
             Explore our latest videos, tutorials, and behind-the-scenes content
@@ -144,7 +144,7 @@ export default function Videos() {
                   hoveredIndex === index ? 'opacity-100' : 'opacity-0'
                 }`}
               >
-                <div className="w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110 shadow-[0_0_30px_rgba(250,204,21,0.8)]">
+                <div className="w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
                   <Play className="w-8 h-8 text-black fill-black ml-1" />
                 </div>
               </div>
@@ -169,7 +169,7 @@ export default function Videos() {
             href={`https://www.youtube.com/channel/${CHANNEL_ID}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold rounded-full hover:from-yellow-300 hover:to-yellow-400 transition-all duration-300 shadow-[0_0_30px_rgba(250,204,21,0.6)] hover:shadow-[0_0_40px_rgba(250,204,21,0.9)] hover:scale-105"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold rounded-full hover:from-yellow-300 hover:to-yellow-400 transition-all duration-300 hover:scale-105"
           >
             <Play size={20} className="fill-current" />
             Watch More on YouTube
