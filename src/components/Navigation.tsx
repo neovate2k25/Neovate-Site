@@ -36,7 +36,7 @@ export default function Navigation() {
       <nav
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ease-in-out ${
           isScrolled
-            ? 'bg-black/95 backdrop-blur-xl shadow-2xl shadow-yellow-400/25 border-b border-yellow-400/15'
+            ? 'bg-black/95 backdrop-blur-xl shadow-2xl border-b border-yellow-400/15'
             : 'bg-black/40 lg:bg-transparent backdrop-blur-sm lg:backdrop-blur-none'
         }`}
       >
@@ -53,12 +53,12 @@ export default function Navigation() {
                 <img
                   src={neovateLogo}
                   alt="Neovate Icon"
-                  className="w-8 h-8 sm:w-10 sm:h-10 object-contain drop-shadow-[0_0_15px_rgba(250,204,21,0.9)] group-hover:drop-shadow-[0_0_20px_rgba(250,204,21,1)]"
+                  className="w-8 h-8 sm:w-10 sm:h-10 object-contain"
                 />
               </div>
               <span className="text-2xl sm:text-3xl font-black tracking-tight">
                 <span className="text-white">Neo</span>
-                <span className="text-yellow-400 drop-shadow-[0_0_12px_rgba(250,204,21,0.7)]">vate</span>
+                <span className="text-yellow-400">vate</span>
               </span>
             </button>
 
@@ -72,12 +72,12 @@ export default function Navigation() {
                   className="text-white hover:text-yellow-400 transition-all duration-400 text-base xl:text-lg font-bold relative group py-2 overflow-hidden"
                 >
                   <span className="relative z-10">{link.name}</span>
-                  <span className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-400 to-yellow-500 -translate-x-full group-hover:translate-x-0 transition-transform duration-400 shadow-[0_0_10px_rgba(250,204,21,0.8)]"></span>
+                  <span className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-400 to-yellow-500 -translate-x-full group-hover:translate-x-0 transition-transform duration-400"></span>
                 </button>
               ))}
               <button
                 onClick={() => scrollToSection('contact')}
-                className="relative px-6 py-2 xl:px-8 xl:py-3 bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 text-black font-bold rounded-full hover:from-yellow-300 hover:via-yellow-400 hover:to-yellow-500 transition-all duration-400 shadow-[0_0_25px_rgba(250,204,21,0.6)] hover:shadow-[0_0_40px_rgba(250,204,21,1)] hover:scale-105 transform overflow-hidden group text-sm xl:text-base"
+                className="relative px-6 py-2 xl:px-8 xl:py-3 bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 text-black font-bold rounded-full hover:from-yellow-300 hover:via-yellow-400 hover:to-yellow-500 transition-all duration-400 hover:scale-105 transform overflow-hidden group text-sm xl:text-base"
               >
                 <span className="relative z-10">Get in Touch</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
