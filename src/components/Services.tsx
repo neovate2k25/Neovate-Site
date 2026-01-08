@@ -69,7 +69,7 @@ export default function Services() {
       <div className="container mx-auto px-4 sm:px-6">
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 leading-tight">
-            Our <span className="text-yellow-400 drop-shadow-[0_0_30px_rgba(250,204,21,0.8)]">Services</span>
+            Our <span className="text-yellow-400">Services</span>
           </h2>
           <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto">
             Focused service categories — tap a card to see a micro-animation.
@@ -89,7 +89,7 @@ export default function Services() {
                 onMouseEnter={() => setHoveredIndex(i)}
                 onMouseLeave={() => setHoveredIndex(null)}
                 className={`relative p-4 sm:p-6 lg:p-8 rounded-2xl border transition-all duration-500 cursor-pointer transform-gpu
-                  ${hoveredIndex === i ? 'bg-gradient-to-br from-yellow-400/20 to-transparent border-yellow-400 shadow-[0_0_40px_rgba(250,204,21,0.25)] scale-105 z-10' : 'bg-gray-900/50 border-gray-800 hover:border-gray-700'}
+                  ${hoveredIndex === i ? 'bg-gradient-to-br from-yellow-400/20 to-transparent border-yellow-400 scale-105 z-10' : 'bg-gray-900/50 border-gray-800 hover:border-gray-700'}
                 `}
                 style={{
                   transform: hoveredIndex === i ? 'translateY(-8px) scale(1.03)' : undefined,
@@ -97,7 +97,7 @@ export default function Services() {
               >
                 {/* Animated icon container */}
                 <div className={`icon-wrap mb-4 sm:mb-6 w-12 h-12 sm:w-14 sm:h-14 lg:w-14 lg:h-14 rounded-lg flex items-center justify-center ${anim} ${hoveredIndex === i ? 'active' : ''}`}>
-                  <Icon className={`w-6 h-6 sm:w-8 sm:h-8 lg:w-8 lg:h-8 ${hoveredIndex === i ? 'text-yellow-400 drop-shadow-[0_0_12px_rgba(250,204,21,0.8)]' : 'text-yellow-400/90'}`} />
+                  <Icon className={`w-6 h-6 sm:w-8 sm:h-8 lg:w-8 lg:h-8 ${hoveredIndex === i ? 'text-yellow-400' : 'text-yellow-400/90'}`} />
                 </div>
 
 
@@ -156,7 +156,7 @@ export default function Services() {
         @keyframes pop { 0%{transform: scale(0.85)}60%{transform: scale(1.08)}100%{transform: scale(1)} }
         @keyframes swirl { 0%{transform: rotate(0deg)}100%{transform: rotate(360deg)} }
         @keyframes wave { 0%{transform: rotate(-6deg)}50%{transform: rotate(6deg)}100%{transform: rotate(-6deg)} }
-        @keyframes pulse { 0%{filter: drop-shadow(0 0 0 rgba(250,204,21,0.0))}50%{filter: drop-shadow(0 0 18px rgba(250,204,21,0.25))}100%{filter: drop-shadow(0 0 0 rgba(250,204,21,0.0))} }
+        @keyframes pulse { 0%{opacity: 0.5}50%{opacity: 1}100%{opacity: 0.5} }
         @keyframes orbit { 0%{transform: translateX(0)}25%{transform: translateX(6px) translateY(-4px)}50%{transform: translateX(0) translateY(-8px)}75%{transform: translateX(-6px) translateY(-4px)}100%{transform: translateX(0)} }
         @keyframes film { 0%{opacity:1}50%{opacity:.6}100%{opacity:1} }
         @keyframes slide { 0%{transform: translateX(-6px)}50%{transform: translateX(6px)}100%{transform: translateX(-6px)} }
