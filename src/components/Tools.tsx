@@ -157,7 +157,7 @@ function TechStacksGrid() {
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-6xl font-extrabold mb-4">
             <span className="text-white">Our Core</span>
-            <span className="text-yellow-400 drop-shadow-[0_0_20px_rgba(250,204,21,0.8)]"> Technologies</span>
+            <span className="text-yellow-400"> Technologies</span>
           </h2>
           <p className="max-w-3xl mx-auto text-base md:text-lg text-gray-300 leading-relaxed">
             Explore the specialized toolsets we master across different domains to build your next project. Click a category to see the stacks!
@@ -176,7 +176,7 @@ function TechStacksGrid() {
                   flex items-center space-x-2 p-2.5 md:p-3 rounded-full font-semibold text-sm md:text-base
                   transition-all duration-300 transform shadow-lg
                   ${isActive
-                    ? `bg-gradient-to-r ${category.color} text-black scale-105 shadow-yellow-500/50`
+                    ? `bg-gradient-to-r ${category.color} text-black scale-105`
                     : 'bg-gray-800 text-gray-300 hover:bg-gray-700 hover:scale-[1.02] border border-gray-700'
                   }
                   ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}
@@ -209,7 +209,7 @@ function TechStacksGrid() {
                 flex flex-col items-center justify-center p-3 md:p-4 rounded-xl border-2
                 bg-gray-800/70 backdrop-blur-sm
                 transition-all duration-700 ease-out transform
-                hover:scale-110 hover:shadow-2xl hover:bg-gray-700/80 hover:z-10
+                hover:scale-110 hover:bg-gray-700/80 hover:z-10
                 float-animation
                 ${inView ? 'opacity-100 scale-100' : 'opacity-0 scale-70'}
               `}
