@@ -86,12 +86,12 @@ export default function Footer() {
                 <img
                   src={neovateLogo}
                   alt="Neovate Icon"
-                  className="w-10 h-10 object-contain drop-shadow-[0_0_15px_rgba(250,204,21,0.9)] group-hover:drop-shadow-[0_0_20px_rgba(250,204,21,1)]"
+                  className="w-10 h-10 object-contain"
                 />
               </div>
               <span className="text-3xl font-black tracking-tight">
                 <span className="text-white">Neo</span>
-                <span className="text-yellow-400 drop-shadow-[0_0_12px_rgba(250,204,21,0.7)]">vate</span>
+                <span className="text-yellow-400">vate</span>
               </span>
             </button>
             
@@ -121,7 +121,7 @@ export default function Footer() {
                 className="text-gray-400 hover:text-yellow-400 transition-all duration-300 text-base font-semibold relative group py-2"
               >
                 <span className="relative z-10">{link.name}</span>
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-500 group-hover:w-full transition-all duration-300 shadow-[0_0_8px_rgba(250,204,21,0.6)]"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-500 group-hover:w-full transition-all duration-300"></span>
               </button>
             ))}
             {/* Contact Button */}
@@ -130,7 +130,7 @@ export default function Footer() {
               className="text-gray-400 hover:text-yellow-400 transition-all duration-300 text-base font-semibold relative group py-2"
             >
               <span className="relative z-10">Contact</span>
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-500 group-hover:w-full transition-all duration-300 shadow-[0_0_8px_rgba(250,204,21,0.6)]"></span>
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-500 group-hover:w-full transition-all duration-300"></span>
             </button>
           </nav>
         </div>
