@@ -163,7 +163,7 @@ export default function Hero() {
         <div className="w-full lg:w-1/2 text-center lg:text-left">
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-8">
   <span className="block text-white drop-shadow-md animate-fade-in-up">Innovation starts</span>
-  <span className="block text-yellow-400 drop-shadow-[0_0_30px_rgba(250,204,21,0.85)] animate-fade-in-up animation-delay-200">with us.</span>
+  <span className="block text-yellow-400 animate-fade-in-up animation-delay-200">with us.</span>
 </h1>
 
 <p className="text-lg md:text-xl text-gray-300 mb-6 animate-fade-in-up animation-delay-400 leading-relaxed">
@@ -206,9 +206,7 @@ export default function Hero() {
             {/* Center Logo Circle */}
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
               <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 max-w-full max-h-full">
-                <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/40 to-yellow-600/30 rounded-full blur-2xl animate-pulse" />
-
-                <div className="relative w-full h-full bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center shadow-2xl border-2 border-yellow-300/50 transform transition-transform duration-500 group-hover:scale-105">
+                <div className="relative w-full h-full bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center transform transition-transform duration-500 group-hover:scale-105">
                   <div className="w-44 h-44 sm:w-48 sm:h-48 bg-white/95 rounded-2xl flex items-center justify-center shadow-inner">
                     <img
                       src={neovateLogo}
@@ -234,9 +232,7 @@ export default function Hero() {
                   style={{ left: pos.left, top: pos.top }}
                 >
                   <div className="relative flex items-center justify-center" title={service.name} tabIndex={0} role="button">
-                    <div className={`absolute inset-0 rounded-full blur-xl opacity-60 bg-gradient-to-r ${service.color}`} />
-
-                    <div className={`relative w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-gradient-to-br ${service.color} rounded-full flex flex-col items-center justify-center p-2 shadow-md border border-white/20 transform transition-all duration-400 hover:scale-110 focus:scale-110`}>
+                    <div className={`relative w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-gradient-to-br ${service.color} rounded-full flex flex-col items-center justify-center p-2 transform transition-all duration-400 hover:scale-110 focus:scale-110`}>
                       <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-white flex-shrink-0" />
                       <span className="text-[10px] sm:text-xs font-semibold text-white text-center leading-tight mt-1 truncate max-w-[64px]">
                         {service.name}
