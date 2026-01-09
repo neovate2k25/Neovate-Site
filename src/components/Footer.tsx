@@ -139,7 +139,7 @@ export default function Footer() {
 
         <div className="text-center">
           <p className="text-gray-400 text-sm">
-            © 2025 <span className="text-yellow-400 font-semibold">Neovate</span>. All rights reserved.
+            © 2026 <span className="text-yellow-400 font-semibold">Neovate</span>. All rights reserved.
           </p>
           <p className="text-gray-600 text-xs mt-2">
             Innovating the New, One Project at a Time
