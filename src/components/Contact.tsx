@@ -240,7 +240,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <p className="text-gray-400 text-sm mb-1">Phone</p>
-                  <p className="text-white font-semibold">+91 9043697817 , +91 9655191168</p>
+                  <p className="text-white font-semibold">+91 9080581688 , +91 9655191168</p>
                 </div>
               </div>
               <div className="flex items-start gap-4 group">
