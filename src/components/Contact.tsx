@@ -3,7 +3,7 @@ import emailjs from '@emailjs/browser';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
 
 export default function Contact() {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', mobile: '', message: '' });
   const [focusedField, setFocusedField] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
@@ -21,6 +21,7 @@ export default function Contact() {
         {
           name: formData.name,
           email: formData.email,
+          mobile: formData.mobile,
           message: formData.message,
           from_email: 'teamneovate@gmail.com' // updated sender email
         },
@@ -34,6 +35,7 @@ export default function Contact() {
         {
           name: formData.name,
           email: formData.email,
+          mobile: formData.mobile,
           message: formData.message,
           from_email: 'teamneovate@gmail.com' // updated sender email
         },
@@ -45,7 +47,7 @@ export default function Contact() {
         message: "Message sent successfully! We've also sent you a confirmation email.",
       });
 
-      setFormData({ name: '', email: '', message: '' });
+      setFormData({ name: '', email: '', mobile: '', message: '' });
 
     } catch (error) {
       console.error('EmailJS Error:', error);
@@ -177,6 +179,24 @@ export default function Contact() {
               </div>
 
               <div>
+                <label className="block text-sm font-semibold mb-2 text-gray-300">Mobile Number</label>
+                <input
+                  type="tel"
+                  value={formData.mobile}
+                  onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
+                  onFocus={() => setFocusedField('mobile')}
+                  onBlur={() => setFocusedField(null)}
+                  className={`w-full px-4 py-3 bg-gray-900/50 border rounded-lg text-white focus:outline-none transition-all duration-300 ${
+                    focusedField === 'mobile'
+                      ? 'border-yellow-400'
+                      : 'border-gray-700'
+                  }`}
+                  placeholder="+91 1234567890"
+                  required
+                />
+              </div>
+
+              <div>
                 <label className="block text-sm font-semibold mb-2 text-gray-300">Message</label>
                 <textarea
                   value={formData.message}
@@ -282,4 +302,4 @@ export default function Contact() {
       </div>
     </section>
   );
-}
+}    
