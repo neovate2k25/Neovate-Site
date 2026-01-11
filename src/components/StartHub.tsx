@@ -5,7 +5,7 @@ import emailjs from '@emailjs/browser';
 export default function StartHub() {
   const [isHovered, setIsHovered] = useState(false);
   const [formType, setFormType] = useState<'join' | 'idea'>('join');
-  const [formData, setFormData] = useState({ name: '', email: '', content: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', mobile: '', content: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
@@ -29,6 +29,7 @@ export default function StartHub() {
         {
           name: formData.name,
           email: formData.email,
+          mobile: formData.mobile,
           message: message,
           subject: subject,
           type: type,
@@ -44,6 +45,7 @@ export default function StartHub() {
         {
           name: formData.name,
           email: formData.email,
+          mobile: formData.mobile,
           message: message,
           subject: `Confirmation: ${subject}`,
           type: type,
@@ -58,7 +60,7 @@ export default function StartHub() {
           ? 'Application submitted successfully! We\'ll review it soon. Confirmation email sent.'
           : 'Your idea has been submitted! Thank you for contributing. Confirmation email sent.'
       });
-      setFormData({ name: '', email: '', content: '' });
+      setFormData({ name: '', email: '', mobile: '', content: '' });
     } catch (error) {
       console.error('EmailJS Error:', error);
       setSubmitStatus({ type: 'error', message: 'Failed to submit. Please try again later.' });
@@ -220,7 +222,7 @@ export default function StartHub() {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <input
                 type="text"
                 value={formData.name}
@@ -235,6 +237,14 @@ export default function StartHub() {
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 className="px-4 py-3 bg-black/40 border border-yellow-400/30 rounded-lg text-white focus:border-yellow-400 focus:outline-none transition-all duration-300"
                 placeholder="your@email.com"
+                required
+              />
+              <input
+                type="tel"
+                value={formData.mobile}
+                onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
+                className="px-4 py-3 bg-black/40 border border-yellow-400/30 rounded-lg text-white focus:border-yellow-400 focus:outline-none transition-all duration-300"
+                placeholder="+91 1234567890"
                 required
               />
             </div>
