@@ -73,7 +73,7 @@ function App() {
           scrollbar-color: #FBBF24 #000000;
         }
       `}</style>
-      <div className="min-h-screen bg-black text-white overflow-x-hidden">
+      <div className="min-h-screen bg-black text-white">
         <Navigation />
         {isDesktop && <CustomCursor />}
         <Hero />
