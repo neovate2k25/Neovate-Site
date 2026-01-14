@@ -259,25 +259,6 @@ export default function Hero() {
 
       {/* Scroll Down Indicator */}
       
-
-      <style jsx>{`
-        @keyframes slide-diagonal {
-          0% { transform: translateX(-50%) rotate(-6deg); }
-          100% { transform: translateX(50%) rotate(-6deg); }
-        }
-        @keyframes fade-in-up {
-          0% { opacity: 0; transform: translateY(28px); }
-          100% { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes float {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          50% { transform: translateY(-8px) rotate(1.5deg); }
-        }
-        .animate-fade-in-up { animation: fade-in-up 0.9s ease-out forwards; opacity: 0; }
-        .animation-delay-200 { animation-delay: 0.2s; }
-        .animation-delay-400 { animation-delay: 0.4s; }
-        .animate-float { animation: float 6s ease-in-out infinite; }
-      `}</style>
     </section>
   );
 }
