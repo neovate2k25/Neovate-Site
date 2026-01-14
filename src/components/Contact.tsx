@@ -269,7 +269,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <p className="text-gray-400 text-sm mb-1">Location</p>
-                  <p className="text-white font-semibold">Remote (Chennai) </p>
+                  <p className="text-white font-semibold">Remote (Vellore) </p>
                 </div>
               </div>
             </div>

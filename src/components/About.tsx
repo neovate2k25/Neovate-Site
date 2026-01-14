@@ -24,7 +24,7 @@ export default function About() {
     <section
       id="about"
       ref={sectionRef}
-      className="relative min-h-screen flex items-center justify-center pt-0 pb-20 overflow-hidden bg-black"
+      className="relative min-h-screen flex items-center justify-center pt-0 pb-20 overflow-hidden bg-black pt-10"
     >
       <style>{`
         @keyframes fadeInUp {
