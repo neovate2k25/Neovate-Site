@@ -11,6 +11,7 @@ import Footer from './components/Footer';
 import CustomCursor from './components/CustomCursor';
 import EasterEgg from './components/EasterEgg';
 import ScrollButton from './components/ScrollButton';
+import SocialSidebar from './components/SocialSidebar';
 
 function App() {
   const [isDesktop, setIsDesktop] = useState(true);
@@ -76,6 +77,7 @@ function App() {
       <div className="min-h-screen bg-black text-white">
         <Navigation />
         {isDesktop && <CustomCursor />}
+        <SocialSidebar />
         <Hero />
         <About />
         <Services />
