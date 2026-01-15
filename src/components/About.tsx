@@ -39,7 +39,7 @@ export default function About() {
         className="relative min-h-screen flex items-center justify-center pt-0 pb-20 overflow-hidden bg-black pt-10"
       >
         <style>{`
-          @keyframes fadeInUp { 0% { opacity: 0; transform: translateY(30px); } 100% { opacity: 1; transform: translateY(0); } }
+          @keyframes fadeInUp { 0% { opacity: 0; transform: translate3d(0, 30px, 0); } 100% { opacity: 1; transform: translate3d(0, 0, 0); } }
           @keyframes fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }
           .animate-fadeInUp { animation: fadeInUp 0.8s ease-out forwards; }
           .animate-fadeIn { animation: fadeIn 0.8s ease-out forwards; }

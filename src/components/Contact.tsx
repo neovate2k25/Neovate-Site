@@ -241,7 +241,7 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className={`w-full px-6 py-4 bg-yellow-400 text-black font-bold rounded-full transition-all duration-300 flex items-center justify-center gap-2 ${
+                  className={`w-full px-6 py-4 bg-yellow-400 text-black font-bold rounded-full transition-transform transition-opacity duration-300 flex items-center justify-center gap-2 ${
                     isSubmitting
                       ? 'opacity-50 cursor-not-allowed'
                       : 'hover:bg-yellow-300 hover:scale-105'
@@ -297,7 +297,7 @@ export default function Contact() {
                         href={social.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-12 h-12 bg-yellow-400/10 rounded-full flex items-center justify-center hover:bg-yellow-400 hover:scale-110 transition-all duration-300 group border border-yellow-400/30 hover:border-yellow-400"
+                        className="w-12 h-12 bg-yellow-400/10 rounded-full flex items-center justify-center hover:bg-yellow-400 hover:scale-110 transition-transform transition-colors duration-300 group border border-yellow-400/30 hover:border-yellow-400"
                         aria-label={social.name}
                       >
                         {/* render the inline SVG icon */}

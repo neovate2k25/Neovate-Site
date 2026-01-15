@@ -126,7 +126,7 @@ export default function Services() {
                       : 'bg-gray-900/50 border-gray-800 hover:border-gray-600'
                   } ${isVisible ? `animate-fadeInUp delay-${i * 50}ms` : 'opacity-0'}`}
                   style={{
-                    transform: hoveredIndex === i ? 'translateY(-8px) scale(1.03)' : undefined,
+                    transform: hoveredIndex === i ? 'translate3d(0, -8px, 0) scale(1.03)' : 'translate3d(0, 0, 0)',
                   }}
                   tabIndex={0}
                   onMouseEnter={() => setHoveredIndex(i)}
@@ -156,8 +156,8 @@ export default function Services() {
         {/* Styles */}
         <style>{`
           @keyframes fadeInUp {
-            0% { opacity: 0; transform: translateY(30px); }
-            100% { opacity: 1; transform: translateY(0); }
+            0% { opacity: 0; transform: translate3d(0, 30px, 0); }
+            100% { opacity: 1; transform: translate3d(0, 0, 0); }
           }
           .animate-fadeInUp { animation: fadeInUp 0.8s ease-out forwards; }
           .delay-0ms { animation-delay: 0ms; }
@@ -192,15 +192,15 @@ export default function Services() {
           .rise.active svg { animation: rise 2s ease-in-out infinite; }
           .spark.active svg { animation: spark 900ms ease-in-out infinite; }
           /* Keyframes (unchanged) */
-          @keyframes float { 0%,100%{transform: translateY(0)}50%{transform: translateY(-8px)} }
+          @keyframes float { 0%,100%{transform: translate3d(0, 0, 0)}50%{transform: translate3d(0, -8px, 0)} }
           @keyframes pop { 0%{transform: scale(0.85)}60%{transform: scale(1.08)}100%{transform: scale(1)} }
           @keyframes swirl { 0%{transform: rotate(0deg)}100%{transform: rotate(360deg)} }
           @keyframes wave { 0%{transform: rotate(-6deg)}50%{transform: rotate(6deg)}100%{transform: rotate(-6deg)} }
           @keyframes pulse { 0%{opacity: 0.5}50%{opacity: 1}100%{opacity: 0.5} }
-          @keyframes orbit { 0%{transform: translateX(0)}25%{transform: translateX(6px) translateY(-4px)}50%{transform: translateX(0) translateY(-8px)}75%{transform: translateX(-6px) translateY(-4px)}100%{transform: translateX(0)} }
+          @keyframes orbit { 0%{transform: translate3d(0, 0, 0)}25%{transform: translate3d(6px, -4px, 0)}50%{transform: translate3d(0, -8px, 0)}75%{transform: translate3d(-6px, -4px, 0)}100%{transform: translate3d(0, 0, 0)} }
           @keyframes film { 0%{opacity:1}50%{opacity:.6}100%{opacity:1} }
           @keyframes slide { 0%{transform: translateX(-6px)}50%{transform: translateX(6px)}100%{transform: translateX(-6px)} }
-          @keyframes rise { 0%{transform: translateY(6px) scale(.98)}50%{transform: translateY(-6px) scale(1.02)}100%{transform: translateY(6px) scale(.98)} }
+          @keyframes rise { 0%{transform: translate3d(0, 6px, 0) scale(.98)}50%{transform: translate3d(0, -6px, 0) scale(1.02)}100%{transform: translate3d(0, 6px, 0) scale(.98)} }
           @keyframes spark { 0%{transform: scale(1)}50%{transform: scale(1.06)}100%{transform: scale(1)} }
           /* Responsive */
           @media (max-width: 640px){ .icon-wrap{ width:48px !important; height:48px !important; } .grid{ gap: 1rem; } }
