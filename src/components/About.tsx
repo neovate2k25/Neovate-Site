@@ -67,13 +67,11 @@ export default function About() {
           {/* Mission & Vision Cards */}
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <div className={`bg-gradient-to-br from-gray-900 to-black border-2 border-yellow-400/30 rounded-2xl p-8 shadow-2xl hover:scale-105 hover:border-yellow-400/50 transition-all ${isVisible ? 'animate-fadeInUp' : 'opacity-0'}`} style={{ animationDelay: '0.2s' }}>
-              <div className="text-center mb-6">
-                <div className="w-20 h-20 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center mx-auto mb-4 hover:scale-110 hover:rotate-12 transition-all">
+              <div className="w-20 h-20 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center mx-auto mb-4 hover:scale-110 hover:rotate-12 transition-all">
                   <Target size={32} className="text-black" />
-                </div>
-                <h2 className="text-2xl font-bold text-yellow-400 mb-2">Mission</h2>
-                <div className="w-20 h-1 bg-gradient-to-r from-yellow-400 to-yellow-200 mx-auto rounded-full"></div>
               </div>
+              <h2 className="text-2xl font-bold text-yellow-400 mb-2 text-center">Mission</h2>
+              <div className="w-20 h-1 bg-gradient-to-r from-yellow-400 to-yellow-200 mx-auto rounded-full mb-6"></div>
               <p className="text-gray-300 text-lg leading-relaxed text-center">
                 Build intelligent AI automation products and provide top-quality digital services at minimal cost, empowering startups and businesses to grow and innovate.
               </p>

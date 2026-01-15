@@ -135,7 +135,6 @@ export default function Hero() {
     >
       {/* Background diagonal animated lines */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute inset-0">
           {[...Array(18)].map((_, i) => (
             <div
               key={`gold-${i}`}
@@ -165,7 +164,6 @@ export default function Hero() {
               }}
             />
           ))}
-        </div>
       </div>
 
       <div className="relative z-10 px-6 max-w-7xl mx-auto w-full pt-20 lg:pt-24 pb-12 flex flex-col lg:flex-row items-start justify-between gap-10 lg:gap-16">
@@ -214,9 +212,7 @@ export default function Hero() {
         <div className="w-full lg:w-1/2 flex items-center justify-center">
           <div ref={containerRef} className="relative w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] lg:w-[520px] lg:h-[520px]">
             {/* Center Logo Circle */}
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-              <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 max-w-full max-h-full">
-                <div className="relative w-full h-full bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center transform transition-transform duration-500 group-hover:scale-105">
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 max-w-full max-h-full bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center transform transition-transform duration-500 group-hover:scale-105">
                   <div className="w-44 h-44 sm:w-48 sm:h-48 bg-white/95 rounded-2xl flex items-center justify-center shadow-inner">
                     <img
                       src={neovateLogo}
@@ -224,9 +220,7 @@ export default function Hero() {
                       className="w-40 h-40 sm:w-44 sm:h-44 object-cover rounded-lg animate-float"
                       fetchPriority="high"
                     />
-                  </div>
                 </div>
-              </div>
             </div>
 
             {/* Service Circles */}
@@ -241,15 +235,16 @@ export default function Hero() {
                   key={service.name}
                   className="absolute -translate-x-1/2 -translate-y-1/2"
                   style={{ left: pos.left, top: pos.top }}
+                  title={service.name} 
+                  tabIndex={0} 
+                  role="button"
                 >
-                  <div className="relative flex items-center justify-center" title={service.name} tabIndex={0} role="button">
                     <div className={`relative w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-gradient-to-br ${service.color} rounded-full flex flex-col items-center justify-center p-2 transform transition-all duration-400 hover:scale-110 focus:scale-110`}>
                       <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-white flex-shrink-0" />
                       <span className="text-[10px] sm:text-xs font-semibold text-white text-center leading-tight mt-1 truncate max-w-[64px]">
                         {service.name}
                       </span>
                     </div>
-                  </div>
                 </div>
               );
             })}

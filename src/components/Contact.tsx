@@ -152,8 +152,7 @@ export default function Contact() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl mx-auto">
             {/* Contact Form */}
-            <div>
-              <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label className="block text-sm font-semibold mb-2 text-gray-300">Name</label>
                   <input
@@ -251,11 +250,9 @@ export default function Contact() {
                   {isSubmitting ? 'Sending...' : 'Send Message'}
                 </button>
               </form>
-            </div>
 
             {/* Contact Info */}
-            <div className="space-y-8">
-              <div className="bg-gray-900/50 border border-gray-800 rounded-2xl p-8 space-y-6">
+            <div className="bg-gray-900/50 border border-gray-800 rounded-2xl p-8 space-y-6 mb-8">
                 <h3 className="text-2xl font-bold text-white mb-6">Contact Information</h3>
                 <div className="flex items-start gap-4 group">
                   <div className="w-12 h-12 bg-yellow-400/10 rounded-full flex items-center justify-center group-hover:bg-yellow-400/20 transition-colors">
@@ -286,8 +283,8 @@ export default function Contact() {
                 </div>
               </div>
 
-              {/* Social Media */}
-              <div className="bg-gray-900/50 border border-gray-800 rounded-2xl p-8">
+            {/* Social Media */}
+            <div className="bg-gray-900/50 border border-gray-800 rounded-2xl p-8">
                 <h3 className="text-2xl font-bold text-white mb-6">Follow Us</h3>
                 <div className="flex gap-4">
                   {socialLinks.map((social, index) => {
@@ -310,7 +307,6 @@ export default function Contact() {
                 </div>
               </div>
             </div>
-          </div>
         </div>
       </section>
     </>
