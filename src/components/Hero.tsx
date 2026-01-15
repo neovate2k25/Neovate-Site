@@ -210,7 +210,7 @@ export default function Hero() {
                   <div className="w-44 h-44 sm:w-48 sm:h-48 bg-white/95 rounded-2xl flex items-center justify-center shadow-inner">
                     <img
                       src={neovateLogo}
-                      alt="Neovate logo"
+                      alt="Neovate animated logo"
                       className="w-40 h-40 sm:w-44 sm:h-44 object-cover rounded-lg animate-float"
                     />
                   </div>

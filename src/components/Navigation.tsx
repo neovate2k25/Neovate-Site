@@ -52,7 +52,7 @@ export default function Navigation() {
               <div className={`transition-all duration-700 ease-out ${isLogoHovered ? 'rotate-12 scale-110' : ''}`}>
                 <img
                   src={neovateLogo}
-                  alt="Neovate Icon"
+                  alt="Neovate Logo"
                   className="w-8 h-8 sm:w-10 sm:h-10 object-contain"
                 />
               </div>
