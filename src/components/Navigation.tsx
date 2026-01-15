@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import neovateLogo from '../assets/LoGo.png';
+import neovateLogo from '../assets/LoGo.webp';
 import { Menu, X } from 'lucide-react';
 
 export default function Navigation() {

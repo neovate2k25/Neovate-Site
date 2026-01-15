@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import neovateLogo from '../assets/LoGo.png';
+import neovateLogo from '../assets/LoGo.webp';
 
 export default function Footer() {
   const [isLogoHovered, setIsLogoHovered] = useState(false);
@@ -74,7 +74,7 @@ export default function Footer() {
     "@type": "Organization",
     "name": "Neovate",
     "url": "https://neovate.com", // Update with your domain
-    "logo": "https://neovate.com/assets/LoGo.png", // Full URL to logo
+    "logo": "https://neovate.com/assets/LoGo.webp", // Full URL to logo
     "description": "Student-led software development startup in New Delhi, specializing in AI automation, web, and mobile solutions.",
     "address": {
       "@type": "PostalAddress",

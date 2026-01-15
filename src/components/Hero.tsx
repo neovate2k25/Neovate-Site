@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Rocket, Eye, Briefcase, Megaphone, Code, Smartphone, Palette, Users, Camera, BarChart3, Brain, Video } from 'lucide-react';
-import neovateLogo from '../assets/Neovate-st.png';
+import neovateLogo from '../assets/Neovate-st.webp';
 
 // Stable reference outside component
 const services = [
