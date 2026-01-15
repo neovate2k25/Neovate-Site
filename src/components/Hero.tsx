@@ -218,7 +218,7 @@ export default function Hero() {
                       src={neovateLogo}
                       alt="Neovate animated logo - Student-led software development"
                       className="w-40 h-40 sm:w-44 sm:h-44 object-cover rounded-lg animate-float"
-                      fetchPriority="high"
+                      {...({ fetchpriority: "high" } as any)}
                     />
                 </div>
             </div>
