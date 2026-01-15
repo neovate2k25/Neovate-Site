@@ -22,14 +22,14 @@ export default function Footer() {
 
   const socialLinks = [
     { 
-  name: 'Instagram', 
-  url: 'https://www.instagram.com/neovate_ai',
-  icon: (
-    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-    </svg>
-  )
-},
+      name: 'Instagram', 
+      url: 'https://www.instagram.com/neovate_ai',
+      icon: (
+        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+        </svg>
+      )
+    },
     { 
       name: 'LinkedIn', 
       url: 'https://www.linkedin.com/company/neovate-ai',
@@ -68,101 +68,139 @@ export default function Footer() {
     },
   ];
 
+  // JSON-LD Schema for Organization (SEO boost)
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Neovate",
+    "url": "https://neovate.com", // Update with your domain
+    "logo": "https://neovate.com/assets/LoGo.png", // Full URL to logo
+    "description": "Student-led software development startup in New Delhi, specializing in AI automation, web, and mobile solutions.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "New Delhi",
+      "addressRegion": "Delhi",
+      "addressCountry": "IN"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "Customer Service",
+      "url": "https://neovate.com/contact"
+    },
+    "sameAs": socialLinks.map(link => link.url) // All social profiles
+  };
+
   return (
-    <footer className="relative bg-black border-t border-yellow-400/30 py-12">
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-yellow-400 to-transparent"></div>
+    <>
+      <footer className="relative bg-black border-t border-yellow-400/30 py-12">
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-yellow-400 to-transparent"></div>
 
-      <div className="container mx-auto px-6">
-        <div className="flex flex-col lg:flex-row justify-between items-center gap-8 mb-8">
-          {/* Logo Section */}
-          <div className="flex flex-col items-center lg:items-start space-y-4">
-            <button
-              onClick={() => scrollToSection('home')}
-              onMouseEnter={() => setIsLogoHovered(true)}
-              onMouseLeave={() => setIsLogoHovered(false)}
-              className="flex items-center space-x-3 group cursor-pointer transition-all duration-500"
-            >
-              <div className={`transition-all duration-700 ease-out ${isLogoHovered ? 'rotate-12 scale-110' : ''}`}>
-                <img
-                  src={neovateLogo}
-                  alt="Neovate Icon"
-                  className="w-10 h-10 object-contain"
-                />
-              </div>
-              <span className="text-3xl font-black tracking-tight">
-                <span className="text-white">Neo</span>
-                <span className="text-yellow-400">vate</span>
-              </span>
-            </button>
-            
-            {/* Social Media Links */}
-            <div className="flex space-x-4">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.name}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-yellow-400 hover:scale-110 transition-all duration-300 p-2 rounded-lg hover:bg-yellow-400/10"
-                  aria-label={social.name}
-                >
-                  {social.icon}
-                </a>
-              ))}
-            </div>
-          </div>
-
-          {/* Navigation Links */}
-          <nav className="flex flex-wrap justify-center gap-x-8 gap-y-4">
-            {navLinks.map((link) => (
+        <div className="container mx-auto px-6">
+          <div className="flex flex-col lg:flex-row justify-between items-center gap-8 mb-8">
+            {/* Logo Section */}
+            <div className="flex flex-col items-center lg:items-start space-y-4">
               <button
-                key={link.id}
-                onClick={() => scrollToSection(link.id)}
-                className="text-gray-400 hover:text-yellow-400 transition-all duration-300 text-base font-semibold relative group py-2"
+                onClick={() => scrollToSection('home')}
+                onMouseEnter={() => setIsLogoHovered(true)}
+                onMouseLeave={() => setIsLogoHovered(false)}
+                className="flex items-center space-x-3 group cursor-pointer transition-all duration-500"
+                aria-label="Neovate Home"
               >
-                <span className="relative z-10">{link.name}</span>
+                <div className={`transition-all duration-700 ease-out ${isLogoHovered ? 'rotate-12 scale-110' : ''}`}>
+                  <img
+                    src={neovateLogo}
+                    alt="Neovate Logo - Student-Led Software Development Startup"
+                    className="w-10 h-10 object-contain"
+                    loading="lazy" // Perf boost
+                  />
+                </div>
+                <span className="text-3xl font-black tracking-tight">
+                  <span className="text-white">Neo</span>
+                  <span className="text-yellow-400">vate</span>
+                </span>
+              </button>
+              
+              {/* Social Media Links */}
+              <div className="flex space-x-4" role="list">
+                {socialLinks.map((social) => (
+                  <a
+                    key={social.name}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-yellow-400 hover:scale-110 transition-all duration-300 p-2 rounded-lg hover:bg-yellow-400/10"
+                    aria-label={`Follow us on ${social.name}`}
+                    role="listitem"
+                  >
+                    {social.icon}
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Navigation Links */}
+            <nav className="flex flex-wrap justify-center gap-x-8 gap-y-4" role="navigation" aria-label="Main navigation">
+              {navLinks.map((link) => (
+                <button
+                  key={link.id}
+                  onClick={() => scrollToSection(link.id)}
+                  className="text-gray-400 hover:text-yellow-400 transition-all duration-300 text-base font-semibold relative group py-2"
+                  aria-label={`Scroll to ${link.name} section`}
+                >
+                  <span className="relative z-10">{link.name}</span>
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-500 group-hover:w-full transition-all duration-300"></span>
+                </button>
+              ))}
+              {/* Contact Button */}
+              <button
+                onClick={() => scrollToSection('contact')}
+                className="text-gray-400 hover:text-yellow-400 transition-all duration-300 text-base font-semibold relative group py-2"
+                aria-label="Scroll to Contact section"
+              >
+                <span className="relative z-10">Contact</span>
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-500 group-hover:w-full transition-all duration-300"></span>
               </button>
-            ))}
-            {/* Contact Button */}
-            <button
-              onClick={() => scrollToSection('contact')}
-              className="text-gray-400 hover:text-yellow-400 transition-all duration-300 text-base font-semibold relative group py-2"
-            >
-              <span className="relative z-10">Contact</span>
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-500 group-hover:w-full transition-all duration-300"></span>
-            </button>
-          </nav>
+            </nav>
+          </div>
+
+          <div className="h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent mb-8"></div>
+
+          <div className="text-center">
+            <p className="text-gray-400 text-sm">
+              © 2026 <span className="text-yellow-400 font-semibold">Neovate</span> | All rights reserved.
+            </p>
+            <p className="text-gray-600 text-xs mt-2">
+              Innovating the New
+            </p>
+            <p className="text-gray-600 text-lg mt-2">
+              Developed by <a href="https://www.sanjayn.me" target="_blank" rel="noopener noreferrer" className="text-yellow-400 hover:underline">Sanjay N</a>
+            </p>
+          </div>
         </div>
 
-        <div className="h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent mb-8"></div>
-
-        <div className="text-center">
-          <p className="text-gray-400 text-sm">
-            © 2026 <span className="text-yellow-400 font-semibold">Neovate</span> | All rights reserved.
-          </p>
-          <p className="text-gray-600 text-xs mt-2">
-            Innovating the New
-          </p>
+        {/* Animated background elements */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          {[...Array(10)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-1 h-1 bg-yellow-400 rounded-full animate-pulse"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 3}s`,
+                animationDuration: `${2 + Math.random() * 2}s`,
+                opacity: 0.2,
+              }}
+            />
+          ))}
         </div>
-      </div>
+      </footer>
 
-      {/* Animated background elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        {[...Array(10)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 bg-yellow-400 rounded-full animate-pulse"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${2 + Math.random() * 2}s`,
-              opacity: 0.2,
-            }}
-          />
-        ))}
-      </div>
-    </footer>
+      {/* JSON-LD Structured Data for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
+    </>
   );
 }

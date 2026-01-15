@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { Code, Cpu, Database, Smartphone, Zap, Brain, CheckCircle, GitBranch } from 'lucide-react';
+import { Helmet } from 'react-helmet-async'; // Page-level SEO
 
 // Define the type for tech stack items
 interface TechStack {
@@ -111,139 +112,170 @@ function TechStacksGrid() {
     return `${(index % 10) * 0.2}s`;
   };
 
+  // Schema for tech stacks (SEO boost)
+  const techSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Neovate",
+    "description": "Student-led software development startup in New Delhi specializing in frontend, backend, AI/ML, mobile, and tools like React, Node.js, TensorFlow.",
+    "url": "https://neovate.com/tech-stacks",
+    "address": { "@type": "PostalAddress", "addressLocality": "New Delhi", "addressCountry": "IN" },
+    "knowsAbout": categories.map(cat => cat.name)
+  };
+
   return (
-    <section
-      id="tech-stacks"
-      ref={sectionRef}
-      className="relative min-h-screen flex flex-col items-center justify-center py-20 overflow-hidden bg-black text-white"
-    >
-      <style>{`
-        @keyframes float {
-          0%, 100% {
-            transform: translateY(0px);
+    <>
+      <Helmet>
+        <title>Tech Stacks | Neovate - Frontend, Backend, AI/ML in Delhi</title>
+        <meta
+          name="description"
+          content="Explore Neovate's tech stacks: React, Node.js, TensorFlow, MongoDB, and more for web, mobile, AI in New Delhi. Student-led innovation for startups."
+        />
+        <meta name="keywords" content="neovate tech stacks delhi, react development india, ai ml tools new delhi, node.js backend, flutter mobile" />
+        <meta property="og:title" content="Neovate Tech Stacks: Powering Delhi Innovation" />
+        <meta property="og:description" content="From frontend to AI/ML—our toolset for scalable solutions in New Delhi." />
+        <meta property="og:image" content="/og-tech-stacks.jpg" />
+        <meta property="og:url" content="https://neovate.com/tech-stacks" />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(techSchema) }} />
+      </Helmet>
+      <section
+        id="tech-stacks"
+        ref={sectionRef}
+        className="relative min-h-screen flex flex-col items-center justify-center py-20 overflow-hidden bg-black text-white"
+        aria-label="Neovate Tech Stacks Overview"
+      >
+        <style>{`
+          @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
           }
-          50% {
-            transform: translateY(-15px);
+          .animate-fadeInUp { animation: fadeInUp 0.8s ease-out forwards; }
+          @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
           }
-        }
+          .float-animation { animation: float 3s ease-in-out infinite; }
+        `}</style>
 
-        .float-animation {
-          animation: float 3s ease-in-out infinite;
-        }
-      `}</style>
-
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900 to-black opacity-80"></div>
-      
-      {/* Background Grid/Lines */}
-      <div className="absolute inset-0 z-0 opacity-10">
-        {[...Array(10)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-full h-[1px] bg-yellow-400"
-            style={{ top: `${i * 10}%` }}
-          />
-        ))}
-        {[...Array(10)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute h-full w-[1px] bg-yellow-400"
-            style={{ left: `${i * 10}%` }}
-          />
-        ))}
-      </div>
-
-      <div className="relative z-10 container mx-auto px-6 max-w-7xl">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-6xl font-extrabold mb-4">
-            <span className="text-white">Our Core</span>
-            <span className="text-yellow-400"> Technologies</span>
-          </h2>
-          <p className="max-w-3xl mx-auto text-base md:text-lg text-gray-300 leading-relaxed">
-            Explore the specialized toolsets we master across different domains to build your next project. Click a category to see the stacks!
-          </p>
-        </div>
-
-        {/* Category Selector */}
-        <div className="flex justify-center flex-wrap gap-3 md:gap-6 mb-10">
-          {categories.map((category, index) => {
-            const isActive = activeCategory === category.key;
-            return (
-              <button
-                key={category.key}
-                onClick={() => setActiveCategory(prev => (prev === category.key ? null : category.key))}
-                className={`
-                  flex items-center space-x-2 p-2.5 md:p-3 rounded-full font-semibold text-sm md:text-base
-                  transition-all duration-300 transform shadow-lg
-                  ${isActive
-                    ? `bg-gradient-to-r ${category.color} text-black scale-105`
-                    : 'bg-gray-800 text-gray-300 hover:bg-gray-700 hover:scale-[1.02] border border-gray-700'
-                  }
-                  ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}
-                `}
-                style={{ transitionDelay: `${index * 100}ms` }}
-              >
-                <category.icon size={18} className={isActive ? 'text-black' : 'text-yellow-400'} />
-                <span>{category.name}</span>
-                {isActive && <CheckCircle size={14} className="text-black ml-1" />}
-              </button>
-            );
-          })}
-          {/* Reset button */}
-          {activeCategory && (
-            <button
-              onClick={() => setActiveCategory(null)}
-              className="flex items-center space-x-2 p-2.5 md:p-3 rounded-full font-semibold text-sm md:text-base bg-red-600 text-white hover:bg-red-700 transition-all duration-300"
-            >
-              Reset Filter
-            </button>
-          )}
-        </div>
-
-        {/* Animated Tech Stack Grid */}
-        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-3 md:gap-4 justify-center">
-          {filteredStacks.map((stack, index) => (
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900 to-black opacity-80"></div>
+        
+        {/* Background Grid/Lines */}
+        <div className="absolute inset-0 z-0 opacity-10 pointer-events-none">
+          {[...Array(10)].map((_, i) => (
             <div
-              key={`${stack.name}-${index}`}
-              className={`
-                flex flex-col items-center justify-center p-3 md:p-4 rounded-xl border-2
-                bg-gray-800/70 backdrop-blur-sm
-                transition-all duration-700 ease-out transform
-                hover:scale-110 hover:bg-gray-700/80 hover:z-10
-                float-animation
-                ${inView ? 'opacity-100 scale-100' : 'opacity-0 scale-70'}
-              `}
-              style={{
-                borderColor: activeCategory === stack.category ? 'var(--stack-color-border)' : 'rgba(250, 204, 21, 0.2)',
-                '--stack-color-border': categories.find(c => c.key === stack.category)?.color.replace('from-', '').split(' ')[0] || 'rgba(250, 204, 21, 0.2)',
-                transitionDelay: getStaggerDelay(index),
-                animationDelay: getFloatDelay(index),
-                minHeight: '90px',
-              } as React.CSSProperties}
-            >
-              <div className="mb-1.5 md:mb-2 w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
-                {stack.svg}
-              </div>
-              <span className="text-white text-xs md:text-sm font-semibold text-center mt-1">
-                {stack.name}
-              </span>
-            </div>
+              key={`h-${i}`}
+              className="absolute w-full h-[1px] bg-yellow-400"
+              style={{ top: `${i * 10}%` }}
+            />
+          ))}
+          {[...Array(10)].map((_, i) => (
+            <div
+              key={`v-${i}`}
+              className="absolute h-full w-[1px] bg-yellow-400"
+              style={{ left: `${i * 10}%` }}
+            />
           ))}
         </div>
 
-        {/* Bottom Quote */}
-        <div className="text-center mt-16">
-          <div className="flex items-center justify-center gap-4 mb-4">
-            <div className="w-12 h-px bg-gradient-to-r from-transparent to-yellow-400"></div>
-            <Zap size={20} className="text-yellow-400" />
-            <div className="w-12 h-px bg-gradient-to-l from-transparent to-yellow-400"></div>
+        <div className="relative z-10 container mx-auto px-6 max-w-7xl">
+          {/* Header */}
+          <div className={`text-center mb-12 animate-fadeInUp ${inView ? 'opacity-100' : 'opacity-0'}`}>
+            <h2 className="text-4xl md:text-6xl font-extrabold mb-4">
+              <span className="text-white">Our Core</span>
+              <span className="text-yellow-400"> Technologies</span>
+            </h2>
+            <p className="max-w-3xl mx-auto text-base md:text-lg text-gray-300 leading-relaxed">
+              Mastered toolsets across domains for your projects—filter by category to explore.
+            </p>
           </div>
-          <p className="text-yellow-400 font-bold text-lg md:text-xl max-w-2xl mx-auto">
-            "Adaptability is the cornerstone of our development philosophy."
-          </p>
+
+          {/* Category Selector */}
+          <div className="flex justify-center flex-wrap gap-3 md:gap-6 mb-10">
+            {categories.map((category, index) => {
+              const isActive = activeCategory === category.key;
+              return (
+                <button
+                  key={category.key}
+                  onClick={() => setActiveCategory(prev => (prev === category.key ? null : category.key))}
+                  className={`
+                    flex items-center space-x-2 p-2.5 md:p-3 rounded-full font-semibold text-sm md:text-base
+                    transition-all duration-300 transform shadow-lg focus:outline-none focus:ring-2 focus:ring-yellow-400/50
+                    ${isActive
+                      ? `bg-gradient-to-r ${category.color} text-black scale-105`
+                      : 'bg-gray-800 text-gray-300 hover:bg-gray-700 hover:scale-[1.02] border border-gray-700'
+                    }
+                    ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}
+                  `}
+                  style={{ transitionDelay: `${index * 100}ms` }}
+                  aria-label={`Filter by ${category.name} ${isActive ? '(active)' : ''}`}
+                  aria-pressed={isActive}
+                >
+                  <category.icon size={18} className={isActive ? 'text-black' : 'text-yellow-400'} />
+                  <span>{category.name}</span>
+                  {isActive && <CheckCircle size={14} className="text-black ml-1" />}
+                </button>
+              );
+            })}
+            {/* Reset button */}
+            {activeCategory && (
+              <button
+                onClick={() => setActiveCategory(null)}
+                className="flex items-center space-x-2 p-2.5 md:p-3 rounded-full font-semibold text-sm md:text-base bg-red-600 text-white hover:bg-red-700 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-red-400/50"
+                aria-label="Reset filter to show all technologies"
+              >
+                <span>Reset</span>
+              </button>
+            )}
+          </div>
+
+          {/* Animated Tech Stack Grid */}
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-3 md:gap-4 justify-center">
+            {filteredStacks.map((stack, index) => (
+              <div
+                key={`${stack.name}-${index}`}
+                className={`
+                  flex flex-col items-center justify-center p-3 md:p-4 rounded-xl border-2
+                  bg-gray-800/70 backdrop-blur-sm
+                  transition-all duration-700 ease-out transform hover:scale-110 hover:bg-gray-700/80 hover:z-10
+                  float-animation
+                  ${inView ? 'opacity-100 scale-100' : 'opacity-0 scale-70'}
+                  focus-within:outline-none focus-within:ring-2 focus-within:ring-yellow-400/50
+                `}
+                style={{
+                  borderColor: activeCategory === stack.category ? categories.find(c => c.key === stack.category)?.color.replace('from-', '').split(' ')[0] || 'rgba(250, 204, 21, 0.2)' : 'rgba(250, 204, 21, 0.2)',
+                  transitionDelay: getStaggerDelay(index),
+                  animationDelay: getFloatDelay(index),
+                  minHeight: '90px',
+                } as React.CSSProperties}
+                tabIndex={0}
+                aria-label={`${stack.name} - ${stack.category} technology`}
+                role="button"
+                onKeyDown={(e) => e.key === 'Enter' && console.log(`Explore ${stack.name}`)} // Placeholder for modal/expand
+              >
+                <div className="mb-1.5 md:mb-2 w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
+                  {stack.svg}
+                </div>
+                <span className="text-white text-xs md:text-sm font-semibold text-center mt-1">
+                  {stack.name}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          {/* Bottom Quote */}
+          <div className={`text-center mt-16 animate-fadeInUp ${inView ? 'opacity-100 delay-500ms' : 'opacity-0'}`}>
+            <div className="flex items-center justify-center gap-4 mb-4">
+              <div className="w-12 h-px bg-gradient-to-r from-transparent to-yellow-400"></div>
+              <Zap size={20} className="text-yellow-400" />
+              <div className="w-12 h-px bg-gradient-to-l from-transparent to-yellow-400"></div>
+            </div>
+            <p className="text-yellow-400 font-bold text-lg md:text-xl max-w-2xl mx-auto">
+              "Adaptability is the cornerstone of our development."
+            </p>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
 
