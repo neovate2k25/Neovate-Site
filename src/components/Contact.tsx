@@ -113,13 +113,13 @@ export default function Contact() {
   return (
     <>
       <Helmet>
-    <title>Neovate</title>
+        <title>Neovate</title>
         <meta
           name="description"
           content="Reach out to Neovate for software development, AI solutions, and digital services. Contact us via email, phone, or our online form to discuss your project."
         />
         <meta name="keywords" content="contact neovate, software company contact, AI startup India, web development inquiry, digital services contact" />
-        <link rel="canonical" href="https://neovate.in/contact" />
+        <link rel="canonical" href="https://neovateai.tech/contact" />
       </Helmet>
 
       <section id="contact" className="relative py-20 bg-black overflow-hidden">

@@ -118,7 +118,7 @@ function TechStacksGrid() {
     "@type": "Organization",
     "name": "Neovate",
     "description": "Student-led software development startup in New Delhi specializing in frontend, backend, AI/ML, mobile, and tools like React, Node.js, TensorFlow.",
-    "url": "https://neovate.com/tech-stacks",
+    "url": "https://neovateai.tech/tech-stacks",
     "address": { "@type": "PostalAddress", "addressLocality": "New Delhi", "addressCountry": "IN" },
     "knowsAbout": categories.map(cat => cat.name)
   };
@@ -132,10 +132,11 @@ function TechStacksGrid() {
           content="Explore Neovate's tech stacks: React, Node.js, TensorFlow, MongoDB, and more for web, mobile, AI in New Delhi. Student-led innovation for startups."
         />
         <meta name="keywords" content="neovate tech stacks delhi, react development india, ai ml tools new delhi, node.js backend, flutter mobile" />
+        <link rel="canonical" href="https://neovateai.tech/tools" />
         <meta property="og:title" content="Neovate Tech Stacks: Powering Delhi Innovation" />
         <meta property="og:description" content="From frontend to AI/ML—our toolset for scalable solutions in New Delhi." />
         <meta property="og:image" content="/og-tech-stacks.jpg" />
-        <meta property="og:url" content="https://neovate.com/tech-stacks" />
+        <meta property="og:url" content="https://neovateai.tech/tech-stacks" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(techSchema) }} />
       </Helmet>
       <section

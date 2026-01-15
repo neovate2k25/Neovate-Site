@@ -65,7 +65,7 @@ export default function Services() {
     "provider": {
       "@type": "Organization",
       "name": "Neovate",
-      "url": "https://neovate.com",
+      "url": "https://neovateai.tech",
       "address": { "@type": "PostalAddress", "addressLocality": "New Delhi", "addressCountry": "IN" }
     },
     "areaServed": "India",
@@ -89,10 +89,11 @@ export default function Services() {
           content="Neovate offers affordable web development, AI integration, SEO optimization, college projects, and digital marketing in New Delhi. Student-led solutions for startups and students."
         />
         <meta name="keywords" content="neovate services delhi, web development india, ai integration new delhi, college projects ai, seo optimization startup, crm setup zoho" />
+        <link rel="canonical" href="https://neovateai.tech/services" />
         <meta property="og:title" content="Neovate Services: From Web Dev to AI in Delhi" />
         <meta property="og:description" content="Explore our 16+ services: Custom apps, branding, ads, and academic projects by student innovators." />
         <meta property="og:image" content="/og-services.jpg" />
-        <meta property="og:url" content="https://neovate.com/services" />
+        <meta property="og:url" content="https://neovateai.tech/services" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesSchema) }} />
       </Helmet>
       <section

@@ -65,11 +65,11 @@ export default function IdeasLab() {
     "@type": "DiscussionForumPosting",
     "headline": "Neovate Ideas Lab: Share Startup Concepts",
     "description": "A community space for students and entrepreneurs in New Delhi to submit and explore innovative startup ideas in AI, web dev, and digital services.",
-    "url": "https://neovate.com/ideas-lab",
+    "url": "https://neovateai.tech/ideas-lab",
     "author": {
       "@type": "Organization",
       "name": "Neovate",
-      "url": "https://neovate.com"
+      "url": "https://neovateai.tech"
     },
     "datePublished": "2026-01-15", // Dynamic? Use new Date().toISOString().split('T')[0]
     "interactionStatistic": {
@@ -88,10 +88,11 @@ export default function IdeasLab() {
           content="Join Neovate's Ideas Lab: Submit your startup concept for AI, web, or digital marketing in New Delhi. Get community feedback from student innovators."
         />
         <meta name="keywords" content="ideas lab neovate, startup ideas delhi, ai concepts students, entrepreneur community india, innovation submissions" />
+        <link rel="canonical" href="https://neovateai.tech/ideas-lab" />
         <meta property="og:title" content="Neovate Ideas Lab: Spark Your Next Big Idea" />
         <meta property="og:description" content="Share ideas, collaborate, and launch with Neovate's student community in Delhi." />
         <meta property="og:image" content="/og-ideas-lab.jpg" /> {/* Hero image of lightbulb/community */}
-        <meta property="og:url" content="https://neovate.com/ideas-lab" />
+        <meta property="og:url" content="https://neovateai.tech/ideas-lab" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ideasSchema) }} />
       </Helmet>
       <section id="ideas-lab" className="relative py-20 bg-black overflow-hidden">

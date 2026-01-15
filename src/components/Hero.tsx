@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Rocket, Eye, Briefcase, Megaphone, Code, Smartphone, Palette, Users, Camera, BarChart3, Brain, Video } from 'lucide-react';
 import neovateLogo from '../assets/Neovate-st.webp';
 
@@ -118,7 +119,16 @@ export default function Hero() {
   }, [containerSize]);
 
   return (
-    <section
+    <>
+      <Helmet>
+        <title>Neovate | Software Development & Digital Solutions</title>
+        <meta
+          name="description"
+          content="Neovate delivers innovative software development, modern web apps, mobile solutions, and AI-powered digital transformations for businesses worldwide."
+        />
+        <link rel="canonical" href="https://neovateai.tech/" />
+      </Helmet>
+      <section
       id="home"
       className="relative min-h-screen flex flex-col justify-start overflow-hidden bg-gradient-to-b from-black/80 via-black/70 to-transparent"
       aria-label="Hero: Neovate — innovation and services"
@@ -260,5 +270,6 @@ export default function Hero() {
       {/* Scroll Down Indicator */}
       
     </section>
+    </>
   );
 }

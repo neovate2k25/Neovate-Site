@@ -73,8 +73,8 @@ export default function Footer() {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "Neovate",
-    "url": "https://neovate.com", // Update with your domain
-    "logo": "https://neovate.com/assets/LoGo.webp", // Full URL to logo
+    "url": "https://neovateai.tech", // Update with your domain
+    "logo": "https://neovateai.tech/assets/LoGo.webp", // Full URL to logo
     "description": "Student-led software development startup in New Delhi, specializing in AI automation, web, and mobile solutions.",
     "address": {
       "@type": "PostalAddress",
@@ -85,7 +85,7 @@ export default function Footer() {
     "contactPoint": {
       "@type": "ContactPoint",
       "contactType": "Customer Service",
-      "url": "https://neovate.com/contact"
+      "url": "https://neovateai.tech/contact"
     },
     "sameAs": socialLinks.map(link => link.url) // All social profiles
   };

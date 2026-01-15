@@ -122,7 +122,7 @@ export default function StartHub() {
     "@type": "Organization",
     "name": "Neovate Startup Hub",
     "description": "Delhi-based ecosystem for freelancers, entrepreneurs, and student innovators offering mentorship, resources, and launch support.",
-    "url": "https://neovate.com/starthub",
+    "url": "https://neovateai.tech/starthub",
     "address": { "@type": "PostalAddress", "addressLocality": "New Delhi", "addressCountry": "IN" },
     "offers": plans.map(plan => ({
       "@type": "Offer",
@@ -149,10 +149,11 @@ export default function StartHub() {
           content="Join Neovate's Startup Hub in New Delhi: Freelancer connections, ideas lab, mentorship, and pricing plans for web/AI/digital services. Ideal for students and entrepreneurs."
         />
         <meta name="keywords" content="startup hub delhi, neovate freelancer network, ideas lab india, mentorship new delhi, startup plans ai" />
+        <link rel="canonical" href="https://neovateai.tech/startup-hub" />
         <meta property="og:title" content="Neovate Startup Hub: Launch Your Idea in Delhi" />
         <meta property="og:description" content="Connect, collaborate, and grow with student-led support in New Delhi." />
         <meta property="og:image" content="/og-starthub.jpg" />
-        <meta property="og:url" content="https://neovate.com/starthub" />
+        <meta property="og:url" content="https://neovateai.tech/starthub" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(hubSchema) }} />
       </Helmet>
       <section

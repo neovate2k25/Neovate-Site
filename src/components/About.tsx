@@ -24,13 +24,13 @@ export default function About() {
   return (
     <>
       <Helmet>
-    <title>Neovate</title>
+        <title>About Us | Neovate</title>
         <meta
           name="description"
           content="Discover Neovate, a passionate student-led startup building innovative AI automation products and delivering high-quality web, mobile, and digital solutions."
         />
+        <link rel="canonical" href="https://neovateai.tech/about" />
         <meta name="keywords" content="about neovate, student startup, software company, AI products, web development India, digital agency" />
-        <link rel="canonical" href="https://neovate.in/about" />
       </Helmet>
 
       <section
