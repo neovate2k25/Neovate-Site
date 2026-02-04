@@ -47,94 +47,86 @@ export default function Projects() {
         </div>
 
         {/* Projects Grid */}
-        <div className="grid gap-8 lg:gap-12">
+        <div className="max-w-4xl mx-auto">
           {projects.map((project, index) => (
             <div
               key={index}
-              className="group relative bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl lg:rounded-3xl overflow-hidden border border-yellow-400/20 hover:border-yellow-400/40 transition-all duration-500 hover:scale-[1.02]"
+              className="group bg-gray-900/30 rounded-xl border border-gray-800 hover:border-yellow-400/50 transition-all duration-300 overflow-hidden"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              
-              <div className="grid lg:grid-cols-2 gap-0">
-                {/* Project Image */}
-                <div className="relative h-64 lg:h-96 overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={`${project.title} - Project Screenshot`}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                  
-                  {/* Category Badge */}
-                  <div className="absolute top-4 left-4">
-                    <div className="flex items-center space-x-2 bg-yellow-400/90 backdrop-blur-sm rounded-full px-3 py-1.5">
-                      <Tag className="w-3 h-3 text-black" />
-                      <span className="text-black font-bold text-xs uppercase tracking-wider">
-                        {project.category}
-                      </span>
+              <div className="p-8">
+                {/* Project Header */}
+                <div className="flex flex-col lg:flex-row lg:items-start gap-6 mb-6">
+                  {/* Project Image */}
+                  <div className="lg:w-80 flex-shrink-0">
+                    <div className="relative rounded-lg overflow-hidden">
+                      <img
+                        src={project.image}
+                        alt={`${project.title} - Project Screenshot`}
+                        className="w-full h-48 lg:h-52 object-cover"
+                      />
+                      {/* Category Badge */}
+                      <div className="absolute top-3 left-3">
+                        <span className="bg-yellow-400 text-black text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
+                          {project.category}
+                        </span>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                {/* Project Details */}
-                <div className="p-6 lg:p-8 xl:p-10 flex flex-col justify-center">
-                  <div className="mb-4">
-                    <div className="flex items-center space-x-2 text-yellow-400 mb-3">
-                      <Calendar className="w-4 h-4" />
-                      <span className="text-sm font-medium">{project.date}</span>
+                  {/* Project Info */}
+                  <div className="flex-1">
+                    <div className="flex items-center text-yellow-400 text-sm mb-3">
+                      <Calendar className="w-4 h-4 mr-2" />
+                      {project.date}
                     </div>
                     
-                    <h3 className="text-2xl lg:text-3xl xl:text-4xl font-black text-white mb-4 group-hover:text-yellow-400 transition-colors duration-300">
+                    <h3 className="text-2xl lg:text-3xl font-bold text-white mb-3">
                       {project.title}
                     </h3>
                     
-                    <p className="text-gray-300 text-base lg:text-lg leading-relaxed mb-6">
+                    <p className="text-gray-300 leading-relaxed mb-6">
                       {project.description}
                     </p>
-                  </div>
 
-                  {/* Tech Stack */}
-                  <div className="mb-6">
-                    <h4 className="text-yellow-400 font-bold text-sm uppercase tracking-wider mb-3">Technologies</h4>
+                    {/* Tech Stack */}
                     <div className="flex flex-wrap gap-2">
                       {project.tech.map((tech, techIndex) => (
                         <span
                           key={techIndex}
-                          className="px-3 py-1.5 bg-yellow-400/10 border border-yellow-400/30 rounded-lg text-yellow-400 font-medium text-sm hover:bg-yellow-400/20 transition-colors duration-300"
+                          className="bg-yellow-400/10 text-yellow-400 text-sm font-medium px-3 py-1 rounded-md border border-yellow-400/30"
                         >
                           {tech}
                         </span>
                       ))}
                     </div>
                   </div>
+                </div>
 
-                  {/* Action Buttons */}
-                  <div className="flex flex-wrap gap-3">
-                    {project.link && (
-                      <a
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold rounded-xl hover:from-yellow-300 hover:to-yellow-400 transition-all duration-300 hover:scale-105 transform group/btn"
-                      >
-                        <span>View Live</span>
-                        <ExternalLink className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
-                      </a>
-                    )}
-                    
-                    {project.github && (
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center space-x-2 px-6 py-3 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-bold rounded-xl hover:bg-white/20 hover:border-white/40 transition-all duration-300 hover:scale-105 transform group/btn"
-                      >
-                        <Github className="w-4 h-4" />
-                        <span>Source Code</span>
-                        <ExternalLink className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
-                      </a>
-                    )}
-                  </div>
+                {/* Action Buttons */}
+                <div className="flex flex-wrap gap-4 pt-4 border-t border-gray-800">
+                  {project.link && (
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center space-x-2 bg-yellow-400 hover:bg-yellow-300 text-black font-semibold px-6 py-2.5 rounded-lg transition-colors duration-200"
+                    >
+                      <span>View Live</span>
+                      <ExternalLink className="w-4 h-4" />
+                    </a>
+                  )}
+                  
+                  {project.github && (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center space-x-2 border border-gray-600 hover:border-gray-500 text-white font-semibold px-6 py-2.5 rounded-lg transition-colors duration-200"
+                    >
+                      <Github className="w-4 h-4" />
+                      <span>Source Code</span>
+                    </a>
+                  )}
                 </div>
               </div>
             </div>
