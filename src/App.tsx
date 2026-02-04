@@ -3,6 +3,7 @@ import Navigation from './components/Navigation';
 import Hero from './components/Hero';
 import About from './components/About';
 import Services from './components/Services';
+import Projects from './components/Projects';
 import StartHub from './components/StartHub';
 import Tools from './components/Tools';
 import Videos from './components/Videos';
@@ -81,8 +82,9 @@ function App() {
         <Hero />
         <About />
         <Services />
-        <Tools />
+        <Projects />
         <StartHub />
+        <Tools />
         <Videos />
         <Contact />
         <Footer />
